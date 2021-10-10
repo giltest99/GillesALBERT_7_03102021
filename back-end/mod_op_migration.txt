@@ -1,0 +1,18 @@
+Création migration :
+-> npm install -g sequelize-cli (si pas installé)
+(npm install --save-dev sequelize-cli) -> pas testé en save-dev
+
+-> npx sequelize-cli init (créer config/config.json)
+
+Génération d'un modèle :
+-> npx sequelize-cli model:generate --name User --attributes firstName:string,lastName:string,email:string
+-> npx sequelize-cli model:generate --name User --attributes firstName:string,lastName:string,email:string comment:string --force (si besoin de créer nouvelle version)
+
+Lancer la migration :
+-> npx sequelize-cli db:migrate
+Création auto de la table User avaec rajout id, createDate et updateDate
+
+Annuler migration (DROP table User):
+-> npx sequelize-cli db:migrate:undo (la plus récente)
+-> npx sequelize-cli db:migrate:undo:all (toutes)
+-> npx sequelize-cli db:migrate:undo:all --to XXXXXXXXXXXXXX-create-user.js (revenir à une version spécifique)

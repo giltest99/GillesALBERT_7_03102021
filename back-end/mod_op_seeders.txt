@@ -1,0 +1,25 @@
+Créer des seeders : enregistrements pour populer la base
+-> npx sequelize-cli seed:generate --name user (crée seeder template à remplir)
+
+Exemple de seeder :
+
+module.exports = {
+    up: async (queryInterface, Sequelize) => {
+      await queryInterface.bulkInsert('Users', [{
+        firstName: 'Gilles',
+        lastName: 'ALBERT',
+        email: 'example@example.com',
+        createdAt: new Date(),
+        updatedAt: new Date()
+      }]);
+    },
+    down: async (queryInterface, Sequelize) => {
+        await queryInterface.bulkDelete('Users', null, {});
+    }
+  };
+
+  -> npx sequelize-cli db:seed:all (lancer le seeder) Ajoute l'enregistrement dans la table
+
+  -> npx sequelize-cli db:seed:undo:all (supprimer tous)
+
+  -> npx sequelize-cli db:seed:undo --seed name-of-seed-as-in-data (supprimer un)
