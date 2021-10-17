@@ -10,8 +10,8 @@ const path = require('path');
 const app = express();
 
 // Database connect
-const db = require('./models/index');
-db.sequelize
+const models = require('./models/index');
+models.sequelize
     .authenticate()
     .then(() => {
         console.log('DB connect successfull !');

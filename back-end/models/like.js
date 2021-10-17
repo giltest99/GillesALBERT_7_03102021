@@ -11,8 +11,6 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      models.Like.belongsTo(models.User);
-      models.Like.belongsTo(models.Post);      
     }
   };
   Like.init({

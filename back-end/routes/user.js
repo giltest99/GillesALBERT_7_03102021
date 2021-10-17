@@ -10,9 +10,11 @@ const userCtrl = require('../controllers/user');
 
 // Endpoints
 router.get('/', userCtrl.selectAllUsers);
+router.get('/:id', userCtrl.selectUser);
+
 
 /* 
-router.get('/:id')
+router.post('/:id', userCtrl.addUser);
 router.post('/login')
 router.post('/subscribe')
 router.put('/:id')
