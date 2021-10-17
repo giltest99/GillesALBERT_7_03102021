@@ -4,15 +4,39 @@ Création migration :
 
 -> npx sequelize-cli init (créer config/config.json)
 
-Génération d'un modèle :
+-> npx sequelize-cli db:create (créer database précisée dans config.json) -> CREATE IF NOT EXISTS
+
+Génération d'un modèle (exemples):
 -> npx sequelize-cli model:generate --name User --attributes firstName:string,lastName:string,email:string
 -> npx sequelize-cli model:generate --name User --attributes firstName:string,lastName:string,email:string comment:string --force (si besoin de créer nouvelle version)
 
 Lancer la migration :
 -> npx sequelize-cli db:migrate
-Création auto de la table User avaec rajout id, createDate et updateDate
 
 Annuler migration (DROP table User):
 -> npx sequelize-cli db:migrate:undo (la plus récente)
 -> npx sequelize-cli db:migrate:undo:all (toutes)
 -> npx sequelize-cli db:migrate:undo:all --to XXXXXXXXXXXXXX-create-user.js (revenir à une version spécifique)
+
+***********************************************************************************************************************************
+1 - Création des modèles (tables)
+
+Génération du modèle User :
+-> npx sequelize-cli model:generate --name User --attributes username:string,password:string,email:string,avatar:string,biography:text,is_admin:boolean
+
+NB: Création auto de la table User avaec rajout id, createDate et updateDate
+
+Génération du modèle Post :
+-> npx sequelize-cli model:generate --name Post --attributes title:string,content:text,attachment:string
+
+Génération du modèle Comment : 
+-> npx sequelize-cli model:generate --name Comment --attributes user_id:integer,content:text,post_id:integer
+
+Génération du modèle Like :
+-> npx sequelize-cli model:generate --name Like --attributes user_id:integer,post_id:integer
+
+2 - Ajout de paramètres (allowNull, defaut, etc...)
+Ajouter si besoin allowNull: false dans le fichier migrations dans User (et/ou autres) si besoin 
+
+3 - Lancer la migration (ou relancer) pour créer (ou modifier) la structure des tables
+-> npx sequelize-cli db:migrate

@@ -2,8 +2,8 @@
   "development": {
     "username": "root",
     "password": "genesisbanks",
-    "database": "test02",
-    "host": "localhost",
+    "database": "test_01",
+    "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "test": {
