@@ -57,13 +57,12 @@ exports.signup = (req, res) => {
                         biography: default_biography,                       
                         is_admin: false
                 })
-                    .then((user) => {
-                        res.status(201).json({ user })
-                    })
-                    .catch((error) => res.status(400).json({ error : 'Cannot create new user'}));
+                .then((user) => {
+                    res.status(201).json({ user })
+                })
+                .catch((error) => res.status(400).json({ error : 'Cannot create new user'}));
             });
-        } 
-        
+        }      
     })
     .catch((error) => res.status(500).json({ error : 'Server error'}));
 };
