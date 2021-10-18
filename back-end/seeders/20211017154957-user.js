@@ -6,7 +6,7 @@ module.exports = {
       username: 'John DOE',
       password: 'My_secret_password',
       email: 'john.doe@example.com',
-      avatar: 'avatar_url',
+      avatar: './images/avatar/default_url',
       biography: 'Quelques mots...',
       is_admin: false,
       createdAt: new Date(),

@@ -1,3 +1,5 @@
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken'); // Création et vérification des tokens
 const models = require('../models');
 
 
@@ -10,10 +12,10 @@ exports.selectAllUsers = (req, res) => {
         .catch(error => res.status(500).json({error}));
 }
 
-// Select one user by id
+// Select user by id
 exports.selectUser = (req, res) => {
     models.User.findOne({
-        attributes: ['id','username', 'email', 'avatar', 'biography', 'is_admin'],
+        attributes: ['id', 'username', 'email', 'avatar', 'biography', 'is_admin'],
         where: { id: req.params.id },
     })
         .then((user) => {
@@ -28,4 +30,42 @@ exports.selectUser = (req, res) => {
         });
 };
 
-// Add user
+
+// Inscription de l'utilisateur
+
+exports.signup = (req, res) => {
+    // Select user by email
+    models.User.findOne({
+        where: { email: req.body.email }
+    })
+    .then((userExists) => {
+        // If user exists
+        if (userExists) {
+            res.status(409).json({ error: "User already exists..."});
+        }
+        // Create new user
+        else  {
+            const avatar_url = './images/avatar/default_url';
+            const default_biography = 'Quelques mots...';
+            bcrypt.hash(req.body.password, 10)
+                .then((hash) => {
+                    models.User.create({
+                        username: req.body.username,
+                        password: hash,
+                        email: req.body.email,                       
+                        avatar: avatar_url,
+                        biography: default_biography,                       
+                        is_admin: false
+                })
+                    .then((user) => {
+                        res.status(201).json({ user })
+                    })
+                    .catch((error) => res.status(400).json({ error : 'Cannot create new user'}));
+            });
+        } 
+        
+    })
+    .catch((error) => res.status(500).json({ error : 'Server error'}));
+};
+
+
