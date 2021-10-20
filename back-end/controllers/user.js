@@ -1,20 +1,19 @@
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken'); // Création et vérification des tokens
-const models = require('../models');
-
+const jwt = require('jsonwebtoken');
+const Models = require('../models');
 
 
 
 // Select all users
 exports.selectAllUsers = (req, res) => {
-    models.User.findAll()
+    Models.User.findAll()
         .then(users => res.status(200).json(users))
-        .catch(error => res.status(500).json({error}));
+        .catch(error => res.status(500).json({ error : 'No ressource found' }));
 }
 
 // Select user by id
 exports.selectUser = (req, res) => {
-    models.User.findOne({
+    Models.User.findOne({
         attributes: ['id', 'username', 'email', 'avatar', 'biography', 'is_admin'],
         where: { id: req.params.id },
     })
@@ -22,20 +21,55 @@ exports.selectUser = (req, res) => {
             if (user) {
                 res.status(200).json(user);
             } else {
-                res.status(404).json({ error: "Utilisateur non trouvé" });
+                res.status(404).json({ error: 'User not found' });
             }
         })
         .catch((error) => {
-            res.status(500).json({ error: "Impossible de voir le profil" });
+            res.status(500).json({ error: 'No ressource found' });
+        });
+};
+
+// Select user by email
+exports.selectUserByUserName = (req, res) => {
+    Models.User.findOne({
+        attributes: ['id', 'username', 'email', 'avatar', 'biography', 'is_admin'],
+        where: { username: req.params.username },
+    })
+        .then((user) => {
+            if (user) {
+                res.status(200).json(user);
+            } else {
+                res.status(404).json({ error: 'User not found' });
+            }
+        })
+        .catch((error) => {
+            res.status(500).json({ error: 'No ressource found' });
+        });
+};
+
+// Select user by email
+exports.selectUserByUserEmail = (req, res) => {
+    Models.User.findOne({
+        attributes: ['id', 'username', 'email', 'avatar', 'biography', 'is_admin'],
+        where: { email: req.params.email },
+    })
+        .then((user) => {
+            if (user) {
+                res.status(200).json(user);
+            } else {
+                res.status(404).json({ error: 'User not found' });
+            }
+        })
+        .catch((error) => {
+            res.status(500).json({ error: 'No ressource found' });
         });
 };
 
 
 // Inscription de l'utilisateur
-
 exports.signup = (req, res) => {
     // Select user by email
-    models.User.findOne({
+    Models.User.findOne({
         where: { email: req.body.email }
     })
     .then((userExists) => {
@@ -45,17 +79,19 @@ exports.signup = (req, res) => {
         }
         // Create new user
         else  {
-            const avatar_url = './images/avatar/default_url';
-            const default_biography = 'Quelques mots...';
+            // Default values
+            const defaultAvatarUrl = './images/avatar/default_url';
+            const defaultBiography = 'Quelques mots...';
+            const defaultAccess = false;
             bcrypt.hash(req.body.password, 10)
                 .then((hash) => {
-                    models.User.create({
-                        username: req.body.username,
+                    Models.User.create({
+                        username: req.body.username, // username = firstName + ' ' + lastName (firstName capitalize() & lastName toUpperCase())
                         password: hash,
                         email: req.body.email,                       
-                        avatar: avatar_url,
-                        biography: default_biography,                       
-                        is_admin: false
+                        avatar: defaultAvatarUrl,
+                        biography: defaultBiography,                       
+                        is_admin: defaultAccess
                 })
                 .then((user) => {
                     res.status(201).json({ user })
