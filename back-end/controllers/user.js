@@ -12,7 +12,7 @@ exports.selectAllUsers = (req, res) => {
 }
 
 // Select user by id
-exports.selectUser = (req, res) => {
+exports.selectUserById = (req, res) => {
     Models.User.findOne({
         attributes: ['id', 'username', 'email', 'avatar', 'biography', 'is_admin'],
         where: { id: req.params.id },
