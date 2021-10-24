@@ -27,7 +27,7 @@ exports.selectUserById = (req, res) => {
         .catch((error) => {
             res.status(500).json({ error: 'No ressource found' });
         });
-};
+}
 
 // Select user by email
 exports.selectUserByUserName = (req, res) => {
@@ -45,7 +45,7 @@ exports.selectUserByUserName = (req, res) => {
         .catch((error) => {
             res.status(500).json({ error: 'No ressource found' });
         });
-};
+}
 
 // Select user by email
 exports.selectUserByUserEmail = (req, res) => {
@@ -63,7 +63,7 @@ exports.selectUserByUserEmail = (req, res) => {
         .catch((error) => {
             res.status(500).json({ error: 'No ressource found' });
         });
-};
+}
 
 // Signup
 exports.signup = (req, res) => {
@@ -73,7 +73,7 @@ exports.signup = (req, res) => {
     })
     .then((userExists) => {
         // If user exists
-        if (!userExists) {
+        if (userExists) {
             res.status(409).json({ error: "User already exists..."});
         }
         // Create new user
@@ -98,7 +98,7 @@ exports.signup = (req, res) => {
     
     })
     .catch((error) => res.status(500).json({ error : 'Server error'}));
-};
+}
 
 // Login
 exports.login = (req, res) => {
@@ -107,6 +107,7 @@ exports.login = (req, res) => {
         where: { email: req.body.email }
     })
         .then(user => {
+            console.log(user);
             if (!user) {
                 return res.status(401).json({ error: 'User not found' });
             }
@@ -122,39 +123,41 @@ exports.login = (req, res) => {
                         is_admin: user.is_admin,
                         avatar: user.avatar,
                         biography: user.biography,
-                        /* JWT */
+                        // JWT token
                         token: jwt.sign(
                             { userId: user._id }, 
                             'SECRET_TOKEN',
                             { expiresIn: '24h' } 
-                        )                     
+                        )                    
                     });
                 })
-                .catch(error => res.status(500).json({ error }));            
+                .catch(error => res.status(500).json({ error: 'Cannot log' }));            
         })
         .catch(error => res.status(500).json({ error }));
-};
-
-// Delete user
-exports.deleteUser = (req, res) => {
-    
-    Models.User.findOne({
-        where: { id: req.params.id }
-    })
-        .then(userExists => {
-            if(userExists) {
-                Models.User.findOne({
-
-                })
-            }
-            else {
-                res.status(404).json({ error: 'User not found' });
-            }
-        })
-        .catch((error) => res.status(404).json({ error }));
 }
 
-// Update user
-exports.updateUser = (req, res) => {
-    
+exports.deleteUser = (req, res) => {
+    Models.User.findOne({
+        where: { id: req.params.id },
+    })
+        .then(user => {
+
+            console.log(user.dataValues);
+            //console.log('Id', req.id);
+            console.log('Body', req);
+
+            if(req.params.id == user.dataValues.id){
+                Models.User.destroy({
+                    where: { id: req.params.id}
+                })
+                    .then(() => {
+                        res.status(201).json({ message: 'User deleted' })
+                    })
+                    .catch(error => res.status(404).json({ error: 'Delete error' }));
+            }
+            else {
+                res.status(403).json({error: 'Forbidden'});
+            }
+        })
+        .catch((error) => res.status(500).json({ error: "User not found" }));
 }
