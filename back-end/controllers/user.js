@@ -71,33 +71,32 @@ exports.signup = (req, res) => {
     Models.User.findOne({
         where: { email: req.body.email }
     })
-    .then((userExists) => {
-        // If user exists
-        if (userExists) {
-            res.status(409).json({ error: "User already exists..."});
-        }
-        // Create new user
-        const defaultAvatarUrl = './images/avatar/default_url';
-        const defaultBiography = 'Quelques mots...';
-        const defaultAccess = false;
-        bcrypt.hash(req.body.password, 10)
-            .then((hash) => {
-                Models.User.create({
-                    username: req.body.username, // username = firstName + ' ' + lastName -> firstName capitalize() & lastName toUpperCase()
-                    password: hash,
-                    email: req.body.email,                       
-                    avatar: defaultAvatarUrl,
-                    biography: defaultBiography,                       
-                    is_admin: defaultAccess
-            })
-            .then((user) => {
-                res.status(201).json({ user })
-            })
-            .catch((error) => res.status(400).json({ error : 'Cannot create new user'}));
-        });
-    
-    })
-    .catch((error) => res.status(500).json({ error : 'Server error'}));
+        .then((userExists) => {
+            // If user exists
+            if (userExists) {
+                res.status(409).json({ error: "User already exists..."});
+            }
+            // Create new user
+            const defaultAvatarUrl = './images/avatar/default_url';
+            const defaultBiography = 'Quelques mots...';
+            const defaultAccess = false;
+            bcrypt.hash(req.body.password, 10)
+                .then((hash) => {
+                    Models.User.create({
+                        username: req.body.username, // username = firstName + ' ' + lastName -> firstName capitalize() & lastName toUpperCase()
+                        password: hash,
+                        email: req.body.email,                       
+                        avatar: defaultAvatarUrl,
+                        biography: defaultBiography,                       
+                        is_admin: defaultAccess
+                })
+                .then((user) => {
+                    res.status(201).json({ user })
+                })
+                .catch((error) => res.status(400).json({ error : 'Cannot create new user'}));
+            });   
+        })
+        .catch((error) => res.status(500).json({ error : 'Server error'}));
 }
 
 // Login
@@ -111,7 +110,7 @@ exports.login = (req, res) => {
             if (!user) {
                 return res.status(401).json({ error: 'User not found' });
             }
-                bcrypt.compare(req.body.password, user.password) 
+            bcrypt.compare(req.body.password, user.password) 
                 .then(valid => {
                     if (!valid) {
                         return res.status(401).json({ error: 'Invalid password' });
@@ -136,16 +135,14 @@ exports.login = (req, res) => {
         .catch(error => res.status(500).json({ error }));
 }
 
+// Delete user
 exports.deleteUser = (req, res) => {
     Models.User.findOne({
-        where: { id: req.params.id },
+        where: { id: req.params.id }
     })
         .then(user => {
-
             console.log(user.dataValues);
             //console.log('Id', req.id);
-            console.log('Body', req);
-
             if(req.params.id == user.dataValues.id){
                 Models.User.destroy({
                     where: { id: req.params.id}
