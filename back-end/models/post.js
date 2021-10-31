@@ -14,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
       models.Post.belongsTo(models.User);
 			models.Post.hasMany(models.Comment, { onDelete: 'cascade', hooks: true});
 			models.Post.hasMany(models.Like, { onDelete: 'cascade', hooks: true });
+      models.Post.hasMany(models.Dislike, { onDelete: 'cascade', hooks: true });
     }
   };
   Post.init({

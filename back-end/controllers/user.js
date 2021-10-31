@@ -138,12 +138,13 @@ exports.login = (req, res) => {
 // Delete user
 exports.deleteUser = (req, res) => {
     Models.User.findOne({
+        attributes: ['is_admin'],
         where: { id: req.params.id }
     })
         .then(user => {
             console.log(user.dataValues);
             //console.log('Id', req.id);
-            if(req.params.id == user.dataValues.id){
+            if(req.params.id == user.dataValues.id || req.params.is_admin == true){
                 Models.User.destroy({
                     where: { id: req.params.id}
                 })

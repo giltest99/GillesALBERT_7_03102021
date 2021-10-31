@@ -21,14 +21,12 @@ module.exports = {
         type: Sequelize.STRING
       },
       avatar: {
-        allowNull: false,
-        type: Sequelize.STRING,
-        default: 'default_avatar_url'
+        allowNull: true,
+        type: Sequelize.STRING
       },
       biography: {
-        allowNull: false,
-        type: Sequelize.TEXT,
-        defaultValue: 'Quelques mots sur moi...'
+        allowNull: true,
+        type: Sequelize.TEXT
       },
       is_admin: {
         allowNull: false,

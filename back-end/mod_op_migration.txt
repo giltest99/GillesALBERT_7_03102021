@@ -22,7 +22,10 @@ Génération du modèle Comment :
 -> npx sequelize-cli model:generate --name Comment --attributes user_id:integer,content:text,post_id:integer
 
 Génération du modèle Like :
--> npx sequelize-cli model:generate --name Like --attributes user_id:integer,post_id:integer
+-> npx sequelize-cli model:generate --name Like --attributes user_id:integer,post_id:integer,comment_id:integer
+
+Génération du modèle Disike :
+-> npx sequelize-cli model:generate --name Dislike --attributes user_id:integer,post_id:integer,comment_id:integer
 
 4 - Ajout de paramètres (allowNull, defaut, etc...)
 Ajouter si besoin allowNull: false, defaultValue: '', etc... dans le fichier migrations dans User (et/ou autres) si besoin 
