@@ -13,8 +13,10 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       models.User.hasMany(models.Post, { onDelete: 'cascade', hooks: true });
 			models.User.hasMany(models.Comment, { onDelete: 'cascade', hooks: true });
-			models.User.hasMany(models.Like, { onDelete: 'cascade', hooks: true });
-      models.User.hasMany(models.Dislike, { onDelete: 'cascade', hooks: true });
+			models.User.hasMany(models.Post_like, { onDelete: 'cascade', hooks: true });
+      models.User.hasMany(models.Post_disislike, { onDelete: 'cascade', hooks: true });
+      models.User.hasMany(models.Comment_like, { onDelete: 'cascade', hooks: true });
+      models.User.hasMany(models.Comment_dislike, { onDelete: 'cascade', hooks: true });
     }
   };
   User.init({

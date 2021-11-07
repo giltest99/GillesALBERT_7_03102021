@@ -45,10 +45,10 @@ app.use((req, res, next) => {
 // Routes
 
 app.use('/api/users', userRoutes);
-
+app.use('/api/posts', postRoutes);
 
 /*
-app.use('/api/posts', postRoutes);
+
 app.use("/api/comments", commentRoutes);
 app.use("/api/likes", likeRoutes);
 */

@@ -39,7 +39,7 @@ Commandes Sequelize
 -> npm install -g sequelize-cli (si pas installé)
 (npm install --save-dev sequelize-cli) -> pas testé en save-dev
 
-Génération d'un modèle (exemples):
+Génération d'un modèle (exemples) --> ne pas mettre d'espace après la(es) virgule(s) :
 -> npx sequelize-cli model:generate --name User --attributes firstName:string,lastName:string,email:string
 -> npx sequelize-cli model:generate --name User --attributes firstName:string,lastName:string,email:string comment:string --force (si besoin de créer nouvelle version)
 
