@@ -2,10 +2,10 @@ const express = require('express');
 const router = express.Router();
 
 // Middlewares
-const auth = require('../middleware/auth');
+
 
 /* 
-
+const auth = require('../middleware/auth');
 const multer = require('../middleware/multer-config'); 
 */
 
@@ -14,6 +14,7 @@ const postCtrl = require('../controllers/post');
 
 // End points
 router.get('/', postCtrl.selectAllPosts);
+router.get('/:id', postCtrl.selectPostById);
 
 /* 
 router.get('/:id', postCtrl.selectPostById);

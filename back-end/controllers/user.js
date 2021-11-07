@@ -2,8 +2,6 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const Models = require('../models');
 
-
-
 // Select all users
 exports.selectAllUsers = (req, res) => {
     Models.User.findAll()

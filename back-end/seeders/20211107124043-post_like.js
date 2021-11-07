@@ -11,6 +11,16 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
+
+    await queryInterface.bulkInsert('Post_likes', [
+      {
+        id: 1,
+        user_id: 1,
+        post_id: 1,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      }
+    ]);
   },
 
   down: async (queryInterface, Sequelize) => {
