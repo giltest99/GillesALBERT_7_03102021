@@ -122,7 +122,7 @@ exports.login = (req, res) => {
                         biography: user.biography,
                         // JWT token
                         token: jwt.sign(
-                            { userId: user._id }, 
+                            { userId: user_id }, 
                             'SECRET_TOKEN',
                             { expiresIn: '24h' } 
                         )                    
