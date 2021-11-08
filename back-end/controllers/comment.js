@@ -1,14 +1,16 @@
 const Models = require('../models');
 
 // Select all comments
-exports.selectAllPosts = (req, res) => {
-    Models.Comment.findAll()
+exports.selectAllComments = (req, res) => {
+    Models.Comment.findAll({
+        attributes: ['id', 'user_id', 'post_id', 'content']
+    })
         .then(comments => res.status(200).json(comments))
         .catch(error => res.status(500).json({ error : 'No ressource found' }));
 }
 
 // Select comment by id
-exports.selectPostById = (req, res) => {
+exports.selectCommentById = (req, res) => {
     Models.Comment.findOne({
         attributes: ['id', 'user_id', 'post_id', 'content'],
         where: { id: req.params.id }

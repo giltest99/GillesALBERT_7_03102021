@@ -23,9 +23,10 @@ models.sequelize
 // Routes import
 const userRoutes = require('./routes/user');
 const postRoutes = require('./routes/post');
+const commentRoutes = require("./routes/comment");
 
 /*
-const commentRoutes = require("./routes/comment");
+
 const likeRoutes = require("./routes/like");
 */
 
@@ -45,10 +46,11 @@ app.use((req, res, next) => {
 // Routes
 app.use('/api/users', userRoutes);
 app.use('/api/posts', postRoutes);
+app.use("/api/comments", commentRoutes);
 
 /*
 
-app.use("/api/comments", commentRoutes);
+
 app.use("/api/likes", likeRoutes);
 */
 
