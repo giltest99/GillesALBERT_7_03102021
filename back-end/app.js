@@ -26,8 +26,10 @@ const postRoutes = require('./routes/post');
 const commentRoutes = require("./routes/comment");
 
 /*
-
-const likeRoutes = require("./routes/like");
+const postLikesRoutes = require('./routes/postLike');
+const postDislikesRoutes = require('./routes/postDislike');
+const commentLikesRoutes = require('./routes/commentLike');
+const commentDislikesRoutes = require('./routes/commentDislike');
 */
 
 // Middlewares
@@ -49,9 +51,10 @@ app.use('/api/posts', postRoutes);
 app.use("/api/comments", commentRoutes);
 
 /*
-
-
-app.use("/api/likes", likeRoutes);
+app.use("/api/postlikes", postLikesRoutes);
+app.use("/api/postdislikes", postDislikesRoutes);
+app.use("/api/commentlikes", commentLikesRoutes);
+app.use("/api/commentdislikes", commentDislikesRoutes);
 */
 
 // Static files
