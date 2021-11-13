@@ -6,7 +6,7 @@ const Models = require('../models');
 exports.selectAllUsers = (req, res) => {
     Models.User.findAll()
         .then(users => res.status(200).json(users))
-        .catch(error => res.status(500).json({ error : 'No ressource found' }));
+        .catch(error => res.status(500).json({ error : 'Pas de ressource disponible' }));
 }
 
 // Select user by id
@@ -19,11 +19,11 @@ exports.selectUserById = (req, res) => {
             if (user) {
                 res.status(200).json(user);
             } else {
-                res.status(404).json({ error: 'User not found' });
+                res.status(404).json({ error: 'Utilisateur non trouvé' });
             }
         })
         .catch((error) => {
-            res.status(500).json({ error: 'No ressource found' });
+            res.status(500).json({ error: 'Pas de ressource disponible' });
         });
 }
 
@@ -33,7 +33,7 @@ exports.selectUserByUserName = (req, res) => {
         attributes: ['id', 'username', 'email', 'avatar', 'biography', 'is_admin'],
         where: { username: req.params.username }
     })
-        .then((user) => {
+        .then(user => {
             if (user) {
                 res.status(200).json(user);
             } else {
@@ -51,7 +51,7 @@ exports.selectUserByUserEmail = (req, res) => {
         attributes: ['id', 'username', 'email', 'avatar', 'biography', 'is_admin'],
         where: { email: req.params.email }
     })
-        .then((user) => {
+        .then(user => {
             if (user) {
                 res.status(200).json(user);
             } else {
@@ -69,30 +69,32 @@ exports.signup = (req, res) => {
     Models.User.findOne({
         where: { email: req.body.email }
     })
-        .then((userExists) => {
+        .then(user => {
             // If user exists
-            if (userExists) {
-                res.status(409).json({ error: "User already exists..."});
+            if (user) {
+                res.status(409).json({ error: "Utilisateur déjà existant"});
             }
-            // Create new user
-            const defaultAvatarUrl = './images/avatar/default_url';
-            const defaultBiography = 'Quelques mots...';
-            const defaultAccess = false;
-            bcrypt.hash(req.body.password, 10)
-                .then((hash) => {
-                    Models.User.create({
-                        username: req.body.username, // username = firstName + ' ' + lastName -> firstName capitalize() & lastName toUpperCase()
-                        password: hash,
-                        email: req.body.email,                       
-                        avatar: defaultAvatarUrl,
-                        biography: defaultBiography,                       
-                        is_admin: defaultAccess
-                })
-                .then((user) => {
-                    res.status(201).json({ user })
-                })
-                .catch((error) => res.status(400).json({ error : 'Cannot create new user'}));
-            });   
+            else {
+                // Create new user
+                const defaultAvatarUrl = './images/avatar/default_url';
+                const defaultBiography = 'Quelques mots...';
+                const defaultAccess = false;
+                bcrypt.hash(req.body.password, 10)
+                    .then((hash) => {
+                        Models.User.create({
+                            username: req.body.username, // username = firstName + ' ' + lastName -> firstName capitalize() & lastName toUpperCase()
+                            password: hash,
+                            email: req.body.email,                       
+                            avatar: defaultAvatarUrl,
+                            biography: defaultBiography,                       
+                            is_admin: defaultAccess
+                    })
+                    .then((user) => {
+                        res.status(201).json({ user })
+                    })
+                    .catch((error) => res.status(400).json({ error : 'Création impossible'}));
+                });
+            }            
         })
         .catch((error) => res.status(500).json({ error : 'Server error'}));
 }
@@ -104,39 +106,36 @@ exports.login = (req, res) => {
         where: { email: req.body.email }
     })
         .then(user => {
-            console.log(user);
-            if (!user) {
-                return res.status(401).json({ error: 'User not found' });
-            }
+            //console.log(user.dataValues);
             bcrypt.compare(req.body.password, user.password) 
-                .then(valid => {
-                    if (!valid) {
-                        return res.status(401).json({ error: 'Invalid password' });
-                    }
-                    res.status(200).json({
-                        user_id: user.id,
-                        username: user.username,
-                        email: user.email,
-                        is_admin: user.is_admin,
-                        avatar: user.avatar,
-                        biography: user.biography,
-                        // JWT token
-                        token: jwt.sign(
-                            { userId: user_id }, 
-                            'SECRET_TOKEN',
-                            { expiresIn: '24h' } 
-                        )                    
-                    });
-                })
-                .catch(error => res.status(500).json({ error: 'Cannot log' }));            
+            .then(validPassword => {
+                if (!validPassword) {
+                    return res.status(401).json({ error: 'Mot de passe invalide' });
+                }
+                res.status(200).json({
+                    userId: user.id,
+                    username: user.username,
+                    email: user.email,
+                    isAdmin: user.is_admin,
+                    avatar: user.avatar,
+                    biography: user.biography,
+                    // JWT
+                    token: jwt.sign(
+                        { userId: user.id }, 
+                        'SECRET_TOKEN',
+                        { expiresIn: '24h' } 
+                    )                 
+                });
+            })
+            .catch(error => res.status(500).json({ error: 'Problème d\'identifiants' }));
+                        
         })
-        .catch(error => res.status(500).json({ error }));
+        .catch(error => res.status(500).json({ error : 'Utilisateur non trouvé'}));
 }
 
 // Delete user
 exports.deleteUser = (req, res) => {
     Models.User.findOne({
-        attributes: ['is_admin'],
         where: { id: req.params.id }
     })
         .then(user => {
