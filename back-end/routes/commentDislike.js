@@ -9,9 +9,10 @@ const auth = require('../middleware/auth');
 const commentDislikeCtrl = require('../controllers/commentDislike');
 
 // Endpoints
-//router.get('/', commentDislikeCtrl.selectAllCommentDislikes);
-//router.get('/:id', commentDislikeCtrl.selectCommentDislikeById);
-//router.post('/', commentDislikeCtrl.createCommentDislike);
-//router.delete('/:id', commentDislikeCtrl.deleteCommentDislike);
+router.post('/', commentDislikeCtrl.createCommentDislike);
+router.delete('/:id', commentDislikeCtrl.deleteCommentDislike);
+
+//router.get('/', commentLikeCtrl.selectAllCommentLikes);
+//router.get('/:id', commentLikeCtrl.selectCommentLikeById);
 
 module.exports = router;
