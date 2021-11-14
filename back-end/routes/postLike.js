@@ -15,6 +15,5 @@ router.delete('/:id', postLikeCtrl.deletePostLike);
 //router.get('/', postLikeCtrl.selectAllPostLikes);
 //router.get('/:id', postLikeCtrl.selectPostLikeById);
 
-//
 
 module.exports = router;
