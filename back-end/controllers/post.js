@@ -5,7 +5,7 @@ const fs = require('fs');
 // Select all posts
 exports.selectAllPosts = (req, res) => {
     Models.Post.findAll({
-        attributes: ['id', 'user_id', 'title', 'content']
+        attributes: ['id', 'user_id', 'title', 'content', 'attachment', 'createdAt']
     })
         .then(posts => res.status(200).json(posts))
         .catch(error => res.status(500).json({ error  }));
@@ -14,7 +14,7 @@ exports.selectAllPosts = (req, res) => {
 // Select post by id
 exports.selectPostById = (req, res) => {
     Models.Post.findOne({
-        attributes: ['id', 'user_id', 'title', 'content'],
+        attributes: ['id', 'user_id', 'title', 'content', 'attachment', 'createdAt', 'updatedAt'],
         where: { id: req.params.id }
     })
         .then((post) => {
