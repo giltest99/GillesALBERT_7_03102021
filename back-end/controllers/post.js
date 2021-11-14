@@ -1,4 +1,6 @@
 const Models = require('../models');
+const fs = require('fs');
+
 
 // Select all posts
 exports.selectAllPosts = (req, res) => {
@@ -25,4 +27,25 @@ exports.selectPostById = (req, res) => {
         .catch((error) => {
             res.status(500).json({ error: 'No ressource found' });
         });
+}
+
+// Create post
+exports.createPost = (req, res) => {
+    Models.Post.findOne({
+        attributes: ['id', 'user_id', 'title', 'content'],
+        where: { id: req.params.id }
+    })
+        .then(user => {
+            Model.Post.create({
+                userId: user.id,
+                title: title,
+                content: content,
+                attachement: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+            })
+                .then()
+                .catch()
+        })
+        .catch(error => {
+            res.status(500).json({ error: 'Server error'});
+        })
 }

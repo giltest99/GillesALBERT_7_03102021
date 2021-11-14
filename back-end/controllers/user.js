@@ -76,7 +76,7 @@ exports.signup = (req, res) => {
             }
             else {
                 // Create new user
-                const defaultAvatarUrl = './images/avatar/default_url';
+                const defaultAvatarUrl = '../images/default_avatar.jpg';
                 const defaultBiography = 'Quelques mots...';
                 const defaultAccess = false;
                 bcrypt.hash(req.body.password, 10)
