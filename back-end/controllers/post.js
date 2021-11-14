@@ -50,3 +50,10 @@ exports.createPost = (req, res) => {
         .then(post => res.status(201).json({ post, log: 'Post créé' }))
         .catch(error => res.status(400).json({ error : 'Pas de post enregistré'}));
 }
+
+// Delete post
+exports.deletePost = (req, res) => {
+    Models.Post.destroy({ where: { id: req.params.id }})
+        .then(() => res.status(200).json({ log: 'Message supprimé' }))
+        .catch(error => res.status(400).json({ error : 'Post non supprimé'}));
+}
