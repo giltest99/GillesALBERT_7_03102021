@@ -4,7 +4,7 @@ const express = require('express');
 const cors = require('cors');
 const helmet = require("helmet");
 const path = require('path');
-//const { Sequelize} = require('sequelize');
+
 
 // Define Express app
 const app = express();
@@ -24,9 +24,10 @@ models.sequelize
 const userRoutes = require('./routes/user');
 const postRoutes = require('./routes/post');
 const commentRoutes = require("./routes/comment");
+const postLikesRoutes = require('./routes/postLike');
 
 /*
-const postLikesRoutes = require('./routes/postLike');
+
 const postDislikesRoutes = require('./routes/postDislike');
 const commentLikesRoutes = require('./routes/commentLike');
 const commentDislikesRoutes = require('./routes/commentDislike');
@@ -49,9 +50,10 @@ app.use((req, res, next) => {
 app.use('/api/users', userRoutes);
 app.use('/api/posts', postRoutes);
 app.use("/api/comments", commentRoutes);
+app.use("/api/postlikes", postLikesRoutes);
 
 /*
-app.use("/api/postlikes", postLikesRoutes);
+
 app.use("/api/postdislikes", postDislikesRoutes);
 app.use("/api/commentlikes", commentLikesRoutes);
 app.use("/api/commentdislikes", commentDislikesRoutes);

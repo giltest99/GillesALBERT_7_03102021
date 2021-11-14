@@ -32,8 +32,9 @@ exports.selectPostById = (req, res) => {
 // Create post
 exports.createPost = (req, res) => {
     let media = "";
+    console.log(req.body);
     if (req.file) { 
-        media = `${req.protocol}://${req.get("host")}/images/${req.file.filename}` 
+        media = `${req.protocol}://${req.get("host")}/images/${req.file.filename}`;
     }
     else {
         media = '';
