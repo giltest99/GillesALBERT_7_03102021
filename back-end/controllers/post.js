@@ -31,21 +31,22 @@ exports.selectPostById = (req, res) => {
 
 // Create post
 exports.createPost = (req, res) => {
-    Models.Post.findOne({
-        attributes: ['id', 'user_id', 'title', 'content'],
-        where: { id: req.params.id }
-    })
-        .then(user => {
-            Model.Post.create({
-                userId: user.id,
-                title: title,
-                content: content,
-                attachement: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
-            })
-                .then()
-                .catch()
-        })
-        .catch(error => {
-            res.status(500).json({ error: 'Server error'});
-        })
+    let media = "";
+    if (req.file) { 
+        media = `${req.protocol}://${req.get("host")}/images/${req.file.filename}` 
+    }
+    else {
+        media = '';
+    }
+    const post = new Models.Post(
+        {
+            user_id: req.body.user_id,
+            title: req.body.title,
+            content: req.body.content,
+            attachment: media
+        }
+    )
+    post.save()
+        .then(post => res.status(201).json({ post, log: 'Post créé' }))
+        .catch(error => res.status(400).json({ error : 'Pas de post enregistré'}));
 }

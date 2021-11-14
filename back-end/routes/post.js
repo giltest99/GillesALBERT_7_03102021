@@ -11,7 +11,7 @@ const postCtrl = require('../controllers/post');
 // Endpoints
 router.get('/', postCtrl.selectAllPosts);
 router.get('/:id', postCtrl.selectPostById);
-//router.post('/', postCtrl.createPost);
+router.post('/', postCtrl.createPost);
 //router.delete('/:id', postCtrl.deletePost);
 //router.put('/:id', postCtrl.updatePost);
 
