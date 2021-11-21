@@ -22,3 +22,12 @@ exports.deleteCommentDislike = (req, res) => {
         .catch(error => res.status(400).json({ error : 'Comment dislike non supprimé'}));
 }
 
+// Count disliked comments
+exports.commentDislikeCount = (req, res) => {
+    Models.Post_like.findAll({
+        attributes: [[sequelize.fn('COUNT', sequelize.col('id')), 'NumberOfDislikedComments']],
+        where: { id: req.params.id }
+      })
+        .then(nb => res.status(200).json(nb))
+        .catch(error => res.status(500).json({ error }));
+}

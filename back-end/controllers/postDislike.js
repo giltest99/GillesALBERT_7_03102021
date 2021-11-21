@@ -25,7 +25,8 @@ exports.deletePostDislike = (req, res) => {
 // Count disliked posts
 exports.postDislikeCount = (req, res) => {
     Models.Post_dislike.findAll({
-        attributes: [[sequelize.fn('COUNT', sequelize.col('post_id')), 'NumberOfDislikedPosts']]
+        attributes: [[sequelize.fn('COUNT', sequelize.col('id')), 'NumberOfDislikedPosts']],
+        where: { id: req.params.id }
       })
         .then(nb => res.status(200).json(nb))
         .catch(error => res.status(500).json({ error }));
