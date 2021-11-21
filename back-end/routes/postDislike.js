@@ -9,6 +9,7 @@ const auth = require('../middleware/auth');
 const postDislikeCtrl = require('../controllers/postDislike');
 
 // Endpoints
+router.get('/:id', postDislikeCtrl.postDislikeCount);
 router.post('/', postDislikeCtrl.createPostDislike);
 router.delete('/:id', postDislikeCtrl.deletePostDislike);
 

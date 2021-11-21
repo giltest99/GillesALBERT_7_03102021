@@ -1,4 +1,5 @@
 const Models = require('../models');
+const sequelize = require('sequelize');
 
 // Like a comment
 exports.createCommentDislike = (req, res) => {
@@ -20,3 +21,4 @@ exports.deleteCommentDislike = (req, res) => {
         .then(() => res.status(200).json({ log: 'Comment dislike supprimé' }))
         .catch(error => res.status(400).json({ error : 'Comment dislike non supprimé'}));
 }
+

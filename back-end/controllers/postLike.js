@@ -25,7 +25,8 @@ exports.deletePostLike = (req, res) => {
 // Count liked posts
 exports.postLikeCount = (req, res) => {
     Models.Post_like.findAll({
-        attributes: [[sequelize.fn('COUNT', sequelize.col('post_id')), 'NumberOfLikedPosts']]
+        attributes: [[sequelize.fn('COUNT', sequelize.col('post_id')), 'NumberOfLikedPosts']],
+        where: { id: req.params.id }
       })
         .then(nb => res.status(200).json(nb))
         .catch(error => res.status(500).json({ error }));

@@ -1,4 +1,5 @@
 const Models = require('../models');
+const sequelize = require('sequelize');
 
 // Dislike a post
 exports.createPostDislike = (req, res) => {
@@ -19,4 +20,13 @@ exports.deletePostDislike = (req, res) => {
     Models.Post_dislike.destroy({ where: { id: req.params.id }})
         .then(() => res.status(200).json({ log: 'Post dislike supprimé' }))
         .catch(error => res.status(400).json({ error : 'Post dislike non supprimé'}));
+}
+
+// Count disliked posts
+exports.postDislikeCount = (req, res) => {
+    Models.Post_dislike.findAll({
+        attributes: [[sequelize.fn('COUNT', sequelize.col('post_id')), 'NumberOfDislikedPosts']]
+      })
+        .then(nb => res.status(200).json(nb))
+        .catch(error => res.status(500).json({ error }));
 }

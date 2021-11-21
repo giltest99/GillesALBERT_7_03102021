@@ -9,7 +9,7 @@ const auth = require('../middleware/auth');
 const postLikeCtrl = require('../controllers/postLike');
 
 // Endpoints
-router.get('/', postLikeCtrl.postLikeCount);
+router.get('/:id', postLikeCtrl.postLikeCount);
 router.post('/', postLikeCtrl.createPostLike);
 router.delete('/:id', postLikeCtrl.deletePostLike);
 
