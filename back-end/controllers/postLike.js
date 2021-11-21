@@ -1,4 +1,5 @@
 const Models = require('../models');
+const sequelize = require('sequelize');
 
 // Like a post
 exports.createPostLike = (req, res) => {
@@ -19,4 +20,13 @@ exports.deletePostLike = (req, res) => {
     Models.Post_like.destroy({ where: { id: req.params.id }})
         .then(() => res.status(200).json({ log: 'Post like supprimé' }))
         .catch(error => res.status(400).json({ error : 'Post like non supprimé'}));
+}
+
+// Count liked posts
+exports.postLikeCount = (req, res) => {
+    Models.Post_like.findAll({
+        attributes: [[sequelize.fn('COUNT', sequelize.col('post_id')), 'NumberOfLikedPosts']]
+      })
+        .then(nb => res.status(200).json(nb))
+        .catch(error => res.status(500).json({ error }));
 }
