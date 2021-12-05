@@ -23,3 +23,5 @@ exports.deletePost = (req, res) => {
         .catch(error => res.status(400).json({ error : 'Post non supprimé'}));
 }
 
+// TODO :
+-------->>>>> DOC DE L'API !!!!!!!!!!!!
