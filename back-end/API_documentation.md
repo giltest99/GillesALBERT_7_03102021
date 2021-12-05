@@ -1,7 +1,6 @@
 # Groupomania API documentation
 
 # USERS
-http://localhost:3000/api/users
 
 ##  Login
 POST http://localhost:3000/api/users/login
