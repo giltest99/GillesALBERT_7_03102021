@@ -13,7 +13,7 @@ router.get('/', postCtrl.selectAllPosts);
 router.get('/:id', postCtrl.selectPostById);
 router.post('/', postCtrl.createPost);
 router.delete('/:id', postCtrl.deletePost);
-//router.put('/:id', postCtrl.updatePost);
+router.put('/:id', postCtrl.updatePost);
 
 
 module.exports = router;

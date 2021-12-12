@@ -58,3 +58,17 @@ exports.deletePost = (req, res) => {
         .then(() => res.status(200).json({ log: 'Message supprimé' }))
         .catch(error => res.status(400).json({ error : 'Post non supprimé'}));
 }
+
+// Update post
+exports.updatePost = (req, res, next) => {
+    const postObject = req.file ?
+      {
+        ...req.body.post,
+        url: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
+      } : 
+      { ... req.body }
+
+    Models.Post.update({ ...postObject, id:  req.params.id}, { where: { id: req.params.id }})
+        .then(() => res.status(200).json({ ...postObject, message: 'Message modifié' }))
+        .catch(error => res.status(400).json({ error }));
+}
