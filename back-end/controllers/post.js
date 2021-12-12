@@ -64,9 +64,9 @@ exports.updatePost = (req, res, next) => {
     const postObject = req.file ?
       {
         ...req.body.post,
-        url: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
+        postUrl: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
       } : 
-      { ... req.body }
+      { ...req.body }
 
     Models.Post.update({ ...postObject, id:  req.params.id}, { where: { id: req.params.id }})
         .then(() => res.status(200).json({ ...postObject, message: 'Message modifié' }))

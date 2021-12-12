@@ -169,7 +169,7 @@ exports.updateUser = (req, res, next) => {
             avatarUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
             biography: req.body.biography
         } : 
-        
+        // Default avatar
         {
             userId: req.params.id,
             username: req.body.username,

@@ -27,7 +27,7 @@ GET http://localhost:3000/api/users
 GET http://localhost:3000/api/users/id/1
 
 ## Delete user by id
-POST http://localhost:3000/api/users/4
+DELETE http://localhost:3000/api/users/4
 
 # POSTS
 http://localhost:3000/api/posts

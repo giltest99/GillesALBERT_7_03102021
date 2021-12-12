@@ -5,7 +5,6 @@ const cors = require('cors');
 const helmet = require("helmet");
 const path = require('path');
 
-
 // Define Express app
 const app = express();
 
@@ -29,10 +28,6 @@ const postDislikesRoutes = require('./routes/postDislike');
 const commentLikesRoutes = require('./routes/commentLike');
 const commentDislikesRoutes = require('./routes/commentDislike');
 
-/*
-
-*/
-
 // Middlewares
 app.use(helmet());
 app.use(express.json());
@@ -54,12 +49,6 @@ app.use('/api/postlikes', postLikesRoutes);
 app.use('/api/postdislikes', postDislikesRoutes);
 app.use("/api/commentlikes", commentLikesRoutes);
 app.use("/api/commentdislikes", commentDislikesRoutes);
-
-/*
-
-
-
-*/
 
 // Static files
 app.use('/images', express.static(path.join(__dirname, 'images')));
