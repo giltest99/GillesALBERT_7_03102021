@@ -1,6 +1,7 @@
 # Groupomania API documentation
 
 # USERS
+http://localhost:3000/api/users
 
 ##  Login
 POST http://localhost:3000/api/users/login
@@ -22,18 +23,19 @@ POST http://localhost:3000/api/users/signup
 ## Select all users
 GET http://localhost:3000/api/users
 
-## Select one user by id
+## Select user by id
 GET http://localhost:3000/api/users/id/1
 
 ## Delete user by id
 POST http://localhost:3000/api/users/4
 
 # POSTS
+http://localhost:3000/api/posts
 
 ## Select all posts
 GET http://localhost:3000/api/posts
 
-## Select one post by id
+## Select post by id
 GET http://localhost:3000/api/posts/1
 
 ## Create post
@@ -50,10 +52,12 @@ POST http://localhost:3000/api/posts
 DELETE http://localhost:3000/api/posts/20
 
 # COMMENTS
+http://localhost:3000/api/comments
+
 ## Select all comments
 GET http://localhost:3000/api/comments
 
-## Select one comment
+## Select comment by id
 GET http://localhost:3000/api/comments/1
 
 ## Create comment
@@ -70,6 +74,7 @@ DELETE  http://localhost:3000/api/comments/
 
 
 # POSTS LIKED
+http://localhost:3000/api/postlikes
 
 ## Select a post and return the number of likes
 GET http://localhost:3000/api/postlikes/1
@@ -82,11 +87,12 @@ POST http://localhost:3000/api/postlikes
     "post_id": "12"
 }
 ```
-## Delete post liked
+## Delete a post liked
 DELETE http://localhost:3000/api/postlikes/5
 
 
 # POSTS DISLIKED
+http://localhost:3000/api/postdislikes
 
 ## Select a post and return the number of dislikes
 GET http://localhost:3000/api/postdislikes/1
@@ -99,10 +105,11 @@ POST http://localhost:3000/api/postdislikes
     "post_id": "12"
 }
 ```
-## DELETE post dislike
+## DELETE a post dislike
 DELETE  http://localhost:3000/api/postdislikes/4
 
 # COMMENT LIKED
+http://localhost:3000/api/commentlikes
 
 ##  Select a comment and return the number of likes
 GET http://localhost:3000/api/commentlikes/2
@@ -115,10 +122,11 @@ POST http://localhost:3000/api/commentlikes
     "comment_id": "1"
 }
 ```
-## Delete comment like
+## Delete a comment like
 DELETE  http://localhost:3000/api/commentlikes/
 
 # COMMENT DISLIKED
+http://localhost:3000/api/commentdislikes
 
 ## Select a comment and return the number of dislikes
 GET http://localhost:3000/api/commentdislikes/2
