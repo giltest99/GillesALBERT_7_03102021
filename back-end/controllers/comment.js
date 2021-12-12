@@ -48,3 +48,10 @@ exports.deleteComment = (req, res) => {
         .then(() => res.status(200).json({ log: 'Comment supprimé' }))
         .catch(error => res.status(400).json({ error : 'Comment non supprimé'}));
 }
+
+// Update comment
+exports.updateComment = (req, res) => {
+    Models.Comment.update({ ...req.body }, { where: { id: req.params.id }})
+        .then(() => res.status(200).json({ ...req.body, message: "Commentaire modifié" }))
+        .catch(error => res.status(400).json({ error }));
+}

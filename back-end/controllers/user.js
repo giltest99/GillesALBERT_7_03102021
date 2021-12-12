@@ -181,8 +181,7 @@ exports.updateUser = (req, res, next) => {
         //console.log(userObject);
 
         Models.User.update({ ...userObject, id:  req.params.id}, { where: { id: req.params.id }})
-            .then(() => res.status(200).json({ ...userObject }))
+            .then(() => res.status(200).json({ ...userObject, message: 'Utilisateur modifié' }))
             .catch(error => res.status(400).json({ error }));
-
 
 }

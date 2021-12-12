@@ -16,7 +16,7 @@ router.get('/', commentCtrl.selectAllComments);
 router.get('/:id', commentCtrl.selectCommentById);
 router.post('/', commentCtrl.createComment);
 router.delete('/:id', commentCtrl.deleteComment);
-//router.put('/:id', commentCtrl.updateComment);
+router.put('/:id', commentCtrl.updateComment);
 
 
 
