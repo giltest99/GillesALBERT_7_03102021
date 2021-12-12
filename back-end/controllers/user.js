@@ -141,7 +141,7 @@ exports.deleteUser = (req, res) => {
         .then(user => {
             console.log(user.dataValues);
             //console.log('Id', req.id);
-            if(req.params.id == user.dataValues.id || req.params.is_admin == true){
+            if(req.params.id == user.dataValues.id || req.params.is_admin == true){
                 Models.User.destroy({
                     where: { id: req.params.id}
                 })
@@ -155,4 +155,34 @@ exports.deleteUser = (req, res) => {
             }
         })
         .catch((error) => res.status(500).json({ error: "User not found" }));
+}
+
+// Update user
+exports.updateUser = (req, res, next) => {
+
+    const userObject = req.file ?
+        // If avatar
+        {
+            userId: req.params.id,
+            username: req.body.username,
+            //password: req.body.password,
+            avatarUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
+            biography: req.body.biography
+        } : 
+        
+        {
+            userId: req.params.id,
+            username: req.body.username,
+            //password: req.body.password,
+            //avatar: '../images/default_avatar.jpg',
+            biography: req.body.biography
+        }
+
+        //console.log(userObject);
+
+        Models.User.update({ ...userObject, id:  req.params.id}, { where: { id: req.params.id }})
+            .then(() => res.status(200).json({ ...userObject }))
+            .catch(error => res.status(400).json({ error }));
+
+
 }
