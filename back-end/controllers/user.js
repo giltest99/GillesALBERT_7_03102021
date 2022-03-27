@@ -165,7 +165,6 @@ exports.updateUser = (req, res, next) => {
         {
             userId: req.params.id,
             username: req.body.username,
-            //password: req.body.password,
             avatarUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
             biography: req.body.biography
         } : 
@@ -173,7 +172,6 @@ exports.updateUser = (req, res, next) => {
         {
             userId: req.params.id,
             username: req.body.username,
-            //password: req.body.password,
             //avatar: '../images/default_avatar.jpg',
             biography: req.body.biography
         }
