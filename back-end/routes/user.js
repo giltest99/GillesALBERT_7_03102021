@@ -18,6 +18,6 @@ router.delete('/:id', userCtrl.deleteUser);
 router.put('/:id', multer, userCtrl.updateUser);
 
 //router.get('/username/:username', userCtrl.selectUserByUserName);
-//router.get('/email/:email', userCtrl.selectUserByUserEmail);
+router.get('/:email', userCtrl.selectUserByUserEmail);
 
 module.exports = router;
