@@ -1,8 +1,6 @@
 # Groupomania API documentation
 
 # USERS
-http://localhost:3000/api/users
-
 ##  Login
 POST http://localhost:3000/api/users/login
 ```json
@@ -32,7 +30,7 @@ DELETE http://localhost:3000/api/users/4
 # POSTS
 http://localhost:3000/api/posts
 
-## Select all posts
+## Select all posts (default order DESC)
 GET http://localhost:3000/api/posts
 
 ## Select post by id
@@ -42,10 +40,20 @@ GET http://localhost:3000/api/posts/1
 POST http://localhost:3000/api/posts
 ```json
 {
-    "title": "Hello my post !",
-    "content": "Content of my fabulous post",
-    "attachment": "url",
-    "user_id": "1"
+    "user_id": "1",
+    "title": "Title of the post !",
+    "content": "Content of the post",
+    "attachment": "url of the media post"
+}
+```
+## Update post
+POST http://localhost:3000/api/posts
+```json
+{
+    "user_id": "5",
+    "title": "Title of the post !",
+    "content": "Content of the post",
+    "attachment": "url of the media post"
 }
 ```
 ## Delete post
@@ -69,8 +77,17 @@ POST http://localhost:3000/api/comments
     "post_id": "1"
 }
 ```
+## Update comment
+UPDATE http://localhost:3000/api/comments/3
+```json
+{
+    "user_id": "3",
+    "content": "Updated another amazing comment !",
+    "post_id": "1"
+}
+```
 ## Delete comment
-DELETE  http://localhost:3000/api/comments/
+DELETE  http://localhost:3000/api/comments/3
 
 
 # POSTS LIKED
