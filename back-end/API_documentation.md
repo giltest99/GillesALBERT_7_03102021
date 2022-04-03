@@ -88,6 +88,7 @@ POST http://localhost:3000/api/comments
     "post_id": "1"
 }
 ```
+
 ## Update comment
 UPDATE http://localhost:3000/api/comments/3
 ```json
@@ -97,6 +98,7 @@ UPDATE http://localhost:3000/api/comments/3
     "post_id": "1"
 }
 ```
+
 ## Delete comment
 DELETE  http://localhost:3000/api/comments/3
 
