@@ -98,8 +98,8 @@ exports.updatePost = (req, res, next) => {
             attributes: ['id', 'user_id', 'title', 'content','attachment'],
             where: { id: req.params.id }
         })
-            .then(() => {
-                const filename = sauce.imageUrl.split('/images/')[1];
+            .then((post) => {
+                const filename = post.attachment.split('/images/')[1];
                 fs.unlink(`images/${filename}`, () => {
                     Models.Post.update({ ...postObject, id:  req.params.id}, { where: { id: req.params.id }})
                         .then(() => { 

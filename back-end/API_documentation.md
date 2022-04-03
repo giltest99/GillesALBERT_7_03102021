@@ -22,8 +22,19 @@ POST http://localhost:3000/api/users/signup
 GET http://localhost:3000/api/users
 
 ## Select user by id
-GET http://localhost:3000/api/users/id/1
+GET http://localhost:3000/api/users/1
 
+## Update user
+UPDATE http://localhost:3000/api/users/1
+```json
+{
+    "email": "john.doe@gmail.com",
+    "password": "123",
+    "username": "John DOE",
+    "avatar": "Avatar url",
+    "biography": "Modified biography"
+}
+```
 ## Delete user by id
 DELETE http://localhost:3000/api/users/4
 

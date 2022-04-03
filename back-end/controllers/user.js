@@ -76,7 +76,7 @@ exports.signup = (req, res) => {
             }
             else {
                 // Create new user
-                const defaultAvatarUrl = '../images/default_avatar.jpg';
+                const defaultAvatarUrl = 'http://localhost:3000/images/default_avatar.jpg';
                 const defaultBiography = 'Quelques mots...';
                 const defaultAccess = false;
                 bcrypt.hash(req.body.password, 10)
@@ -108,26 +108,26 @@ exports.login = (req, res) => {
         .then(user => {
             //console.log(user.dataValues);
             bcrypt.compare(req.body.password, user.password) 
-            .then(validPassword => {
-                if (!validPassword) {
-                    return res.status(401).json({ error: 'Mot de passe invalide' });
-                }
-                res.status(200).json({
-                    userId: user.id,
-                    username: user.username,
-                    email: user.email,
-                    isAdmin: user.is_admin,
-                    avatar: user.avatar,
-                    biography: user.biography,
-                    // JWT
-                    token: jwt.sign(
-                        { userId: user.id }, 
-                        'SECRET_TOKEN',
-                        { expiresIn: '24h' } 
-                    )                 
-                });
-            })
-            .catch(error => res.status(500).json({ error: 'Problème d\'identifiants' }));
+                .then(validPassword => {
+                    if (!validPassword) {
+                        return res.status(401).json({ error: 'Mot de passe invalide' });
+                    }
+                    res.status(200).json({
+                        userId: user.id,
+                        username: user.username,
+                        email: user.email,
+                        isAdmin: user.is_admin,
+                        avatar: user.avatar,
+                        biography: user.biography,
+                        // JWT
+                        token: jwt.sign(
+                            { userId: user.id }, 
+                            'SECRET_TOKEN',
+                            { expiresIn: '24h' } 
+                        )                 
+                    });
+                })
+                .catch(error => res.status(500).json({ error: 'Problème d\'identifiants' }));
                         
         })
         .catch(error => res.status(500).json({ error : 'Utilisateur non trouvé'}));
@@ -136,12 +136,15 @@ exports.login = (req, res) => {
 // Delete user
 exports.deleteUser = (req, res) => {
     Models.User.findOne({
+        attributes: ['id', 'is_admin'],
         where: { id: req.params.id }
     })
         .then(user => {
             console.log(user.dataValues);
+            
             //console.log('Id', req.id);
-            if(req.params.id == user.dataValues.id || req.params.is_admin == true){
+             
+            if(req.params.id == user.dataValues.id || user.dataValues.is_admin == true){
                 Models.User.destroy({
                     where: { id: req.params.id}
                 })
@@ -160,25 +163,49 @@ exports.deleteUser = (req, res) => {
 // Update user
 exports.updateUser = (req, res, next) => {
 
-    const userObject = req.file ?
-        // If avatar
-        {
-            userId: req.params.id,
-            username: req.body.username,
-            avatarUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
-            biography: req.body.biography
-        } : 
-        // Default avatar
-        {
-            userId: req.params.id,
-            username: req.body.username,
-            //avatar: '../images/default_avatar.jpg',
-            biography: req.body.biography
-        }
+    const userObject = req.file && req.body.avatar != 'http://localhost:3000/images/default_avatar.jpg' ?
+    // If avatar && != default_avatar
+    {
+        id: req.params.id,
+        username: req.body.username,
+        avatar: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
+        biography: req.body.biography
+    } : 
+    // Default avatar
+    {
+        id: req.params.id,
+        username: req.body.username,
+        avatar: 'http://localhost:3000/images/default_avatar.jpg',
+        biography: req.body.biography
+    }
 
-        //console.log(userObject);
+    //console.log(userObject);
 
+    // Delete media from ./images when user media is modified
+    if(req.file){
+        Models.User.findOne({
+            attributes: ['id', 'username', 'email', 'password', 'avatar','biography'],
+            where: { id: req.params.id }
+        })
+            .then((user) => {
+                const filename = user.avatar.split('/images/')[1];
+                fs.unlink(`images/${filename}`, () => {
+                    Models.User.update({ ...userObject, id:  req.params.id}, { where: { id: req.params.id }})
+                        .then(() => { 
+                            res.status(200).json({ message: 'User mis à jour!' }); 
+                        })
+                        .catch((error) => { 
+                            res.status(400).json({ error }); 
+                        });
+                })
+            })
+            .catch((error) => { 
+                res.status(500).json({ error });
+            });
+    }
+    else {
         Models.User.update({ ...userObject, id:  req.params.id}, { where: { id: req.params.id }})
-            .then(() => res.status(200).json({ ...userObject, message: 'Utilisateur modifié' }))
+            .then(() => res.status(200).json({ ...userObject, message: 'User modifié' }))
             .catch(error => res.status(400).json({ error }));
+    }
 }
