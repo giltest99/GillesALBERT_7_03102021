@@ -38,20 +38,20 @@ exports.createComment = (req, res) => {
         }
     )
     comment.save()
-        .then(comment => res.status(201).json({ comment, log: 'Comment créé' }))
+        .then(comment => res.status(201).json(comment))
         .catch(error => res.status(400).json({ error : 'Pas de comment enregistré'}));
 }
 
 // Delete comment
 exports.deleteComment = (req, res) => {
     Models.Comment.destroy({ where: { id: req.params.id }})
-        .then(() => res.status(200).json({ log: 'Comment supprimé' }))
+        .then(() => res.status(200).json({ message: 'Comment supprimé' }))
         .catch(error => res.status(400).json({ error : 'Comment non supprimé'}));
 }
 
 // Update comment
 exports.updateComment = (req, res) => {
     Models.Comment.update({ ...req.body }, { where: { id: req.params.id }})
-        .then(() => res.status(200).json({ ...req.body, message: "Commentaire modifié" }))
+        .then(() => res.status(200).json({ ...req.body }))
         .catch(error => res.status(400).json({ error }));
 }

@@ -9,7 +9,7 @@ exports.selectAllPosts = (req, res) => {
         order: [['createdAt', 'DESC']]
     })
         .then(posts => res.status(200).json(posts))
-        .catch(error => res.status(500).json({ error  }));
+        .catch(error => res.status(500).json({ error : 'Pas de post trouvé' }));
 }
 
 // Select post by id
@@ -22,11 +22,11 @@ exports.selectPostById = (req, res) => {
             if (post) {
                 res.status(200).json(post);
             } else {
-                res.status(404).json({ error: 'Post not found' });
+                res.status(404).json({ error: 'Pas de post trouvé' });
             }
         })
         .catch((error) => {
-            res.status(500).json({ error: 'No ressource found' });
+            res.status(500).json({ error: 'Erreur' });
         });
 }
 
@@ -66,15 +66,15 @@ exports.deletePost = (req, res) => {
                 const filename = post.attachment.split('/images/')[1];
                 fs.unlink(`images/${filename}`, () => {
                     Models.Post.destroy({ where: { id: req.params.id }})
-                        .then(() => res.status(200).json({ log: 'Message supprimé' }))
+                        .then(() => res.status(200).json({ log: 'Post supprimé' }))
                         .catch(error => res.status(400).json({ error : 'Post non supprimé'}));
                 })
             } else {
-                res.status(404).json({ error: 'Post not found' });
+                res.status(404).json({ error: 'Pas de post trouvé' });
             }
         })
         .catch((error) => {
-            res.status(500).json({ error: 'No ressource found' });
+            res.status(500).json({ error: 'Erreur' });
         });       
 }
 
@@ -106,17 +106,17 @@ exports.updatePost = (req, res, next) => {
                             res.status(200).json({ message: 'Post mis à jour!' }); 
                         })
                         .catch((error) => { 
-                            res.status(400).json({ error }); 
+                            res.status(400).json({ error : 'Post non mis à jour' }); 
                         });
                 })
             })
             .catch((error) => { 
-                res.status(500).json({ error });
+                res.status(500).json({ error : 'Erreur' });
             });
     }
     else {
         Models.Post.update({ ...postObject, id:  req.params.id}, { where: { id: req.params.id }})
             .then(() => res.status(200).json({ ...postObject, message: 'Message modifié' }))
-            .catch(error => res.status(400).json({ error }));
+            .catch(error => res.status(400).json({ error : 'Erreur' }));
     }
 }
