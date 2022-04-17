@@ -50,7 +50,7 @@ exports.createPost = (req, res) => {
     )
     
     post.save()
-        .then(post => res.status(201).json({ post, log: 'Post créé' }))
+        .then(post => res.status(201).json({ message: 'Post créé' }))
         .catch(error => res.status(400).json({ error : 'Pas de post créé'}));
 }
 
@@ -87,7 +87,7 @@ exports.updatePost = (req, res, next) => {
             user_id: req.body.user_id,
             title: req.body.title,
             content: req.body.content,
-            attachment: req.body.attachment
+            attachment: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
         } : {
             ...req.body
         }

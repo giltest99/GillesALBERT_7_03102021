@@ -19,15 +19,6 @@ models.sequelize
         console.log('DB connect failed !');
     });
 
-// Routes import
-const userRoutes = require('./routes/user');
-const postRoutes = require('./routes/post');
-const commentRoutes = require("./routes/comment");
-const postLikesRoutes = require('./routes/postLike');
-const postDislikesRoutes = require('./routes/postDislike');
-const commentLikesRoutes = require('./routes/commentLike');
-const commentDislikesRoutes = require('./routes/commentDislike');
-
 // Middlewares
 app.use(helmet());
 app.use(express.json());
@@ -40,6 +31,17 @@ app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
     next();
 });
+
+// Routes import
+const userRoutes = require('./routes/user');
+const postRoutes = require('./routes/post');
+const commentRoutes = require("./routes/comment");
+const postLikesRoutes = require('./routes/postLike');
+const postDislikesRoutes = require('./routes/postDislike');
+const commentLikesRoutes = require('./routes/commentLike');
+const commentDislikesRoutes = require('./routes/commentDislike');
+
+
 
 // Routers
 app.use('/api/users', userRoutes);
