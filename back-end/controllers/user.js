@@ -72,7 +72,7 @@ exports.signup = (req, res) => {
         .then(user => {
             // If user exists
             if (user) {
-                res.status(409).json({ error: "Utilisateur déjà existant"});
+                res.status(409).json({ message: "Utilisateur déjà existant"});
             }
             else {
                 // Create new user
@@ -90,13 +90,13 @@ exports.signup = (req, res) => {
                             is_admin: defaultAccess
                     })
                     .then((user) => {
-                        res.status(201).json({ user })
+                        res.status(201).json({ message: 'Utilisateur créé' })
                     })
-                    .catch((error) => res.status(400).json({ error : 'Création impossible'}));
+                    .catch((error) => res.status(400).json({ message : 'Création impossible'}));
                 });
             }            
         })
-        .catch((error) => res.status(500).json({ error : 'Server error'}));
+        .catch((error) => res.status(500).json({ message : 'Erreur serveur'}));
 }
 
 // Login
@@ -110,27 +110,28 @@ exports.login = (req, res) => {
             bcrypt.compare(req.body.password, user.password) 
                 .then(validPassword => {
                     if (!validPassword) {
-                        return res.status(401).json({ error: 'Mot de passe invalide' });
+                        return res.status(401).json({ message: 'Mot de passe invalide' });
                     }
                     res.status(200).json({
-                        userId: user.id,
+                        /* userId: user.id,
                         username: user.username,
                         email: user.email,
                         isAdmin: user.is_admin,
                         avatar: user.avatar,
-                        biography: user.biography,
+                        biography: user.biography, */
                         // JWT
                         token: jwt.sign(
                             { userId: user.id }, 
                             'SECRET_TOKEN',
                             { expiresIn: '24h' } 
-                        )                 
+                        ),
+                        message: 'Connexion réussie'                
                     });
                 })
-                .catch(error => res.status(500).json({ error: 'Problème d\'identifiants' }));
+                .catch(error => res.status(500).json({ message: 'Problème d\'identifiants' }));
                         
         })
-        .catch(error => res.status(500).json({ error : 'Utilisateur non trouvé'}));
+        .catch(error => res.status(500).json({ message : 'Utilisateur non trouvé'}));
 }
 
 // Delete user
