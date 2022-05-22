@@ -1,0 +1,13 @@
+:root {
+  --primary: #091f43 !important;
+  --primary-hover: #2a3d5b !important;
+  --groupo-red: #d1515a !important;
+  --bg-color: #ededf0;
+}
+html, body {
+  background-color: var(--bg-color);
+}
+article {
+	margin: 1rem 0;
+  padding: 1rem 2rem;
+}
