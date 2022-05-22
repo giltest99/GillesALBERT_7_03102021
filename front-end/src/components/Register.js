@@ -2,7 +2,7 @@ import {useState} from 'react'
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as yup from "yup";
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import TextError from './SpanError';
 import GroupoLogo from '../assets/mono-groupo.svg'
 import BackError from './BackEndError';
@@ -13,6 +13,8 @@ export default function Register() {
   document.title = 'Groupomania créer un compte'
 
   const [errorMessage, setErrorMessage] = useState('')
+
+  const navigate = useNavigate()
 
   const initialValues = {
     username: '',
@@ -32,6 +34,7 @@ export default function Register() {
     .then(response => {
       console.log(response.data);
       resetForm();
+      navigate('/')
       })
     .catch(error => {
       console.log(error.response.data.message)
