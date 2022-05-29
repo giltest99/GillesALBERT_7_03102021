@@ -6,8 +6,14 @@ import axios from 'axios';
 import TextError from './SpanError';
 import GroupoLogo from '../assets/mono-groupo.svg'
 import BackError from './BackEndError';
+import Swal from 'sweetalert2';
 
-
+const successLoginAlert = () => {
+  Swal.fire({
+    icon: 'success',
+    title: 'Connexion réussie'
+  })
+}
 
 export default function Login() {
   document.title = 'Groupomania se connecter'
@@ -30,7 +36,7 @@ export default function Login() {
     .then(response => {
       console.log(response.data)
       localStorage.setItem('user',JSON.stringify(response.data))
-      alert('Connexion réussie !')
+      successLoginAlert()
       setErrorMessage('')
       resetForm();
     })
