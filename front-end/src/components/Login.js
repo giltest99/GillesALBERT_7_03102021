@@ -9,8 +9,6 @@ import BackError from './BackEndError';
 
 
 
-
-
 export default function Login() {
   document.title = 'Groupomania se connecter'
 
@@ -31,15 +29,19 @@ export default function Login() {
     axios.post('http://localhost:3000/api/users/login', values)
     .then(response => {
       console.log(response.data)
-      localStorage.setItem('data',JSON.stringify(response.data))
+      localStorage.setItem('user',JSON.stringify(response.data))
+      alert('Connexion réussie !')
       setErrorMessage('')
       resetForm();
     })
     .catch(error => {
       console.log(error.response.data.message)
       setErrorMessage(error.response.data.message)
-    })
-    
+    })    
+  }
+
+  const resetForm = () => {
+    setErrorMessage('')
   }
 
   return (
@@ -66,7 +68,7 @@ export default function Login() {
 
             <p>
               <label htmlFor="email">Email</label>
-              <Field type="text" name="email"  />
+              <Field type="text" name="email" autoComplete="off" />
               <ErrorMessage name="email" component={TextError}/>
             </p>
             
@@ -76,12 +78,19 @@ export default function Login() {
               <ErrorMessage name="password" component={TextError}/>
             </p>
             
-            <p>
+            <p style={{display:'flex',flexDirection:'row',justifyContent:'space-between'}}>
               <button type="submit">Se connecter</button>
             </p>
 
             <p style={{textAlign:'center'}}>
               <Link to="register" >Créer un compte</Link>
+            </p>
+
+            <p className='reset-button-container'>
+              <button
+              type='reset'
+              className='reset-button' 
+              onClick={resetForm}>Effacer</button>
             </p>
             
           </Form>

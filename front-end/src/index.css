@@ -2,6 +2,7 @@
   --primary: #091f43 !important;
   --primary-hover: #2a3d5b !important;
   --groupo-red: #d1515a !important;
+  --groupo-red-hover: #da7279 !important;
   --bg-color: #ededf0;
 }
 html, body {
@@ -10,4 +11,18 @@ html, body {
 article {
 	margin: 1rem 0;
   padding: 1rem 2rem;
+}
+.reset-button-container {
+  display: flex;
+  justify-content: flex-end;
+  align-content: center;
+}
+.reset-button {
+  width: 4rem;
+  background-color: var(--groupo-red);
+  padding: .2rem;
+  transition: all .2s linear;
+}
+.reset-button:hover {
+  background-color: var(--groupo-red-hover);
 }

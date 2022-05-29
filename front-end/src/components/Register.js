@@ -34,12 +34,17 @@ export default function Register() {
     .then(response => {
       console.log(response.data);
       resetForm();
+      alert(response.data.message)
       navigate('/')
       })
     .catch(error => {
       console.log(error.response.data.message)
       setErrorMessage(error.response.data.message)
     }) 
+  }
+
+  const resetForm = () => {
+    setErrorMessage('')
   }
 
   return (
@@ -64,7 +69,7 @@ export default function Register() {
 
             <p>
               <label htmlFor="username">Nom d'utilisateur</label>
-              <Field type="text" name="username" />
+              <Field type="text" name="username"  autoComplete="off" />
               <ErrorMessage name="username" component={TextError} />
             </p>
             
@@ -86,6 +91,13 @@ export default function Register() {
 
             <p style={{textAlign:'center'}}>
               <Link to="/" >Se connecter</Link>
+            </p>
+
+            <p className='reset-button-container'>
+              <button
+              type='reset'
+              className='reset-button' 
+              onClick={resetForm}>Effacer</button>
             </p>
 
           </Form>
