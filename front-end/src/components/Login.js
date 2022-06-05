@@ -11,14 +11,16 @@ import Swal from 'sweetalert2';
 const successLoginAlert = () => {
   Swal.fire({
     icon: 'success',
-    title: 'Connexion réussie'
+    //title: 'Connexion réussie',
+    confirmButtonText: '<a href="posts" style="color:white;text-decoration:none">Voir les posts</a>',
+    confirmButtonColor: '#091f43'
   })
 }
 
 export default function Login() {
   document.title = 'Groupomania se connecter'
 
-  const [errorMessage, setErrorMessage] = useState('')
+  const [errorMessage, setErrorMessage] = useState('')  
 
   const initialValues = {
     email: '',
@@ -34,8 +36,8 @@ export default function Login() {
     console.log(values)
     axios.post('http://localhost:3000/api/users/login', values)
     .then(response => {
-      console.log(response.data)
-      localStorage.setItem('user',JSON.stringify(response.data))
+      //console.log(response.data)
+      localStorage.setItem('user',JSON.stringify(response.data.token))
       successLoginAlert()
       setErrorMessage('')
       resetForm();
