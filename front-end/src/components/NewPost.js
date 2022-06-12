@@ -36,7 +36,7 @@ export default function NewPost() {
   return (
       <>
     <Navigation />
-      <article className='container' style={{backgroundColor:'white',padding:'1rem'}}>
+      <article className='container' style={{backgroundColor:'white',padding:'1rem',margin:'0 auto'}}>
       
     <form onSubmit={formik.handleSubmit} encType="multipart/form-data" className='w3-container w3-center'>
       <Link to="/posts">&larr; &nbsp; Retour</Link>
@@ -53,7 +53,7 @@ export default function NewPost() {
         />
       </div>
 
-      <div className='w3-container w3-margin'>
+      <div>
         <label>Titre</label>
         <br />
         <input
@@ -64,18 +64,18 @@ export default function NewPost() {
         />
       </div>
 
-      <div className='w3-container w3-margin'>
+      <div>
         <label>Content</label>
         <br />
-        <input
-          type='text'
+        <textarea
+          /* type='text' */
           name='content'
           onChange={formik.handleChange}
           value={formik.values.content}
         />
       </div>
 
-      <div className='w3-container w3-margin'>
+      <div>
         <label>Upload File</label>
         <br />
         <input
@@ -90,8 +90,8 @@ export default function NewPost() {
       </div>
       <br />
 
-      <div className='w3-container w3-margin'>
-        <button type='submit' className='w3-btn w3-indigo w3-padding-large'>Submit</button>
+      <div>
+        <button type='submit'>Submit</button>
       </div>
       
 

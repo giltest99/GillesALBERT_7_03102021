@@ -10,18 +10,7 @@ export const getAllPosts = async () => {
     }
     catch (error) {
         throw new Error('Pas de ressource disponible')
-    }
-    
+    }    
 }
 
-export const getOnePost = async ({ queryKey }) => {
-    /* eslint-disable no-unused-vars */
-    const [_key, { id }] = queryKey;
-    const response = await fetch(`${baseURL}/posts/${id}`);
-  
-    if (!response.ok) {
-      throw new Error(response.json().message);
-    }
-  
-    return response.json();
-  };
+

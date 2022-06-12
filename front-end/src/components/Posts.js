@@ -1,8 +1,7 @@
-import React, {useState, useEffect} from 'react'
 import Navigation from './Navigation'
 import { getAllPosts } from '../utils/api';
 import { useQuery } from "react-query";
-
+import {Link} from 'react-router-dom';
 
 
 export default function Posts() {
@@ -31,19 +30,34 @@ export default function Posts() {
     <>
         <Navigation />
         
-        <section className='container'>
+        <section className='container' style={{maxWidth:'50rem'}}>
+
         {data.map(({ id, title, content, attachment}) => (
-          <article key={id}>
-              <p>{id}</p>
-              <p>{title}</p>
-              <p>{content}</p>
-              <p>
-                  <figure>
-                      <img src={attachment} alt="my attachment"/>
-                  </figure>
-              </p>
+
+          <article key={id} style={{}}> 
+
+              <figure style={{width:'100%'}}>
+                    <img src={attachment} alt="my attachment" style={{width:'100%',objectFit:'cover'}}/>          
+              </figure>     
+            
+
+              <div style={{width:'100%'}}>
+                  <h3 style={{marginBottom:'.5rem'}}>{title}</h3>
+                  <small><i>John DOE, le 12/06/2022</i></small>
+                  <p style={{border:'none',resize:'none',padding:'1rem 0'}}>{content}</p>
+              </div>
+
+              <div className='grid'>
+                <p>12</p>
+                <p><a href="#">Liker</a></p>
+                <p><a href="#">Modifier</a></p>
+                <p><a href="#">Supprimer</a></p>
+              </div>
+
           </article>
+
         ))}
+
         </section>
         
 

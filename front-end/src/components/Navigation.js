@@ -4,18 +4,16 @@ import Logo from '../assets/mono-groupo.svg'
 
 export default function Navigation() {
   return (
-    <header className='container-fluid grid' style={{backgroundColor:'white'}}>
-        <nav className="container-fluid" style={{justifyContent:'space-between',alignItems:'center'}}>
-        <Link to="/posts">
-            <img src={Logo} alt="logo groupomania" style={{height:'80%', width:'50%'}}/>
-        </Link>
-        
+    <header className='container-fluid' style={{backgroundColor:'white'}}>
+      <nav style={{justifyContent:'space-between',alignItems:'center'}}>
+
+        <img src={Logo} alt="logo groupomania" style={{width:'40%', minWidth:'6rem',padding:'1rem', minHeight:'3rem',height:'4rem'}}/>
+
         <ul>
           <li>
             <details role="list" dir="rtl">
               <summary role="link">Messages</summary>
               <ul role="listbox">
-                {/* <li><Link to="/posts">Lire tous</Link></li> */}
                 <li><Link to="/new-post">Ecrire</Link></li>
               </ul>
             </details>
@@ -30,7 +28,9 @@ export default function Navigation() {
             </details>
           </li>
         </ul>
+
       </nav>
+      
     </header>
   )
 }
