@@ -1,14 +1,17 @@
 import Navigation from './Navigation'
 import { getAllPosts } from '../utils/api';
 import { useQuery } from "react-query";
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 
 export default function Posts() {
 
-     const { data, error, isLoading, isError, isFetching } = useQuery("allPosts", getAllPosts);
+     const { data, error, isLoading, isError, isFetching } = useQuery("allPosts", getAllPosts, {
+      refetchOnMount: true,
+      cacheTime: 0
+     });
 
-    if(isLoading || isFetching) {
+    if(isLoading || isFetching) {
         return (
             <>
             <Navigation />
@@ -48,10 +51,12 @@ export default function Posts() {
               </div>
 
               <div className='grid'>
-                <p>12</p>
-                <p><a href="#">Liker</a></p>
-                <p><a href="#">Modifier</a></p>
-                <p><a href="#">Supprimer</a></p>
+                <p style={{textAlign:'center',margin:'.5rem auto'}}>12</p>
+                <p style={{textAlign:'center',margin:'.5rem auto'}}><a href="#">Liker</a></p>
+                <p style={{textAlign:'center',margin:'.5rem auto'}}>
+                  <Link to={`/posts/${id}`}>Détails</Link>
+                </p>
+                {/* <p style={{textAlign:'center',margin:'.5rem auto'}}><a href="#">Supprimer</a></p> */}
               </div>
 
           </article>

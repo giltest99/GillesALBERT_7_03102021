@@ -4,7 +4,9 @@ import axios from 'axios'
 import Navigation from './Navigation';
 import { Link, useNavigate } from 'react-router-dom'; 
 
+
 export default function NewPost() {
+
     const navigate = useNavigate()
     const [posts, setPosts] = useState([]);
     const url = 'http://localhost:3000/api/posts/';
@@ -16,14 +18,14 @@ export default function NewPost() {
       image: '',
     },
     onSubmit: (values, {resetForm}) => {
-      console.log(values);
+      //console.log(values);
 
       const formData = new FormData();
-      console.log(formData);
+      //console.log(formData);
 
       for (let value in values) {
         formData.append(value, values[value]);
-        console.log(value, values[value])
+        //console.log(value, values[value])
       }
 
       axios.post(url, formData).then((res) => {
@@ -38,10 +40,10 @@ export default function NewPost() {
     <Navigation />
       <article className='container' style={{backgroundColor:'white',padding:'1rem',margin:'0 auto'}}>
       
-    <form onSubmit={formik.handleSubmit} encType="multipart/form-data" className='w3-container w3-center'>
+    <form onSubmit={formik.handleSubmit} encType="multipart/form-data">
       <Link to="/posts">&larr; &nbsp; Retour</Link>
       <h1 style={{marginBottom:'.5rem'}}>Ecrire un message</h1>
-      <div className='w3-container w3-margin'>
+      <div>
         <label>User ID</label>
         <br />
         <input

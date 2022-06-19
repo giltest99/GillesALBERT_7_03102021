@@ -13,4 +13,14 @@ export const getAllPosts = async () => {
     }    
 }
 
+export const addNewPost = async (newPost) => {
+    try {
+        const response = await axios.post(`${baseURL}posts`, newPost)
+        return response.json();
+    }
+    catch (error) {
+        throw new Error('Impossible de créer un nouveau post')
+    }
+}
+
 

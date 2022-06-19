@@ -13,7 +13,7 @@ const successLoginAlert = () => {
     icon: 'success',
     //title: 'Connexion réussie',
     confirmButtonText: '<a href="posts" style="color:white;text-decoration:none">Voir les posts</a>',
-    confirmButtonColor: '#091f43'
+    confirmButtonColor: '#FD2D01'
   })
 }
 

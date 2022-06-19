@@ -14,7 +14,7 @@ root.render(
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
         <App />
-        <ReactQueryDevtools  position="bottom-right" />
+        <ReactQueryDevtools  position="bottom-right" initialIsOpen={false}/>
       </BrowserRouter>
     </QueryClientProvider>
   </React.StrictMode>
