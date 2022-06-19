@@ -25,9 +25,9 @@ export default function PostDetails() {
           <article>
             {/* {JSON.stringify(data)}  */}
             <Link to="/posts">&larr; &nbsp; Retour</Link>
-            <h1>{data.data.title}</h1>
-            <h2>{data.data.content}</h2>
-            <img src={data.data.attachment} alt="" />
+            <h1 style={{margin:'0'}}>{data.data.title}</h1>
+            <p>{data.data.content}</p>
+            <img src={data.data.attachment} alt="img" style={{width:'100%'}}/>
             
           </article>
 

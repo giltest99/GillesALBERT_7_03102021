@@ -37,27 +37,33 @@ export default function Posts() {
 
         {data.map(({ id, title, content, attachment}) => (
 
-          <article key={id} style={{}}> 
-
-              <figure style={{width:'100%'}}>
-                    <img src={attachment} alt="my attachment" style={{width:'100%',objectFit:'cover'}}/>          
-              </figure>     
+          <article key={id} style={{}} className="grid"> 
+              <div>
+                <figure style={{height:'10rem'}}>
+                      <img src={attachment} alt="my attachment" style={{width:'100%',objectFit:'contain',height:'100%'}} />          
+                </figure>
+                <div className='grid'>
+                    <p style={{textAlign:'center',margin:'.5rem auto'}}>12</p>
+                    <p style={{textAlign:'center',margin:'.5rem auto'}}>
+                      <a href="#">Liker</a>
+                    </p>
+                    <p style={{textAlign:'center',margin:'.5rem auto'}}>
+                      <Link to={`/posts/${id}`}>Détails</Link>
+                    </p>
+                  </div>
+              </div>
+                   
             
 
               <div style={{width:'100%'}}>
                   <h3 style={{marginBottom:'.5rem'}}>{title}</h3>
                   <small><i>John DOE, le 12/06/2022</i></small>
-                  <p style={{border:'none',resize:'none',padding:'1rem 0'}}>{content}</p>
+                  <p style={{border:'none',resize:'none',padding:'1rem 0',textAlign:'justify'}}>{content}</p>
+
+                  
               </div>
 
-              <div className='grid'>
-                <p style={{textAlign:'center',margin:'.5rem auto'}}>12</p>
-                <p style={{textAlign:'center',margin:'.5rem auto'}}><a href="#">Liker</a></p>
-                <p style={{textAlign:'center',margin:'.5rem auto'}}>
-                  <Link to={`/posts/${id}`}>Détails</Link>
-                </p>
-                {/* <p style={{textAlign:'center',margin:'.5rem auto'}}><a href="#">Supprimer</a></p> */}
-              </div>
+              
 
           </article>
 

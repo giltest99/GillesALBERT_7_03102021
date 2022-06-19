@@ -4,7 +4,7 @@ import axios from 'axios'
 const fetchPost = ({ queryKey }) => {
     const postId = queryKey[1]
     return axios.get(`http://localhost:3000/api/posts/${postId}`)
-  }
+}
 
 export const usePostDetails = postId => {
 
