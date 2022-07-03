@@ -4,6 +4,8 @@ import axios from 'axios'
 import Navigation from './Navigation';
 import { Link, useNavigate } from 'react-router-dom'; 
 
+import { useQuery, useMutation, useQueryClient } from "react-query"
+
 
 export default function NewPost() {
 
@@ -31,6 +33,8 @@ export default function NewPost() {
       axios.post(url, formData).then((res) => {
         setPosts(posts.concat(res.data));
       });
+
+
       resetForm({})
       navigate('/posts')
     }

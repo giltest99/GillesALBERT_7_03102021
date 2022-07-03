@@ -38,7 +38,7 @@ export default function Posts() {
         {data.map(({ id, title, content, attachment}) => (
 
           <article key={id} style={{}} className="grid"> 
-              <div>
+              <div style={{}}>
                 <figure style={{height:'10rem'}}>
                       <img src={attachment} alt="my attachment" style={{width:'100%',objectFit:'contain',height:'100%'}} />          
                 </figure>
