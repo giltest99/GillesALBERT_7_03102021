@@ -29,5 +29,14 @@ exports.postLikeCount = (req, res) => {
         where: { id: req.params.id }
       })
         .then(nb => res.status(200).json(nb))
-        .catch(error => res.status(500).json({ error }));
+        .catch(error => res.status(500).json({ msg: "Oups..." }));
+}
+
+// Select all liked posts
+exports.selectAllLikes = (req, res) => {
+    Models.Post_like.findAll({
+        attributes: ['id', 'user_id', 'post_id']
+    })
+        .then(posts => res.status(200).json(posts))
+        .catch(error => res.status(500).json({ error : 'Pas de post trouvé' }));
 }
