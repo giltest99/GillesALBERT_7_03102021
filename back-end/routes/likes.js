@@ -6,17 +6,16 @@ const router = express.Router();
 //const multer = require('../middleware/multer-config');
 
 // Controller
-const postLikeCtrl = require("../controllers/postLike");
+const postLikeCtrl = require("../controllers/like");
 
 // Endpoints
 
 router.get("/", postLikeCtrl.selectAllLikes);
-
-router.get("/:id", postLikeCtrl.postLikeCount);
 router.post("/", postLikeCtrl.createPostLike);
 router.delete("/:id", postLikeCtrl.deletePostLike);
+router.get("/:postid", postLikeCtrl.postLikeCount);
+router.get("/user/:userid", postLikeCtrl.postLikeByUserId);
 
-//router.get('/', postLikeCtrl.selectAllPostLikes);
-//router.get('/:id', postLikeCtrl.selectPostLikeById);
+router.get("/details/:userid", postLikeCtrl.postLikedDetailByUserId);
 
 module.exports = router;

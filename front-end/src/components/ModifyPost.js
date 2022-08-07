@@ -1,20 +1,33 @@
 import React, { useState } from "react";
 import { useFormik } from "formik";
 import axios from "axios";
-import Navigation from "./Navigation";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import { useMutation, useQueryClient } from "react-query";
+import { updatePost } from "../api/postsApi";
 
-import { useQuery, useMutation, useQueryClient } from "react-query";
-
-export default function NewPost() {
+export default function UpdatePostPage() {
+  // id, user_id, title, content, attachment, createdAt
+  const location = useLocation();
+  const obj = location.state;
+  console.log(obj);
   const navigate = useNavigate();
   const [posts, setPosts] = useState([]);
-  const url = "http://localhost:3000/api/posts/";
+
+  const queryClient = useQueryClient();
+  const updatePostMutation = useMutation(updatePost, {
+    onSuccess: () => {
+      // Invalidates cache and refetch
+      queryClient.invalidateQueries("posts");
+    },
+  });
+
+  const url = `http://localhost:3000/api/posts/${obj.id}`;
+
   const formik = useFormik({
     initialValues: {
-      user_id: "",
-      title: "",
-      content: "",
+      user_id: obj.user_id,
+      title: obj.title,
+      content: obj.content,
       image: "",
     },
     onSubmit: (values, { resetForm }) => {
@@ -25,28 +38,31 @@ export default function NewPost() {
 
       for (let value in values) {
         formData.append(value, values[value]);
-        //console.log(value, values[value])
       }
 
-      axios.post(url, formData).then((res) => {
+      //console.log(formData);
+
+      axios.put(url, formData).then((res) => {
         setPosts(posts.concat(res.data));
+        //alert("Post enregistré");
+        console.log(posts);
       });
 
       resetForm({});
-      navigate("/posts");
+      //navigate("/posts");
     },
   });
+
   return (
     <>
-      <Navigation />
       <article
         className="container"
         style={{ backgroundColor: "white", padding: "1rem", margin: "0 auto" }}
       >
         <form onSubmit={formik.handleSubmit} encType="multipart/form-data">
-          <Link to="/posts">&larr; &nbsp; Retour</Link>
-          <h1 style={{ marginBottom: ".5rem" }}>Ecrire un message</h1>
-          <div>
+          {/* <Link to="/posts">&larr; &nbsp; Retour</Link> */}
+          <h1 style={{ marginBottom: ".5rem" }}>Modifier un message</h1>
+          {/* <div style={{ display: "none" }}>
             <label>User ID</label>
             <br />
             <input
@@ -54,9 +70,10 @@ export default function NewPost() {
               type="text"
               name="user_id"
               onChange={formik.handleChange}
-              value={formik.values.user_id}
+
+              value={obj.user_id}
             />
-          </div>
+          </div> */}
 
           <div>
             <label>Titre</label>
@@ -76,7 +93,7 @@ export default function NewPost() {
               /* type='text' */
               name="content"
               onChange={formik.handleChange}
-              value={formik.values.content}
+              value={formik.values.content.replace(/(?:\r\n|\r|\n)/g, "\n")}
             />
           </div>
 
@@ -92,6 +109,7 @@ export default function NewPost() {
               }
               style={{ color: "blue" }}
             />
+            <img src={obj.attachment} alt="" />
           </div>
           <br />
 
@@ -99,6 +117,9 @@ export default function NewPost() {
             <button type="submit">Submit</button>
           </div>
         </form>
+        <p>
+          <Link to="/posts">Retour aux posts</Link>
+        </p>
       </article>
     </>
   );

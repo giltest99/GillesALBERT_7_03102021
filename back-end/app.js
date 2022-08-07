@@ -35,13 +35,17 @@ app.use((req, res, next) => {
 // Routes import
 const userRoutes = require('./routes/user');
 const postRoutes = require('./routes/post');
-const postLikesRoutes = require('./routes/postLike');
+const postLikesRoutes = require('./routes/likes');
+
+//const likes = require('./routes/likes')
 
 
 // Routers
 app.use('/api/users', userRoutes);
 app.use('/api/posts', postRoutes);
 app.use('/api/postlikes', postLikesRoutes);
+
+//app.use('/api/likes',likes);
 
 // Static files
 app.use('/images', express.static(path.join(__dirname, 'images')));

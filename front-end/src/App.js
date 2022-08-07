@@ -6,6 +6,7 @@ import NewPost from './components/NewPost';
 import MyProfile from './components/MyProfile';
 import PostDetails from './components/PostDetails';
 import ErrorPage from './components/ErrorPage';
+import ModifyPost from './components/ModifyPostBackup';
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
       <Route path='/posts' element={<Posts />} />
       <Route path='/posts/:id' element={<PostDetails />} />
       <Route path='/new-post' element={<NewPost />} />
+      <Route path='/modify-post/:id' element={<ModifyPost />} />
       <Route path='/profile' element={<MyProfile />} />
       <Route path='*' element={<ErrorPage />} />
     </Routes>

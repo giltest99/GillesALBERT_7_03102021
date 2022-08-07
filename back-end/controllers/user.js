@@ -125,7 +125,10 @@ exports.login = (req, res) => {
                             'SECRET_TOKEN',
                             { expiresIn: '24h' } 
                         ),
-                        message: 'Connexion réussie'                
+                        //message: 'Connexion réussie',
+                        userId: user.id,
+                        userName: user.username,
+                        isAdmin: user.is_admin              
                     });
                 })
                 .catch(error => res.status(500).json({ message: 'Problème d\'identifiants' }));

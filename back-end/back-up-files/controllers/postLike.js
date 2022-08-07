@@ -11,7 +11,7 @@ exports.createPostLike = (req, res) => {
         }
     )
     postLike.save()
-        .then(postLike => res.status(201).json({ postLike, log: 'Post liké' }))
+        .then(like => res.status(201).json({ postLike, log: 'Post liké' }))
         .catch(error => res.status(400).json({ error : 'Post non liké'}));
 }
 
