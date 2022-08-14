@@ -1,5 +1,0 @@
-# Supprimer colonne id table Users :
-ALTER TABLE Users DROP id
-
-# Créer nouvelle colonne id :
-ALTER TABLE  Users ADD `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY FIRST

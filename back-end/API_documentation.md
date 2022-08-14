@@ -70,38 +70,6 @@ POST http://localhost:3000/api/posts
 ## Delete post
 DELETE http://localhost:3000/api/posts/20
 
-# COMMENTS
-http://localhost:3000/api/comments
-
-## Select all comments
-GET http://localhost:3000/api/comments
-
-## Select comment by id
-GET http://localhost:3000/api/comments/1
-
-## Create comment
-POST http://localhost:3000/api/comments
-```json
-{
-    "user_id": "3",
-    "content": "Another amazing comment !",
-    "post_id": "1"
-}
-```
-
-## Update comment
-UPDATE http://localhost:3000/api/comments/3
-```json
-{
-    "user_id": "3",
-    "content": "Updated another amazing comment !",
-    "post_id": "1"
-}
-```
-
-## Delete comment
-DELETE  http://localhost:3000/api/comments/3
-
 
 # POSTS LIKED
 http://localhost:3000/api/postlikes
@@ -119,55 +87,3 @@ POST http://localhost:3000/api/postlikes
 ```
 ## Delete a post liked
 DELETE http://localhost:3000/api/postlikes/5
-
-
-# POSTS DISLIKED
-http://localhost:3000/api/postdislikes
-
-## Select a post and return the number of dislikes
-GET http://localhost:3000/api/postdislikes/1
-
-## Dislike a post
-POST http://localhost:3000/api/postdislikes
-```json
-{
-    "user_id": "1",
-    "post_id": "12"
-}
-```
-## DELETE a post dislike
-DELETE  http://localhost:3000/api/postdislikes/4
-
-# COMMENT LIKED
-http://localhost:3000/api/commentlikes
-
-##  Select a comment and return the number of likes
-GET http://localhost:3000/api/commentlikes/2
-
-## Like a comment
-POST http://localhost:3000/api/commentlikes
-```json
-{
-    "user_id": "1",
-    "comment_id": "1"
-}
-```
-## Delete a comment like
-DELETE  http://localhost:3000/api/commentlikes/
-
-# COMMENT DISLIKED
-http://localhost:3000/api/commentdislikes
-
-## Select a comment and return the number of dislikes
-GET http://localhost:3000/api/commentdislikes/2
-
-## Dislike a comment
-POST http://localhost:3000/api/commentdislikes
-```json
-{
-    "user_id": "1",
-    "comment_id": "1"
-} 
-```
-## Delete a comment dislike
-DELETE http://localhost:3000/api/commentdislikes/3
