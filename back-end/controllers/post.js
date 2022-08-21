@@ -57,7 +57,7 @@ exports.createPost = (req, res) => {
     user_id: req.body.user_id,
     title: req.body.title,
     content: req.body.content,
-    attachment: media
+    attachment: media,
   });
 
   post
