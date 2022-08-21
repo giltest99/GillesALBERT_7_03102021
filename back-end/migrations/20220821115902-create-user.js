@@ -9,16 +9,16 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       username: {
+        type: Sequelize.STRING,
         allowNull: false,
-        type: Sequelize.STRING
       },
       password: {
+        type: Sequelize.STRING,
         allowNull: false,
-        type: Sequelize.STRING
       },
       email: {
+        type: Sequelize.STRING,
         allowNull: false,
-        type: Sequelize.STRING
       },
       avatar: {
         allowNull: true,
@@ -29,8 +29,9 @@ module.exports = {
         type: Sequelize.TEXT
       },
       is_admin: {
+        type: Sequelize.BOOLEAN,
         allowNull: false,
-        type: Sequelize.BOOLEAN
+        defaultValue: false
       },
       createdAt: {
         allowNull: false,
