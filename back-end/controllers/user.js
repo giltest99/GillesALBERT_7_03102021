@@ -117,20 +117,20 @@ exports.login = (req, res) => {
             return res.status(401).json({ message: "Mot de passe incorrect" });
           }
           res.status(200).json({
-            /* userId: user.id,
-                        username: user.username,
-                        email: user.email,
-                        isAdmin: user.is_admin,
-                        avatar: user.avatar,
-                        biography: user.biography, */
+            userId: user.id,
+            username: user.username,
+            email: user.email,
+            isAdmin: user.is_admin,
+            avatar: user.avatar,
+            biography: user.biography,
             // JWT
             token: jwt.sign({ userId: user.id }, "SECRET_TOKEN", {
               expiresIn: "24h",
             }),
             //message: 'Connexion réussie',
-            userId: user.id,
+            /* userId: user.id,
             userName: user.username,
-            isAdmin: user.is_admin,
+            isAdmin: user.is_admin, */
           });
         })
         .catch((error) =>
