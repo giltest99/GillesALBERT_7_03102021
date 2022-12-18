@@ -1,5 +1,18 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
 
+:root {
+  --primary: #fd2d01 !important;
+  --primary-hover: #fe5634 !important;
+  --secondary: #ffd7d7 !important;
+  --secondary-hover: #ffe6e6 !important;
+  --groupo-red: #d1515a !important;
+  --groupo-red-hover: #da7279 !important;
+  --bg-color: #ededf0;
+  --tertiary: #4e5166 !important;
+  --tertiary-hover: #646782 !important;
+  --color-main: black !important;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -9,6 +22,15 @@
 html,
 body {
   font-family: "Lato", sans-serif;
+  background-color: var(--bg-color);
+  color: var(--color-main);
+  width: 100%;
+  height: 100vh;
+}
+
+main {
+  max-width: 80rem;
+  margin: 0 auto;
 }
 
 li {

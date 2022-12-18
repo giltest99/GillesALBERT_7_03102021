@@ -1,8 +1,10 @@
 function App() {
   return (
-    <div className="App">
-      <h1>Hello client-react !</h1>
-    </div>
+    <>
+      <main>
+        <h1>Hello client-react !</h1>
+      </main>
+    </>
   );
 }
 
