@@ -19,6 +19,9 @@ export default function Navigation() {
       />
       <nav>
         <ul style={{display:"flex",padding:"1rem",flexWrap:"wrap"}}>
+        <li style={{margin: "0.5rem 1rem 0.5rem 0"}}>
+            <Link to="/posts">Posts</Link>
+          </li>
           <li style={{margin: "0.5rem 1rem 0.5rem 0"}}>
             <Link to="/create-post">Ecrire</Link>
           </li>
