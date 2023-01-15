@@ -1,9 +1,12 @@
+import { AuthProvider } from "react-auth-kit";
+import RoutesComponent from "./Routes";
+
 function App() {
   return (
     <>
-      <main>
-        <h1>Hello client-react !</h1>
-      </main>
+      <AuthProvider authName={"_auth"} authType={"localstorage"}>
+        <RoutesComponent />
+      </AuthProvider>
     </>
   );
 }

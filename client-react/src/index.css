@@ -21,6 +21,8 @@
 
 html,
 body {
+  max-width: 60rem;
+  margin: 0 auto;
   font-family: "Lato", sans-serif;
   background-color: var(--bg-color);
   color: var(--color-main);
