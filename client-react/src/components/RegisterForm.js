@@ -4,8 +4,8 @@ import * as yup from "yup";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import TextError from "./SpanError";
-import GroupoLogo from "../assets/mono-groupo.svg";
 import BackError from "./BackEndError";
+import HomePageNav from "./HomePageNav";
 
 export default function Register() {
   document.title = "Groupomania créer un compte";
@@ -57,12 +57,9 @@ export default function Register() {
 
   return (
     <>
+      <HomePageNav />
       <section className="container">
         <article>
-          <p style={{ display: "flex", justifyContent: "center" }}>
-            <img src={GroupoLogo} alt="logo groupomania" />
-          </p>
-
           <Formik
             initialValues={initialValues}
             validationSchema={registerSchema}
