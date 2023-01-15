@@ -9,5 +9,5 @@ export default function SignOutComponent() {
     navigate("/", { replace: true });
     window.location.reload(false);
   };
-  return <Link onClick={logout}>Sign Out</Link>;
+  return <Link onClick={logout}>Se déconnecter</Link>;
 }
