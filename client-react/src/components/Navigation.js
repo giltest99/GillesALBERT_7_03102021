@@ -5,54 +5,27 @@ import SignOutComponent from "./SignOutComponent";
 
 export default function Navigation() {
   return (
-    <header className="container-fluid" style={{ backgroundColor: "white" }}>
+    <header className="container-fluid" style={{ backgroundColor: "white", marginBottom: "1rem" }}>
       <img
         src={Logo}
         alt="logo groupomania"
         style={{
-          width: "40%",
+          maxWidth: "90%",
           minWidth: "6rem",
           /* padding: "1rem", */
           minHeight: "3rem",
           height: "4rem",
         }}
       />
-      {/* <nav style={{ justifyContent: "space-between", alignItems: "center" }}>
-        <ul>
-          <li>
-            <details role="list" dir="ltr">
-              <summary role="link">Messages</summary>
-              <ul role="listbox">
-                <li>
-                  <Link to="/create-post">Ecrire</Link>
-                </li>
-              </ul>
-            </details>
-          </li>
-          <li>
-            <details role="list" dir="ltr">
-              <summary role="link">Profil</summary>
-              <ul role="listbox">
-                <li>
-                  <Link to="/profile">Mon profil</Link>
-                </li>
-                <li>
-                  <Link to="/">Se déconnecter</Link>
-                </li>
-              </ul>
-            </details>
-          </li>
-        </ul>
-      </nav> */}
       <nav>
-        <ul>
-          <li>
+        <ul style={{display:"flex",padding:"1rem",flexWrap:"wrap"}}>
+          <li style={{margin: "0.5rem 1rem 0.5rem 0"}}>
             <Link to="/create-post">Ecrire</Link>
           </li>
-          <li>
+          <li style={{margin: "0.5rem 1rem 0.5rem 0"}}>
             <Link to="/profile">Mon profil</Link>
           </li>
-          <li>
+          <li style={{margin: "0.5rem 1rem 0.5rem 0"}}>
             <SignOutComponent />
           </li>
         </ul>

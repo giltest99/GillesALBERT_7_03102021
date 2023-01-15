@@ -90,9 +90,9 @@ export default function Register() {
                 <button type="submit">Créer un compte</button>
               </p>
 
-              <p style={{ textAlign: "center" }}>
+              {/* <p style={{ textAlign: "center" }}>
                 <Link to="/">Se connecter</Link>
-              </p>
+              </p> */}
 
               <p className="reset-button-container">
                 <button
