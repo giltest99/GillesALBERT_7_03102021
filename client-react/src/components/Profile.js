@@ -6,6 +6,7 @@ const Main = styled.main`
   display: flex;
   flex-direction: column;
   background-color: #fff;
+  padding: 0.5rem;
 `;
 
 const H1 = styled.h1`

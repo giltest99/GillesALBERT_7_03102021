@@ -26,7 +26,6 @@ const Nav = styled.nav`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  margin-top: 1rem;
 `;
 
 const Ul = styled.ul`
@@ -60,16 +59,19 @@ const NavLink = styled(Link)`
     background-color: var(--primary-hover);
     color: #f1f1f1;
   }
-/*   &:active {
-    background-color: var(--primary-hover);
-    color: #f1f1f1;
-  } */
+`;
+
+const Hr = styled.hr`
+  color: rgb(0, 0, 0, 0.2);
+  width: 90%;
+  margin: 1rem auto 0;
 `;
 
 export default function Navigation() {
   return (
     <Header>
       <Image />
+      <Hr />
       <Nav>
         <Ul>
           <li>
