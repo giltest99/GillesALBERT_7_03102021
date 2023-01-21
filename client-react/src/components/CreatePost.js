@@ -2,14 +2,11 @@ import React, { useState } from "react";
 import { useFormik } from "formik";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-/* import { useMutation, useQueryClient } from "react-query";
-import { addPost } from "../api/postsApi"; */
 import styled from "styled-components";
 import Navigation from "./Navigation";
 
 const Main = styled.main`
-  max-width: 1024px;
-  margin: 0 auto;
+  background-color: #fff;
 
   label {
     display: block;
@@ -23,15 +20,6 @@ const Main = styled.main`
 
 export default function CreatePost() {
   const [posts, setPosts] = useState([]);
-  /* const queryClient = useQueryClient(); */
-
-  /* const addPostMutation = useMutation(addPost, {
-    onSuccess: () => {
-      // Invalidates cache and refetch
-      queryClient.invalidateQueries("posts");
-    },
-  }); */
-
   const navigate = useNavigate();
   const LS = JSON.parse(localStorage.getItem("_auth_state"));
   const connectedUser = LS.userId;
@@ -43,7 +31,7 @@ export default function CreatePost() {
       content: "",
       image: "",
     },
-    onSubmit: (values, { resetForm }) => {
+    onSubmit: (values /* , { resetForm } */) => {
       //console.log(values);
 
       const formData = new FormData();
@@ -60,37 +48,17 @@ export default function CreatePost() {
         alert(res.data.message);
         navigate("/posts");
       });
-
-      // id, user_id, title, content, attachment, createdAt
-      /* addPostMutation.mutate({
-        user_id: values.user_id,
-        title: values.title,
-        content: values.content,
-        image: values.image,
-      }); */
-      //resetForm({});
-      //navigate("/posts");
     },
   });
 
   return (
     <>
+      <Navigation />
       <Main>
-        <Navigation />
-        {/* <article
-          className="container"
-          style={{
-            backgroundColor: "white",
-            padding: "1rem",
-            margin: "0 auto",
-          }}
-        > */}
         <form onSubmit={formik.handleSubmit} encType="multipart/form-data">
           <h1 style={{ marginBottom: ".5rem" }}>Ecrire un message</h1>
-          {/* <button onClick={() => navigate("/posts")}>Retour aux posts</button> */}
           <div style={{ display: "none" }}>
             <label>User ID</label>
-            {/* <br /> */}
             <input
               autoFocus
               type="text"
@@ -102,7 +70,6 @@ export default function CreatePost() {
 
           <div>
             <label>Titre</label>
-            {/* <br /> */}
             <input
               type="text"
               name="title"
@@ -113,7 +80,6 @@ export default function CreatePost() {
 
           <div>
             <label>Content</label>
-            {/* <br /> */}
             <textarea
               /* type='text' */
               name="content"
@@ -124,7 +90,6 @@ export default function CreatePost() {
 
           <div>
             <label>Upload File</label>
-            {/* <br /> */}
             <input
               type="file"
               name="image"

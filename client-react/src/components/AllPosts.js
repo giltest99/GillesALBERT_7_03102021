@@ -154,10 +154,9 @@ export default function AllPosts() {
 
   return (
     <>
+      <Navigation />
       <main>
-        {/* <Header /> */}
-        <Navigation />
-        <section style={{ position: "relative" }}>
+        <section>
           {/* <AddPostButton onClick={() => navigate("/create-post")} /> */}
           {newPosts &&
             newPosts.map((post) => (

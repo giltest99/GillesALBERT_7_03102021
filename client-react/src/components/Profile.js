@@ -5,14 +5,11 @@ import Navigation from "./Navigation";
 const Main = styled.main`
   display: flex;
   flex-direction: column;
-  max-width: 60rem;
-  margin: 1rem auto;
-  padding: 1rem 0.5rem 4rem;
   background-color: #fff;
 `;
 
 const H1 = styled.h1`
-  margin: 0 0 1rem 0;
+  /* margin: 0 0 1rem 0; */
 `;
 
 export default function UserAccount() {
@@ -57,14 +54,7 @@ export default function UserAccount() {
 
         <h2>Bonjour, {connectedUser.userName}</h2>
         <br />
-        <section
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            gap: "1rem",
-            justifyContent: "space-between",
-          }}
-        >
+        <section>
           <div>
             <h3>Mon adresse mail : {connectedUser.email}</h3>
             <br />
