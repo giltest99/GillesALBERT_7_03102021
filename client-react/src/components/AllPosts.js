@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Navigation from "./Navigation";
 import axios from "axios";
 import Post from "./Post";
@@ -123,20 +123,20 @@ export default function AllPosts() {
       user_id: likeUserId,
       post_id: likePostId,
     };
-    console.log(obj);
+    //console.log(obj);
     axios.post(`http://localhost:3000/api/postlikes`, obj).then(() => {
-      console.log("Post liké");
+      //console.log("Post liké");
       window.location.reload();
     });
   }
   function noLikeThisPost(id) {
     axios.delete(`http://localhost:3000/api/postlikes/${id}`).then(() => {
-      console.log("Post disliké");
+      //console.log("Post disliké");
       window.location.reload();
     });
   }
 
-  useEffect(() => {
+  /* useEffect(() => {
     const interval = setInterval(() => {
       getAllPosts();
       getAllUsers();
@@ -144,7 +144,7 @@ export default function AllPosts() {
     return () => {
       clearInterval(interval);
     };
-  }, []);
+  }, []); */
 
   return (
     <>

@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { useFormik } from "formik";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { useMutation, useQueryClient } from "react-query";
-import { addPost } from "../api/postsApi";
+/* import { useMutation, useQueryClient } from "react-query";
+import { addPost } from "../api/postsApi"; */
 import styled from "styled-components";
 import Navigation from "./Navigation";
 
@@ -23,14 +23,14 @@ const Main = styled.main`
 
 export default function CreatePost() {
   const [posts, setPosts] = useState([]);
-  const queryClient = useQueryClient();
+  /* const queryClient = useQueryClient(); */
 
-  const addPostMutation = useMutation(addPost, {
+  /* const addPostMutation = useMutation(addPost, {
     onSuccess: () => {
       // Invalidates cache and refetch
       queryClient.invalidateQueries("posts");
     },
-  });
+  }); */
 
   const navigate = useNavigate();
   const LS = JSON.parse(localStorage.getItem("_auth_state"));

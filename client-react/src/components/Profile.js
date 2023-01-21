@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
 import Navigation from "./Navigation";
 
 const Main = styled.main`
@@ -17,7 +16,6 @@ export default function UserAccount() {
     biography: "",
     avatar: "",
   });
-  const navigate = useNavigate();
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("_auth_state"));
@@ -32,18 +30,11 @@ export default function UserAccount() {
     });
   }, []);
 
-  const logout = () => {
-    alert("Se déconnecter...");
-    localStorage.removeItem("user");
-    navigate("/");
-  };
-
   return (
     <>
       <Navigation />
       <Main>
         <h1>Mon espace</h1>
-        {/* <button onClick={() => navigate("/posts")}>Retour aux posts</button> */}
         <br />
 
         <h2>Bonjour, {connectedUser.userName}</h2>

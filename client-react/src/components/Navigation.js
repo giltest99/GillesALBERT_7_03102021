@@ -9,14 +9,13 @@ const Header = styled.header`
   margin-bottom: 1rem;
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
+  justify-content: center;
 `;
 
 const Image = styled.img.attrs({
   src: Logo,
   alt: "logo groupomania",
 })`
-  max-width: 90%;
   min-width: 6rem;
   min-height: 3rem;
   height: 4rem;
@@ -24,9 +23,10 @@ const Image = styled.img.attrs({
 `;
 
 const Nav = styled.nav`
-
-@media (max-width: 500px) {
-    
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  @media (max-width: 500px) {
   }
 `;
 
@@ -34,14 +34,13 @@ export default function Navigation() {
   return (
     <Header>
       <Image />
-      <nav>
-      
+      <Nav>
         <ul
           style={{
             display: "flex",
             padding: "0.5rem",
             flexWrap: "wrap",
-            justifyContent: "center",
+            /* justifyContent: "center", */
           }}
         >
           <li style={{ margin: "0.5rem 1rem 0.5rem 0" }}>
@@ -57,7 +56,7 @@ export default function Navigation() {
             <SignOutComponent />
           </li>
         </ul>
-      </nav>
+      </Nav>
     </Header>
   );
 }
