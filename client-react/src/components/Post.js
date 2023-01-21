@@ -84,8 +84,8 @@ const Article = styled.article`
 `;
 
 export default function Post({
-  postId,
   /* postUserId, // A remplacer par nom de l'auteur */
+  postId,
   postTitle,
   postContent,
   postName,
@@ -100,7 +100,7 @@ export default function Post({
   modifyPost,
   deletePost,
 }) {
-/*   const [myLike, setMyLike] = useState(false);
+  /*   const [myLike, setMyLike] = useState(false);
   const toggleMyLike = () => {
     setMyLike(!myLike);
     postLiked = myLike;
@@ -125,9 +125,12 @@ export default function Post({
 
           <div className="right" onClick={onClick}>
             <p>
-              {/* <a href={imgUrl} target="_blank" rel="noreferrer"> */}
-              <img className="main-post-image" src={imgUrl} alt="alt" />
-              {/* </a> */}
+              {/* Display image & alt if exists */}
+              {imgUrl ? (
+                <img className="main-post-image" src={imgUrl} alt="Post img" />
+              ) : (
+                ""
+              )}
             </p>
           </div>
           <div
@@ -187,7 +190,7 @@ export default function Post({
                 }}
               >
                 <button
-                  onClick={modifyPost}
+                  onClick={() => modifyPost(postId)}
                   style={{
                     cursor: "pointer",
                     fontSize: "2rem",
@@ -197,8 +200,9 @@ export default function Post({
                 >
                   &#9997;
                 </button>
+
                 <button
-                  onClick={deletePost}
+                  onClick={() => deletePost(postId)}
                   style={{
                     cursor: "pointer",
                     fontSize: "2rem",

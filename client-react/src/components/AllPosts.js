@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import Navigation from "./Navigation";
 import axios from "axios";
 import Post from "./Post";
@@ -25,21 +25,21 @@ export default function AllPosts() {
   const getAllPosts = () => {
     axios.get("http://localhost:3000/api/posts").then((res) => {
       setPosts(res.data);
-      console.log(res.data);
+      //console.log(res.data);
     });
   };
 
   const getAllLikes = () => {
     axios.get("http://localhost:3000/api/postlikes").then((res) => {
       setLikes(res.data);
-      console.log(res.data);
+      //console.log(res.data);
     });
   };
 
   useEffect(() => {
     /* const connectedUser = 5; */
     const loggued = JSON.parse(localStorage.getItem("_auth_state"));
-    console.log(loggued.userId);
+    //console.log(loggued.userId);
     //const loggedUser = JSON.parse(localStorage.getItem("user"));
     setConnectedUser(loggued);
     //console.log("Connected", loggedUser);
@@ -136,7 +136,7 @@ export default function AllPosts() {
     });
   }
 
-  /* useEffect(() => {
+  useEffect(() => {
     const interval = setInterval(() => {
       getAllPosts();
       getAllUsers();
@@ -144,7 +144,7 @@ export default function AllPosts() {
     return () => {
       clearInterval(interval);
     };
-  }, []); */
+  }, []);
 
   return (
     <>

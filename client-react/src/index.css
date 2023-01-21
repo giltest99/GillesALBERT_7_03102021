@@ -33,6 +33,7 @@ body {
 main {
   max-width: 80rem;
   margin: 0 auto;
+  padding: 0 0.75rem;
 }
 
 li {

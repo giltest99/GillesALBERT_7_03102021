@@ -34,7 +34,7 @@ export default function RoutesComponent() {
           }
         />
         <Route
-          path={"/update-post"}
+          path={"/update-post/:id"}
           element={
             <RequireAuth loginPath={"/"}>
               <UpdatePost />

@@ -88,7 +88,7 @@ export default function UserAccount() {
           >
             Se déconnecter
           </button> */}
-          <button
+          {/* <button
             onClick={() => alert("Modifier mon compte...")}
             style={{
               margin: "1rem",
@@ -97,11 +97,11 @@ export default function UserAccount() {
             }}
           >
             Modifier mon compte
-          </button>
+          </button> */}
           <button
             onClick={() => alert("Supprimer mon compte...")}
             style={{
-              margin: "1rem",
+              /* margin: "1rem", */
               padding: "0.5rem 1rem",
               cursor: "pointer",
             }}
