@@ -4,6 +4,13 @@ import Navigation from "./Navigation";
 import axios from "axios";
 import Post from "./Post";
 import formatDate from "../utils/formatDate";
+import styled from "styled-components";
+
+const Main = styled.main`
+  @media screen and (max-width: 1000px) {
+    padding: 0 0.33rem;
+  }
+`;
 
 export default function AllPosts() {
   const [posts, setPosts] = useState([]);
@@ -155,7 +162,7 @@ export default function AllPosts() {
   return (
     <>
       <Navigation />
-      <main>
+      <Main>
         <section>
           {/* <AddPostButton onClick={() => navigate("/create-post")} /> */}
           {newPosts &&
@@ -179,7 +186,7 @@ export default function AllPosts() {
               />
             ))}
         </section>
-      </main>
+      </Main>
     </>
   );
 }

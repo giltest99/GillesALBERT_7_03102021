@@ -61,6 +61,7 @@ const Article = styled.article`
   }
   .post-like {
     background-color: lightgreen;
+    border-radius: 0.5rem;
   }
   .post-like:hover {
     cursor: pointer;
@@ -72,6 +73,7 @@ const Article = styled.article`
   .post-no-like:hover {
     cursor: pointer;
     background-color: gainsboro;
+    border-radius: 0.5rem;
   }
   .btn-modify:hover {
     color: seagreen;

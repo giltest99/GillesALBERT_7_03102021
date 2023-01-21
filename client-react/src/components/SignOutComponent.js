@@ -9,7 +9,7 @@ const StyledLink = styled(Link)`
   padding: 0.5rem;
   transition: background-color 0.2s ease;
   &:hover {
-    background-color: var(--primary-hover);
+    background-color: var(--primary);
     color: #F1F1F1;
   }
 `;

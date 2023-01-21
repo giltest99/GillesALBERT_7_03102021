@@ -8,6 +8,9 @@ import Navigation from "./Navigation";
 const Main = styled.main`
   background-color: #fff;
   padding: 0.5rem;
+  @media screen and (max-width: 1000px) {
+    padding: 0 0.5rem;
+  }
 
   label {
     display: block;

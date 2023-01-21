@@ -56,7 +56,7 @@ const NavLink = styled(Link)`
     margin: 1rem 0;
   }
   &:hover {
-    background-color: var(--primary-hover);
+    background-color: var(--primary);
     color: #f1f1f1;
   }
 `;

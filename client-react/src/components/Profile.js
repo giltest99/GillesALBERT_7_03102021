@@ -10,7 +10,7 @@ const Main = styled.main`
 `;
 
 const H1 = styled.h1`
-  /* margin: 0 0 1rem 0; */
+  margin: 0 0 1rem 0;
 `;
 
 export default function UserAccount() {
@@ -38,8 +38,9 @@ export default function UserAccount() {
 
   return (
     <>
-      <Navigation />
+    <Navigation />
       <Main>
+        
         <H1>Mon espace</H1>
         <figure>
           <img
@@ -59,8 +60,9 @@ export default function UserAccount() {
           <div>
             <h3>Mon adresse mail : {connectedUser.email}</h3>
             <br />
-            <h4>Quelques mots sur moi :</h4>
-            <p>{connectedUser.biography}</p>
+            {/* TODO : create field for biography */}
+            {/* <h4>Quelques mots sur moi :</h4> */}
+            {/* <p>{connectedUser.biography}</p> */}
           </div>
         </section>
 
