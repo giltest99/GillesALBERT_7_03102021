@@ -111,10 +111,19 @@ export default function AllPosts() {
   }, [posts, users, likes, connectedUser]);
 
   function deleteThisPost(id) {
-    axios.delete(`http://localhost:3000/api/posts/${id}`).then(() => {
-      console.log("Post supprimé");
-      //window.location.reload();
-    });
+    let result = window.confirm("Voulez-vous supprimer le post ?");
+
+    if (result === true) {
+      axios.delete(`http://localhost:3000/api/posts/${id}`).then(() => {
+        console.log("Post supprimé");
+        //window.location.reload();
+        getAllPosts();
+        getAllUsers();
+        getAllLikes();
+      });
+    } else {
+      return;
+    }
   }
 
   /* function modifyMyPost(id){

@@ -7,6 +7,7 @@ const StyledLink = styled(Link)`
   font-size: 1.25rem;
   font-weight: 600;
   padding: 0.5rem;
+  border-radius: 0.33rem;
   transition: background-color 0.2s ease;
   &:hover {
     background-color: var(--primary);

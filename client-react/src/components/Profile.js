@@ -9,8 +9,20 @@ const Main = styled.main`
   padding: 0.5rem;
 `;
 
+const Section = styled.section`
+  max-width: 40rem;
+  margin: 2rem auto;
+  /* border: 1px solid purple; */
+`;
+
 const H1 = styled.h1`
-  margin: 0 0 1rem 0;
+  margin: 1rem auto 2rem;
+  color: var(--tertiary);
+`;
+
+const H3 = styled.h3`
+  margin: 0 auto 2rem;
+  color: var(--tertiary);
 `;
 
 export default function UserAccount() {
@@ -38,46 +50,39 @@ export default function UserAccount() {
 
   return (
     <>
-    <Navigation />
+      <Navigation />
       <Main>
-        
-        <H1>Mon espace</H1>
-        <figure>
-          <img
-            src={connectedUser.avatar}
-            alt="user avatar"
-            style={{
-              width: "10rem",
-              display: "inline-block",
-              borderRadius: "50%",
-            }}
-          />
-        </figure>
+        <Section>
+          <figure>
+            <img
+              src={connectedUser.avatar}
+              alt="user avatar"
+              style={{
+                width: "10rem",
+                borderRadius: "50%",
+              }}
+            />
+          </figure>
 
-        <h2>Bonjour, {connectedUser.userName}</h2>
-        <br />
-        <section>
-          <div>
-            <h3>Mon adresse mail : {connectedUser.email}</h3>
-            <br />
-            {/* TODO : create field for biography */}
-            {/* <h4>Quelques mots sur moi :</h4> */}
-            {/* <p>{connectedUser.biography}</p> */}
-          </div>
-        </section>
+          <H1>Bonjour, {connectedUser.userName}</H1>
+          <H3>Mon adresse mail : {connectedUser.email}</H3>
+          {/* TODO : create field for biography */}
+          {/* <h4>Quelques mots sur moi :</h4> */}
+          {/* <p>{connectedUser.biography}</p> */}
 
-        <p>
-          <button
-            onClick={() => alert("Supprimer mon compte...")}
-            style={{
-              /* margin: "1rem", */
-              padding: "0.5rem 1rem",
-              cursor: "pointer",
-            }}
-          >
-            Supprimer mon compte
-          </button>
-        </p>
+          <p>
+            <button
+              onClick={() => alert("Supprimer mon compte...")}
+              style={{
+                /* margin: "1rem", */
+                padding: "0.5rem 1rem",
+                cursor: "pointer",
+              }}
+            >
+              Supprimer mon compte
+            </button>
+          </p>
+        </Section>
       </Main>
     </>
   );

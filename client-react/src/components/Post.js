@@ -7,7 +7,7 @@ const Article = styled.article`
   flex-direction: row;
   justify-content: flex-end;
   background-color: white;
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
   font-family: sans-serif;
   border-radius: 0.5rem;
   border: 1px solid rgba(0, 0, 0, 0.25);
@@ -80,7 +80,12 @@ const Article = styled.article`
   }
   .btn-delete:hover {
     color: crimson;
+    font-size: 0.5rem;
   }
+`;
+
+const ButtonModifyDelete = styled.button`
+  
 `;
 
 export default function Post({
@@ -131,7 +136,7 @@ export default function Post({
           >
             {/* Conditional like or not like icon */}
             {postLiked ? (
-              <div>
+              <div style={{ display: "flex", alignItems: "center" }}>
                 <p
                   style={{
                     display: "flex",
@@ -150,7 +155,7 @@ export default function Post({
                 <p className="post-likes">{postLikes}</p>
               </div>
             ) : (
-              <div>
+              <div style={{ display: "flex", alignItems: "center" }}>
                 <p
                   style={{
                     display: "flex",
@@ -174,11 +179,11 @@ export default function Post({
             {/* Conditional display if isAuthor */}
             {isAuthor ? (
               <p
-                style={{
+                /* style={{
                   display: "flex",
                   alignSelf: "center",
                   justifyContent: "flex-start",
-                }}
+                }} */
               >
                 <button
                   onClick={() => modifyPost(postId)}

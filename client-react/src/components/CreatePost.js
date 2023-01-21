@@ -7,19 +7,55 @@ import Navigation from "./Navigation";
 
 const Main = styled.main`
   background-color: #fff;
-  padding: 0.5rem;
+  padding: 1rem 0.5rem 4rem;
   @media screen and (max-width: 1000px) {
-    padding: 0 0.5rem;
+    padding: 1rem 0.5rem 4rem;
   }
+ 
+  button {
+    padding: 1rem;
+  }
+`;
 
-  label {
-    display: block;
-  }
-  input,
-  textarea {
-    margin-bottom: 1rem;
-    padding: 0.75rem;
-  }
+const Form = styled.form`
+  max-width: 40rem;
+  margin: 2rem auto;
+  /* border: 1px solid purple; */
+`;
+
+const H1 = styled.h1`
+  margin: 0 auto 2rem;
+  color: var(--tertiary);
+`;
+
+const Label = styled.label`
+  display: block;
+  font-size: 1.25em;
+  color: var(--tertiary);
+`;
+
+const InputText = styled.input.attrs({
+  type: "text",
+})`
+  border: 1px solid rgb(0, 0, 0, 0.2);
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+  width: 100%;
+  font-size: 1.5em;
+  font-family: Lato, sans-serif;
+`;
+
+const TextArea = styled.textarea`
+  border: 1px solid rgb(0, 0, 0, 0.2);
+  min-height: 40vh;
+  resize: none;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+  width: 100%;
+  font-size: 1.5em;
+  font-family: Lato, sans-serif;
 `;
 
 export default function CreatePost() {
@@ -49,7 +85,7 @@ export default function CreatePost() {
       axios.post(url, formData).then((res) => {
         setPosts(posts.concat(res.data));
         console.log(res.data);
-        alert(res.data.message);
+        //alert(res.data.message);
         navigate("/posts");
       });
     },
@@ -59,33 +95,25 @@ export default function CreatePost() {
     <>
       <Navigation />
       <Main>
-        <form onSubmit={formik.handleSubmit} encType="multipart/form-data">
-          <h1 style={{ marginBottom: ".5rem" }}>Ecrire un message</h1>
-          <div style={{ display: "none" }}>
-            <label>User ID</label>
-            <input
-              autoFocus
-              type="text"
-              name="user_id"
-              onChange={formik.handleChange}
-              value={formik.values.user_id}
-            />
-          </div>
-
+        <Form onSubmit={formik.handleSubmit} encType="multipart/form-data">
+          <H1>Ecrire un message</H1>
           <div>
-            <label>Titre</label>
-            <input
+            <Label htmlFor="title">Titre</Label>
+            <InputText
               type="text"
               name="title"
+              id="title"
               onChange={formik.handleChange}
               value={formik.values.title}
+              required
+              autoFocus
             />
           </div>
 
           <div>
-            <label>Content</label>
-            <textarea
-              /* type='text' */
+            <Label htmlFor="content">Content</Label>
+            <TextArea
+              id="content"
               name="content"
               onChange={formik.handleChange}
               value={formik.values.content}
@@ -93,9 +121,10 @@ export default function CreatePost() {
           </div>
 
           <div>
-            <label>Upload File</label>
+            <Label htmlFor="image">Upload File</Label>
             <input
               type="file"
+              id="image"
               name="image"
               accept="image/*"
               onChange={(e) =>
@@ -109,8 +138,7 @@ export default function CreatePost() {
           <div>
             <button type="submit">Submit</button>
           </div>
-        </form>
-        {/* </article> */}
+        </Form>
       </Main>
     </>
   );
