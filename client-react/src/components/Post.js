@@ -50,6 +50,7 @@ const Article = styled.article`
     display: flex;
     flex-direction: column;
     align-items: space-between;
+    background-color: lightcyan;
   }
 
   img {
@@ -60,8 +61,9 @@ const Article = styled.article`
     margin-left: 1rem;
   }
   .post-like {
-    background-color: lightgreen;
+    /* background-color: lightgreen; */
     border-radius: 0.5rem;
+    color: blue;
   }
   .post-like:hover {
     cursor: pointer;
@@ -82,10 +84,6 @@ const Article = styled.article`
     color: crimson;
     font-size: 0.5rem;
   }
-`;
-
-const ButtonModifyDelete = styled.button`
-  
 `;
 
 export default function Post({
@@ -178,21 +176,22 @@ export default function Post({
             )}
             {/* Conditional display if isAuthor */}
             {isAuthor ? (
-              <p
-                /* style={{
+              <div
+                style={{
                   display: "flex",
-                  alignSelf: "center",
+                  alignItems: "center",
                   justifyContent: "flex-start",
-                }} */
+                }}
               >
                 <button
                   onClick={() => modifyPost(postId)}
                   style={{
                     cursor: "pointer",
-                    fontSize: "2rem",
+                    fontSize: "1.25rem",
                     padding: "0.25rem 0.5rem",
                   }}
                   className="btn-modify"
+                  title="Modifier"
                 >
                   &#9997;
                 </button>
@@ -201,14 +200,15 @@ export default function Post({
                   onClick={() => deletePost(postId)}
                   style={{
                     cursor: "pointer",
-                    fontSize: "2rem",
+                    fontSize: "1.25rem",
                     padding: "0.25rem 0.5rem",
                   }}
                   className="btn-delete"
+                  title="Supprimer"
                 >
                   &#10005;
                 </button>
-              </p>
+              </div>
             ) : null}
           </div>
         </div>

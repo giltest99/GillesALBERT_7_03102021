@@ -36,6 +36,7 @@ const Label = styled.label`
 
 const InputText = styled.input.attrs({
   type: "text",
+  autoComplete: "off"
 })`
   border: 1px solid rgb(0, 0, 0, 0.2);
   border-radius: 0.5rem;

@@ -126,13 +126,6 @@ export default function AllPosts() {
     }
   }
 
-  /* function modifyMyPost(id){
-    axios.get(`/posts/${id}`).then(() => {
-      console.log("Post " + id);
-      //window.location.reload();
-    });
-  } */
-
   function likeThisPost(postId) {
     const likePostId = postId;
     const likeUserId = connectedUser.userId;
