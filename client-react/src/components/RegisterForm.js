@@ -37,11 +37,15 @@ const InputText = styled(Field).attrs({
 })`
   border: 1px solid rgb(0, 0, 0, 0.2);
   border-radius: 0.5rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0.25rem;
   padding: 0.75rem;
   width: 100%;
   font-size: 1.5em;
   font-family: Lato, sans-serif;
+  &:focus {
+    outline: none;
+    border: 1px solid var(--primary);
+  }
 `;
 
 const InputEmail = styled(Field).attrs({
@@ -50,11 +54,15 @@ const InputEmail = styled(Field).attrs({
 })`
   border: 1px solid rgb(0, 0, 0, 0.2);
   border-radius: 0.5rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0.25rem;
   padding: 0.75rem;
   width: 100%;
   font-size: 1.5em;
   font-family: Lato, sans-serif;
+  &:focus {
+    outline: none;
+    border: 1px solid var(--primary);
+  }
 `;
 
 const InputPassword = styled(Field).attrs({
@@ -63,11 +71,30 @@ const InputPassword = styled(Field).attrs({
 })`
   border: 1px solid rgb(0, 0, 0, 0.2);
   border-radius: 0.5rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0.25rem;
   padding: 0.75rem;
   width: 100%;
   font-size: 1.5em;
   font-family: Lato, sans-serif;
+  &:focus {
+    outline: none;
+    border: 1px solid var(--primary);
+  }
+`;
+
+const FieldWrapper = styled.div`
+  display: block;
+  margin: 1rem 0;
+`;
+
+const Button = styled.button`
+  min-width: 6rem;
+  margin-right: 1rem;
+  color: var(--tertiary);
+  &:hover {
+    cursor: pointer;
+    color: var(--primary);
+  }
 `;
 
 export default function Register() {
@@ -130,37 +157,31 @@ export default function Register() {
           <StyledForm>
             <BackError>{errorMessage}</BackError>
 
-            <p>
+            <FieldWrapper>
               <Label htmlFor="username">Nom d'utilisateur</Label>
               <InputText name="username" autoComplete="off" />
               <ErrorMessage name="username" component={TextError} />
-            </p>
+            </FieldWrapper>
 
-            <p>
+            <FieldWrapper>
               <Label htmlFor="email">Email</Label>
               <InputEmail name="email" />
               <ErrorMessage name="email" component={TextError} />
-            </p>
+            </FieldWrapper>
 
-            <p>
+            <FieldWrapper>
               <Label htmlFor="password">Mot de passe</Label>
               <InputPassword name="password" />
               <ErrorMessage name="password" component={TextError} />
-            </p>
+            </FieldWrapper>
 
-            <p>
-              <button type="submit">Créer un compte</button>
-            </p>
+            <FieldWrapper>
+              <Button type="submit">Créer</Button>
 
-            {/* <p style={{ textAlign: "center" }}>
-                <Link to="/">Se connecter</Link>
-              </p> */}
-
-            <p className="reset-button-container">
-              <button type="reset" className="reset-button" onClick={resetForm}>
+              <Button type="reset" onClick={resetForm}>
                 Effacer
-              </button>
-            </p>
+              </Button>
+            </FieldWrapper>
           </StyledForm>
         </Formik>
       </Main>

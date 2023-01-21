@@ -40,9 +40,38 @@ const InputText = styled.input.attrs({
   width: 100%;
   font-size: 1.5em;
   font-family: Lato, sans-serif;
+  &:focus {
+    outline: none;
+    border: 1px solid var(--primary);
+  }
 `;
 
+const InputPassword = styled.input.attrs({
+  type: "password",
+  autoComplete: "off",
+})`
+  border: 1px solid rgb(0, 0, 0, 0.2);
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+  width: 100%;
+  font-size: 1.5em;
+  font-family: Lato, sans-serif;
+  &:focus {
+    outline: none;
+    border: 1px solid var(--primary);
+  }
+`;
 
+const Button = styled.button`
+  min-width: 6rem;
+  margin-right: 1rem;
+  color: var(--tertiary);
+  &:hover {
+    cursor: pointer;
+    color: var(--primary);
+  }
+`;
 
 const SignInComponent = () => {
   const signIn = useSignIn();
@@ -85,6 +114,7 @@ const SignInComponent = () => {
             <Label htmlFor="email">Email</Label>
             <InputText
               type={"email"}
+              autoFocus
               onChange={(e) =>
                 setFormData({ ...formData, email: e.target.value })
               }
@@ -92,7 +122,7 @@ const SignInComponent = () => {
           </p>
           <p>
             <Label htmlFor="password">Mot de passe</Label>
-            <InputText
+            <InputPassword
               type={"password"}
               onChange={(e) =>
                 setFormData({ ...formData, password: e.target.value })
@@ -100,7 +130,7 @@ const SignInComponent = () => {
             />
           </p>
 
-          <button>Connexion</button>
+          <Button>Connexion</Button>
         </Form>
       </Main>
     </>

@@ -11,7 +11,7 @@ const Main = styled.main`
   @media screen and (max-width: 1000px) {
     padding: 1rem 0.5rem 4rem;
   }
- 
+
   button {
     padding: 1rem;
   }
@@ -36,7 +36,7 @@ const Label = styled.label`
 
 const InputText = styled.input.attrs({
   type: "text",
-  autoComplete: "off"
+  autoComplete: "off",
 })`
   border: 1px solid rgb(0, 0, 0, 0.2);
   border-radius: 0.5rem;
@@ -45,6 +45,10 @@ const InputText = styled.input.attrs({
   width: 100%;
   font-size: 1.5em;
   font-family: Lato, sans-serif;
+  &:focus {
+    outline: none;
+    border: 1px solid var(--primary);
+  }
 `;
 
 const TextArea = styled.textarea`
@@ -57,6 +61,20 @@ const TextArea = styled.textarea`
   width: 100%;
   font-size: 1.5em;
   font-family: Lato, sans-serif;
+  &:focus {
+    outline: none;
+    border: 1px solid var(--primary);
+  }
+`;
+
+const Button = styled.button`
+  min-width: 6rem;
+  margin-right: 1rem;
+  color: var(--tertiary);
+  &:hover {
+    cursor: pointer;
+    color: var(--primary);
+  }
 `;
 
 export default function CreatePost() {
@@ -137,7 +155,7 @@ export default function CreatePost() {
           <br />
 
           <div>
-            <button type="submit">Submit</button>
+            <Button type="submit">Submit</Button>
           </div>
         </Form>
       </Main>

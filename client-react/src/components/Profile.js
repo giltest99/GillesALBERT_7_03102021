@@ -25,6 +25,17 @@ const H3 = styled.h3`
   color: var(--tertiary);
 `;
 
+const Button = styled.button`
+  min-width: 6rem;
+  margin-right: 1rem;
+  padding: 0.5rem 1rem;
+  color: var(--tertiary);
+  &:hover {
+    cursor: pointer;
+    color: var(--primary);
+  }
+`;
+
 export default function UserAccount() {
   const [connectedUser, setConnectedUser] = useState({
     userId: "",
@@ -70,18 +81,9 @@ export default function UserAccount() {
           {/* <h4>Quelques mots sur moi :</h4> */}
           {/* <p>{connectedUser.biography}</p> */}
 
-          <p>
-            <button
-              onClick={() => alert("Supprimer mon compte...")}
-              style={{
-                /* margin: "1rem", */
-                padding: "0.5rem 1rem",
-                cursor: "pointer",
-              }}
-            >
-              Supprimer mon compte
-            </button>
-          </p>
+          <Button onClick={() => alert("Supprimer mon compte...")}>
+            Supprimer mon compte
+          </Button>
         </Section>
       </Main>
     </>
