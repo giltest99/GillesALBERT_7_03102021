@@ -49,7 +49,7 @@ const InputText = styled.input.attrs({
 
 const TextArea = styled.textarea`
   border: 1px solid rgb(0, 0, 0, 0.2);
-  min-height: 40vh;
+  min-height: 30vh;
   resize: none;
   border-radius: 0.5rem;
   margin-bottom: 1rem;
@@ -122,7 +122,7 @@ export default function CreatePost() {
           </div>
 
           <div>
-            <Label htmlFor="image">Upload File</Label>
+            <Label htmlFor="image">Télécharger un fichier</Label>
             <input
               type="file"
               id="image"

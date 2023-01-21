@@ -2,11 +2,50 @@ import { useState } from "react";
 import axios from "axios";
 import { useSignIn, useIsAuthenticated } from "react-auth-kit";
 import { Navigate } from "react-router-dom";
+import styled from "styled-components";
 import HomePageNav from "./HomePageNav";
+
+const Main = styled.main`
+  background-color: #fff;
+  padding: 1rem 0.5rem 4rem;
+  @media screen and (max-width: 1000px) {
+    padding: 1rem 0.5rem 4rem;
+  }
+
+  button {
+    padding: 1rem;
+  }
+`;
+
+const Form = styled.form`
+  max-width: 40rem;
+  margin: 2rem auto;
+  /* border: 1px solid purple; */
+`;
+
+const Label = styled.label`
+  display: block;
+  font-size: 1.25em;
+  color: var(--tertiary);
+`;
+
+const InputText = styled.input.attrs({
+  type: "text",
+  autoComplete: "off",
+})`
+  border: 1px solid rgb(0, 0, 0, 0.2);
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+  width: 100%;
+  font-size: 1.5em;
+  font-family: Lato, sans-serif;
+`;
+
+
 
 const SignInComponent = () => {
   const signIn = useSignIn();
-  //const navigate = useNavigate();
   const isAuthenticated = useIsAuthenticated();
   const [formData, setFormData] = useState({ email: "", password: "" });
 
@@ -24,9 +63,7 @@ const SignInComponent = () => {
               authState: res.data,
             })
           ) {
-            // Only if you are using refreshToken feature
-            // Redirect or do-something
-            //console.log("Connexion ok");
+            console.log("Connexion ok");
           } else {
             return <button onClick={onSubmit()}>Connexion</button>;
           }
@@ -41,29 +78,31 @@ const SignInComponent = () => {
 
   return (
     <>
-    <HomePageNav />
-      <form onSubmit={onSubmit}>
-        <p>
-          <label htmlFor="email">Email</label>
-          <input
-            type={"email"}
-            onChange={(e) =>
-              setFormData({ ...formData, email: e.target.value })
-            }
-          />
-        </p>
-        <p>
-          <label htmlFor="password">Mot de passe</label>
-          <input
-            type={"password"}
-            onChange={(e) =>
-              setFormData({ ...formData, password: e.target.value })
-            }
-          />
-        </p>
+      <HomePageNav />
+      <Main>
+        <Form onSubmit={onSubmit}>
+          <p>
+            <Label htmlFor="email">Email</Label>
+            <InputText
+              type={"email"}
+              onChange={(e) =>
+                setFormData({ ...formData, email: e.target.value })
+              }
+            />
+          </p>
+          <p>
+            <Label htmlFor="password">Mot de passe</Label>
+            <InputText
+              type={"password"}
+              onChange={(e) =>
+                setFormData({ ...formData, password: e.target.value })
+              }
+            />
+          </p>
 
-        <button>Connexion</button>
-      </form>
+          <button>Connexion</button>
+        </Form>
+      </Main>
     </>
   );
 };

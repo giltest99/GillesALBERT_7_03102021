@@ -19,6 +19,7 @@ const Image = styled.img.attrs({
   min-width: 6rem;
   min-height: 3rem;
   height: 4rem;
+  margin-top: 1rem;
   padding: 0.5rem;
 `;
 

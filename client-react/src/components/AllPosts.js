@@ -44,12 +44,9 @@ export default function AllPosts() {
   };
 
   useEffect(() => {
-    /* const connectedUser = 5; */
     const loggued = JSON.parse(localStorage.getItem("_auth_state"));
-    //console.log(loggued.userId);
-    //const loggedUser = JSON.parse(localStorage.getItem("user"));
     setConnectedUser(loggued);
-    //console.log("Connected", loggedUser);
+    console.log("Connected user", loggued);
   }, []);
 
   useEffect(() => {
@@ -116,7 +113,6 @@ export default function AllPosts() {
     if (result === true) {
       axios.delete(`http://localhost:3000/api/posts/${id}`).then(() => {
         console.log("Post supprimé");
-        //window.location.reload();
         getAllPosts();
         getAllUsers();
         getAllLikes();
@@ -124,6 +120,11 @@ export default function AllPosts() {
     } else {
       return;
     }
+
+
+    
+
+
   }
 
   function likeThisPost(postId) {

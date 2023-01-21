@@ -3,12 +3,75 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as yup from "yup";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
 import TextError from "./SpanError";
 import BackError from "./BackEndError";
 import HomePageNav from "./HomePageNav";
 
+const Main = styled.main`
+  background-color: #fff;
+  padding: 1rem 0.5rem 4rem;
+  @media screen and (max-width: 1000px) {
+    padding: 1rem 0.5rem 4rem;
+  }
+
+  button {
+    padding: 1rem;
+  }
+`;
+
+const StyledForm = styled(Form)`
+  max-width: 40rem;
+  margin: 2rem auto;
+`;
+
+const Label = styled.label`
+  display: block;
+  font-size: 1.25em;
+  color: var(--tertiary);
+`;
+
+const InputText = styled(Field).attrs({
+  type: "text",
+  autoComplete: "off",
+})`
+  border: 1px solid rgb(0, 0, 0, 0.2);
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+  width: 100%;
+  font-size: 1.5em;
+  font-family: Lato, sans-serif;
+`;
+
+const InputEmail = styled(Field).attrs({
+  type: "email",
+  autoComplete: "off",
+})`
+  border: 1px solid rgb(0, 0, 0, 0.2);
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+  width: 100%;
+  font-size: 1.5em;
+  font-family: Lato, sans-serif;
+`;
+
+const InputPassword = styled(Field).attrs({
+  type: "password",
+  autoComplete: "off",
+})`
+  border: 1px solid rgb(0, 0, 0, 0.2);
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+  width: 100%;
+  font-size: 1.5em;
+  font-family: Lato, sans-serif;
+`;
+
 export default function Register() {
-  document.title = "Groupomania créer un compte";
+  //document.title = "Groupomania créer un compte";
 
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -58,55 +121,49 @@ export default function Register() {
   return (
     <>
       <HomePageNav />
-      <section className="container">
-        <article>
-          <Formik
-            initialValues={initialValues}
-            validationSchema={registerSchema}
-            onSubmit={handleSubmit}
-          >
-            <Form>
-              <BackError>{errorMessage}</BackError>
+      <Main>
+        <Formik
+          initialValues={initialValues}
+          validationSchema={registerSchema}
+          onSubmit={handleSubmit}
+        >
+          <StyledForm>
+            <BackError>{errorMessage}</BackError>
 
-              <p>
-                <label htmlFor="username">Nom d'utilisateur</label>
-                <Field type="text" name="username" autoComplete="off" />
-                <ErrorMessage name="username" component={TextError} />
-              </p>
+            <p>
+              <Label htmlFor="username">Nom d'utilisateur</Label>
+              <InputText name="username" autoComplete="off" />
+              <ErrorMessage name="username" component={TextError} />
+            </p>
 
-              <p>
-                <label htmlFor="email">Email</label>
-                <Field type="text" name="email" />
-                <ErrorMessage name="email" component={TextError} />
-              </p>
+            <p>
+              <Label htmlFor="email">Email</Label>
+              <InputEmail name="email" />
+              <ErrorMessage name="email" component={TextError} />
+            </p>
 
-              <p>
-                <label htmlFor="password">Mot de passe</label>
-                <Field type="password" name="password" />
-                <ErrorMessage name="password" component={TextError} />
-              </p>
+            <p>
+              <Label htmlFor="password">Mot de passe</Label>
+              <InputPassword name="password" />
+              <ErrorMessage name="password" component={TextError} />
+            </p>
 
-              <p>
-                <button type="submit">Créer un compte</button>
-              </p>
+            <p>
+              <button type="submit">Créer un compte</button>
+            </p>
 
-              {/* <p style={{ textAlign: "center" }}>
+            {/* <p style={{ textAlign: "center" }}>
                 <Link to="/">Se connecter</Link>
               </p> */}
 
-              <p className="reset-button-container">
-                <button
-                  type="reset"
-                  className="reset-button"
-                  onClick={resetForm}
-                >
-                  Effacer
-                </button>
-              </p>
-            </Form>
-          </Formik>
-        </article>
-      </section>
+            <p className="reset-button-container">
+              <button type="reset" className="reset-button" onClick={resetForm}>
+                Effacer
+              </button>
+            </p>
+          </StyledForm>
+        </Formik>
+      </Main>
     </>
   );
 }
