@@ -1,0 +1,11 @@
+- Rédiger la page d'accueil
+
+- Login à faire avec Formik et yup
+
+- Fonction supprimer le compte
+
+- Formulaire update post
+
+- Page Github du projet
+
+- Préparer présentation

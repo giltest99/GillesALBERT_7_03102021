@@ -8,6 +8,7 @@ const Article = styled.article`
   justify-content: flex-end;
   background-color: white;
   margin-bottom: 0.75rem;
+  padding: 0.5rem;
   font-family: sans-serif;
   border-radius: 0.5rem;
   border: 1px solid rgba(0, 0, 0, 0.25);
