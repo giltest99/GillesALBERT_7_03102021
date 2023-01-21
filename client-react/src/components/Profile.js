@@ -3,8 +3,16 @@ import styled from "styled-components";
 import Navigation from "./Navigation";
 
 const Main = styled.main`
-  max-width: 1024px;
-  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  max-width: 60rem;
+  margin: 1rem auto;
+  padding: 1rem 0.5rem 4rem;
+  background-color: #fff;
+`;
+
+const H1 = styled.h1`
+  margin: 0 0 1rem 0;
 `;
 
 export default function UserAccount() {
@@ -34,8 +42,18 @@ export default function UserAccount() {
     <>
       <Navigation />
       <Main>
-        <h1>Mon espace</h1>
-        <br />
+        <H1>Mon espace</H1>
+        <figure>
+          <img
+            src={connectedUser.avatar}
+            alt="user avatar"
+            style={{
+              width: "10rem",
+              display: "inline-block",
+              borderRadius: "50%",
+            }}
+          />
+        </figure>
 
         <h2>Bonjour, {connectedUser.userName}</h2>
         <br />
@@ -53,42 +71,9 @@ export default function UserAccount() {
             <h4>Quelques mots sur moi :</h4>
             <p>{connectedUser.biography}</p>
           </div>
-          <div>
-            <figure>
-              <img
-                src={connectedUser.avatar}
-                alt="user avatar"
-                style={{
-                  width: "10rem",
-                  display: "inline-block",
-                  borderRadius: "50%",
-                }}
-              />
-            </figure>
-          </div>
         </section>
 
         <p>
-          {/* <button
-            onClick={logout}
-            style={{
-              margin: "1rem",
-              padding: "0.5rem 1rem",
-              cursor: "pointer",
-            }}
-          >
-            Se déconnecter
-          </button> */}
-          {/* <button
-            onClick={() => alert("Modifier mon compte...")}
-            style={{
-              margin: "1rem",
-              padding: "0.5rem 1rem",
-              cursor: "pointer",
-            }}
-          >
-            Modifier mon compte
-          </button> */}
           <button
             onClick={() => alert("Supprimer mon compte...")}
             style={{

@@ -67,7 +67,7 @@ const Article = styled.article`
     background-color: gainsboro;
   }
   .post-no-like {
-    background-color: lightpink;
+    /* background-color: lightpink; */
   }
   .post-no-like:hover {
     cursor: pointer;
@@ -139,7 +139,11 @@ export default function Post({
                   className="post-like"
                   onClick={noLikePost}
                 >
-                  <img src={like} alt="Post liké" className="like-icon" />
+                  <img
+                    src={like}
+                    alt={`Post ${postTitle} liké par ${postName}`}
+                    className="like-icon"
+                  />
                 </p>
                 <p className="post-likes">{postLikes}</p>
               </div>
@@ -156,11 +160,13 @@ export default function Post({
                 >
                   <img
                     src={notLike}
-                    alt="Post non liké"
+                    /* alt="Post non liké" */
+                    alt={`Post ${postTitle} non liké par ${postName}`}
                     className="like-icon"
                   />
                 </p>
                 <p className="post-likes">{postLikes}</p>
+                {/* <p className="post-likes">{`Liké ${postLikes} fois`}</p> */}
               </div>
             )}
             {/* Conditional display if isAuthor */}

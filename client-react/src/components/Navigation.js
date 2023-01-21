@@ -25,9 +25,45 @@ const Image = styled.img.attrs({
 const Nav = styled.nav`
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
-  @media (max-width: 500px) {
+  flex-wrap: wrap;
+  margin-top: 1rem;
+`;
+
+const Ul = styled.ul`
+  display: flex;
+  flex-direction: row;
+  padding: 0.5rem;
+  @media (max-width: 700px) {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
   }
+  & li {
+    padding: 1rem;
+    width: 100%auto;
+    text-align: center;
+  }
+`;
+
+const NavLink = styled(Link)`
+  color: var(--tertiary);
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 1rem;
+  text-align: center;
+  padding: 0.5rem;
+  transition: background-color 0.2s ease;
+  @media (max-width: 700px) {
+    margin: 1rem 0;
+  }
+  &:hover {
+    background-color: var(--primary-hover);
+    color: #f1f1f1;
+  }
+/*   &:active {
+    background-color: var(--primary-hover);
+    color: #f1f1f1;
+  } */
 `;
 
 export default function Navigation() {
@@ -35,27 +71,20 @@ export default function Navigation() {
     <Header>
       <Image />
       <Nav>
-        <ul
-          style={{
-            display: "flex",
-            padding: "0.5rem",
-            flexWrap: "wrap",
-            /* justifyContent: "center", */
-          }}
-        >
-          <li style={{ margin: "0.5rem 1rem 0.5rem 0" }}>
-            <Link to="/posts">Posts</Link>
+        <Ul>
+          <li>
+            <NavLink to="/posts">Posts</NavLink>
           </li>
-          <li style={{ margin: "0.5rem 1rem 0.5rem 0" }}>
-            <Link to="/create-post">Ecrire</Link>
+          <li>
+            <NavLink to="/create-post">Ecrire</NavLink>
           </li>
-          <li style={{ margin: "0.5rem 1rem 0.5rem 0" }}>
-            <Link to="/profile">Mon profil</Link>
+          <li>
+            <NavLink to="/profile">Mon profil</NavLink>
           </li>
-          <li style={{ margin: "0.5rem 1rem 0.5rem 0" }}>
+          <li>
             <SignOutComponent />
           </li>
-        </ul>
+        </Ul>
       </Nav>
     </Header>
   );

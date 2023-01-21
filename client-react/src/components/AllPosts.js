@@ -62,7 +62,8 @@ export default function AllPosts() {
         /* const findUserName = myUsers.find((el) => el.id === e.user_id)
         e.userName = findUserName.username; */
 
-        myUsers.find((el) => {
+        // eslint-disable-next-line array-callback-return, no-unused-vars
+        const myNewUsers = myUsers.find((el) => {
           if (el.id === e.user_id) e.userName = el.username;
         });
 
@@ -126,25 +127,30 @@ export default function AllPosts() {
     //console.log(obj);
     axios.post(`http://localhost:3000/api/postlikes`, obj).then(() => {
       //console.log("Post liké");
-      window.location.reload();
+      getAllPosts();
+      getAllUsers();
+      getAllLikes();
     });
   }
   function noLikeThisPost(id) {
     axios.delete(`http://localhost:3000/api/postlikes/${id}`).then(() => {
       //console.log("Post disliké");
-      window.location.reload();
+      getAllPosts();
+      getAllUsers();
+      getAllLikes();
     });
   }
 
-  /* useEffect(() => {
+  useEffect(() => {
     const interval = setInterval(() => {
       getAllPosts();
       getAllUsers();
-    }, 1000);
+      getAllLikes();
+    }, 60000);
     return () => {
       clearInterval(interval);
     };
-  }, []); */
+  }, []);
 
   return (
     <>
