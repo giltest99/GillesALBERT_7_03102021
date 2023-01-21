@@ -1,5 +1,3 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 import like from "../assets/like.png";
 import notLike from "../assets/no-like.png";
@@ -84,7 +82,7 @@ const Article = styled.article`
 `;
 
 export default function Post({
-  /* postUserId, // A remplacer par nom de l'auteur */
+  postUserId, // A remplacer par nom de l'auteur
   postId,
   postTitle,
   postContent,
@@ -100,24 +98,13 @@ export default function Post({
   modifyPost,
   deletePost,
 }) {
-  /*   const [myLike, setMyLike] = useState(false);
-  const toggleMyLike = () => {
-    setMyLike(!myLike);
-    postLiked = myLike;
-  }; */
-
   return (
     <>
       <Article>
         <div className="main-column">
           <h3 className="post-title">{postTitle}</h3>
 
-          {/* <h4 className="post-author">
-            Message de {postName}, le {createdAt}
-          </h4> */}
-
           <h4 className="post-author">
-            {/* Message de {postUserId}, le {createdAt} */}
             Message de {postName}, le {createdAt}
           </h4>
 
@@ -140,6 +127,7 @@ export default function Post({
               justifyContent: "space-between",
             }}
           >
+            {/* Conditional like or not like icon */}
             {postLiked ? (
               <div>
                 <p
@@ -152,8 +140,6 @@ export default function Post({
                   onClick={noLikePost}
                 >
                   <img src={like} alt="Post liké" className="like-icon" />
-
-                  {/* <span className="post-likes">{postLikes}</span> */}
                 </p>
                 <p className="post-likes">{postLikes}</p>
               </div>
@@ -168,19 +154,16 @@ export default function Post({
                   className="post-no-like"
                   onClick={likePost}
                 >
-                  {/* <span style={{ color: "red" }}>{postLiked}</span> */}
-
                   <img
                     src={notLike}
                     alt="Post non liké"
                     className="like-icon"
                   />
-
-                  {/* <span className="post-likes">{postLikes}</span> */}
                 </p>
                 <p className="post-likes">{postLikes}</p>
               </div>
             )}
+            {/* Conditional display if isAuthor */}
             {isAuthor ? (
               <p
                 style={{
@@ -216,8 +199,6 @@ export default function Post({
             ) : null}
           </div>
         </div>
-
-        <br />
       </Article>
     </>
   );
