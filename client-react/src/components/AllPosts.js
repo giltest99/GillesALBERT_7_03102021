@@ -120,11 +120,6 @@ export default function AllPosts() {
     } else {
       return;
     }
-
-
-    
-
-
   }
 
   function likeThisPost(postId) {
@@ -151,6 +146,7 @@ export default function AllPosts() {
     });
   }
 
+  // Refresh data every 60 sec
   useEffect(() => {
     const interval = setInterval(() => {
       getAllPosts();

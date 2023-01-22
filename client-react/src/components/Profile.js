@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import styled from "styled-components";
 import Navigation from "./Navigation";
 
@@ -45,6 +47,7 @@ export default function UserAccount() {
     biography: "",
     avatar: "",
   });
+  const navigate = useNavigate();
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("_auth_state"));
@@ -58,6 +61,24 @@ export default function UserAccount() {
       avatar: user.avatar,
     });
   }, []);
+
+  const logout = () => {
+    localStorage.clear();
+    navigate("/", { replace: true });
+    window.location.reload();
+  };
+
+  const deleteUser = (id) => {
+    const loggedUser = JSON.parse(localStorage.getItem("_auth_state"));
+    id = loggedUser.userId;
+    console.log(loggedUser.userId);
+
+    axios.delete(`http://localhost:3000/api/users/${id}`).then(() => {
+      console.log("Cliqué");
+      console.log(`User ${id} supprimé`);
+      logout();
+    });
+  };
 
   return (
     <>
@@ -77,11 +98,10 @@ export default function UserAccount() {
 
           <H1>Bonjour, {connectedUser.userName}</H1>
           <H3>Mon adresse mail : {connectedUser.email}</H3>
-          {/* TODO : create field for biography */}
-          {/* <h4>Quelques mots sur moi :</h4> */}
-          {/* <p>{connectedUser.biography}</p> */}
-
-          <Button onClick={() => alert("Supprimer mon compte...")}>
+          {/* <Button onClick={() => alert("Supprimer mon compte...")}>
+            Supprimer mon compte
+          </Button> */}
+          <Button onClick={() => deleteUser(connectedUser.userId)}>
             Supprimer mon compte
           </Button>
         </Section>

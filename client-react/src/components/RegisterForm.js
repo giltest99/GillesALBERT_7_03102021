@@ -98,7 +98,6 @@ const Button = styled.button`
 `;
 
 export default function Register() {
-  //document.title = "Groupomania créer un compte";
 
   const [errorMessage, setErrorMessage] = useState("");
 

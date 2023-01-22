@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { useSignIn, useIsAuthenticated } from "react-auth-kit";
-import { Navigate } from "react-router-dom";
+import { /* useNavigate,  */Navigate } from "react-router-dom";
 import styled from "styled-components";
 import HomePageNav from "./HomePageNav";
 
@@ -74,12 +74,27 @@ const Button = styled.button`
 `;
 
 const SignInComponent = () => {
+  //const navigate = useNavigate();
   const signIn = useSignIn();
   const isAuthenticated = useIsAuthenticated();
   const [formData, setFormData] = useState({ email: "", password: "" });
 
+  const resetForm = () => {
+    setFormData({
+      email: "",
+      password: "",
+    });
+  };
+
   const onSubmit = (e) => {
     e.preventDefault();
+
+    /* if (formData.email.trim() === "" || formData.password.trim()) {
+      window.alert("Tous les champs doivent être remplis");
+      resetForm();
+      return
+    } */
+
     axios
       .post("http://localhost:3000/api/users/login", formData)
       .then((res) => {
@@ -118,6 +133,7 @@ const SignInComponent = () => {
               onChange={(e) =>
                 setFormData({ ...formData, email: e.target.value })
               }
+              autoComplete="off"
             />
           </p>
           <p>
@@ -131,6 +147,9 @@ const SignInComponent = () => {
           </p>
 
           <Button>Connexion</Button>
+          <Button type="reset" onClick={resetForm}>
+            Effacer
+          </Button>
         </Form>
       </Main>
     </>
