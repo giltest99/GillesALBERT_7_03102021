@@ -1,5 +1,3 @@
-- Rédiger la page d'accueil
-
 - Formulaire update post
 
 - Page Github du projet

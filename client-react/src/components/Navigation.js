@@ -32,7 +32,9 @@ const Nav = styled.nav`
 const Ul = styled.ul`
   display: flex;
   flex-direction: row;
+  justify-content: center;
   padding: 0.5rem;
+  width: 100%;
   @media (max-width: 700px) {
     display: flex;
     flex-direction: column;

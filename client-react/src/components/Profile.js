@@ -98,9 +98,6 @@ export default function UserAccount() {
 
           <H1>Bonjour, {connectedUser.userName}</H1>
           <H3>Mon adresse mail : {connectedUser.email}</H3>
-          {/* <Button onClick={() => alert("Supprimer mon compte...")}>
-            Supprimer mon compte
-          </Button> */}
           <Button onClick={() => deleteUser(connectedUser.userId)}>
             Supprimer mon compte
           </Button>
