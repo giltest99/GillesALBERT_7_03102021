@@ -83,9 +83,10 @@ export default function CreatePost() {
   const navigate = useNavigate();
 
   const { id } = useParams();
-  console.log("id",id);
+  console.log("id", id);
 
   const titleRef = useRef();
+  titleRef.value = selectedPost.title;
 
   const post = (id) => {
     return axios
@@ -99,9 +100,10 @@ export default function CreatePost() {
 
   useEffect(() => {
     post(id);
+    
   }, [id]);
 
-  console.log("Post",selectedPost);
+  console.log("Post", selectedPost);
 
   const url = "http://localhost:3000/api/posts";
   const formik = useFormik({

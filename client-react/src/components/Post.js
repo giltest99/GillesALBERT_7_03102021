@@ -16,30 +16,28 @@ const Article = styled.article`
   color: var(--tertiary);
 
   .main-column {
-    width: 100%;
     display: flex;
     flex-direction: column;
+    width: 100%;
     h3 {
-      /* background-color: lavender; */
       margin: 0;
       padding: 0.5rem;
     }
     h4 {
-      /* background-color: lightcyan; */
       margin: 0;
       padding: 0.5rem;
     }
     p {
-      /* background-color: lightblue; */
       margin: 0;
       padding: 0.5rem;
+      margin: 1rem 0;
     }
     .post-author {
       font-style: italic;
     }
     .main-post-image {
       width: 100%;
-      height: 300px;
+      max-height: 400px;
       border-radius: 0 0.5rem 0.5rem 0;
       object-fit: contain;
     }
@@ -48,22 +46,26 @@ const Article = styled.article`
     }
   }
 
-  .left-column {
-    display: flex;
-    flex-direction: column;
-    align-items: space-between;
-    background-color: lightcyan;
-  }
-
-  img {
+  .like-icon {
     width: 30px;
   }
+
+  .main-like-edit-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .post-like-container {
+    display: flex;
+    align-items: center;
+  }
+
   .post-likes {
     font-size: 20px;
     margin-left: 1rem;
   }
   .post-like {
-    /* background-color: lightgreen; */
     border-radius: 0.5rem;
     color: blue;
   }
@@ -71,20 +73,28 @@ const Article = styled.article`
     cursor: pointer;
     background-color: gainsboro;
   }
-  .post-no-like {
-    /* background-color: lightpink; */
-  }
   .post-no-like:hover {
     cursor: pointer;
     background-color: gainsboro;
     border-radius: 0.5rem;
+  }
+  .is-author-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  .btn-modify,
+  .btn-delete {
+    cursor: pointer;
+    font-size: 1.25rem;
+    padding: 0.25rem 0.5rem;
   }
   .btn-modify:hover {
     color: seagreen;
   }
   .btn-delete:hover {
     color: crimson;
-    font-size: 0.5rem;
   }
 `;
 
@@ -117,34 +127,17 @@ export default function Post({
 
           <p className="post-content">{postContent}</p>
 
-          <div className="right" onClick={onClick}>
-            <p>
-              {imgUrl ? (
-                <img className="main-post-image" src={imgUrl} alt="Post img" />
-              ) : (
-                ""
-              )}
-            </p>
+          <div onClick={onClick}>
+            {imgUrl ? (
+              <img className="main-post-image" src={imgUrl} alt="Post img" />
+            ) : (
+              ""
+            )}
           </div>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-between",
-            }}
-          >
-            {/* Conditional like or not like icon */}
+          <div className="main-like-edit-container">
             {postLiked ? (
-              <div style={{ display: "flex", alignItems: "center" }}>
-                <p
-                  style={{
-                    display: "flex",
-                    padding: "0.5rem",
-                    margin: "0.5rem",
-                  }}
-                  className="post-like"
-                  onClick={noLikePost}
-                >
+              <div className="post-like-container">
+                <p className="post-like" onClick={noLikePost}>
                   <img
                     src={like}
                     alt={`Post ${postTitle} liké par ${postName}`}
@@ -154,43 +147,21 @@ export default function Post({
                 <p className="post-likes">{postLikes}</p>
               </div>
             ) : (
-              <div style={{ display: "flex", alignItems: "center" }}>
-                <p
-                  style={{
-                    display: "flex",
-                    padding: "0.5rem",
-                    margin: "0.5rem",
-                  }}
-                  className="post-no-like"
-                  onClick={likePost}
-                >
+              <div className="post-like-container">
+                <p className="post-no-like" onClick={likePost}>
                   <img
                     src={notLike}
-                    /* alt="Post non liké" */
-                    alt={`Post ${postTitle} non liké par ${postName}`}
+                    alt={`Post ${postTitle} non liké`}
                     className="like-icon"
                   />
                 </p>
                 <p className="post-likes">{postLikes}</p>
-                {/* <p className="post-likes">{`Liké ${postLikes} fois`}</p> */}
               </div>
             )}
-            {/* Conditional display if isAuthor */}
             {isAuthor ? (
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "flex-start",
-                }}
-              >
+              <div className="is-author-container">
                 <button
                   onClick={() => modifyPost(postId)}
-                  style={{
-                    cursor: "pointer",
-                    fontSize: "1.25rem",
-                    padding: "0.25rem 0.5rem",
-                  }}
                   className="btn-modify"
                   title="Modifier"
                 >
@@ -199,11 +170,6 @@ export default function Post({
 
                 <button
                   onClick={() => deletePost(postId)}
-                  style={{
-                    cursor: "pointer",
-                    fontSize: "1.25rem",
-                    padding: "0.25rem 0.5rem",
-                  }}
                   className="btn-delete"
                   title="Supprimer"
                 >
