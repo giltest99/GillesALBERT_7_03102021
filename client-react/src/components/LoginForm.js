@@ -1,9 +1,10 @@
 import { useState } from "react";
 import axios from "axios";
 import { useSignIn, useIsAuthenticated } from "react-auth-kit";
-import { /* useNavigate,  */Navigate } from "react-router-dom";
+import { /* useNavigate,  */ Navigate } from "react-router-dom";
 import styled from "styled-components";
 import HomePageNav from "./HomePageNav";
+import TextError from "./SpanError";
 
 const Main = styled.main`
   background-color: #fff;
@@ -89,12 +90,6 @@ const SignInComponent = () => {
   const onSubmit = (e) => {
     e.preventDefault();
 
-    /* if (formData.email.trim() === "" || formData.password.trim()) {
-      window.alert("Tous les champs doivent être remplis");
-      resetForm();
-      return
-    } */
-
     axios
       .post("http://localhost:3000/api/users/login", formData)
       .then((res) => {
@@ -125,26 +120,25 @@ const SignInComponent = () => {
       <HomePageNav />
       <Main>
         <Form onSubmit={onSubmit}>
-          <p>
-            <Label htmlFor="email">Email</Label>
-            <InputText
-              type={"email"}
-              autoFocus
-              onChange={(e) =>
-                setFormData({ ...formData, email: e.target.value })
-              }
-              autoComplete="off"
-            />
-          </p>
-          <p>
-            <Label htmlFor="password">Mot de passe</Label>
-            <InputPassword
-              type={"password"}
-              onChange={(e) =>
-                setFormData({ ...formData, password: e.target.value })
-              }
-            />
-          </p>
+          <Label htmlFor="email">Email</Label>
+          <InputText
+            type={"email"}
+            autoFocus
+            onChange={(e) =>
+              setFormData({ ...formData, email: e.target.value })
+            }
+            autoComplete="off"
+          />
+          <TextError></TextError>
+
+          <Label htmlFor="password">Mot de passe</Label>
+          <InputPassword
+            type={"password"}
+            onChange={(e) =>
+              setFormData({ ...formData, password: e.target.value })
+            }
+          />
+          <TextError></TextError>
 
           <Button>Connexion</Button>
           <Button type="reset" onClick={resetForm}>

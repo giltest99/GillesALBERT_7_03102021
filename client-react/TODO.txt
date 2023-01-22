@@ -1,9 +1,5 @@
 - Rédiger la page d'accueil
 
-- Login à faire avec Formik et yup, bouton reset à ajouter
-
-- Fonction supprimer le compte
-
 - Formulaire update post
 
 - Page Github du projet

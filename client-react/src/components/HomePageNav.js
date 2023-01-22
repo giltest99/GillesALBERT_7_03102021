@@ -77,9 +77,9 @@ export default function HomePageNav() {
         <Hr />
         <Nav>
           <Ul>
-          <li>
+            {/* <li>
               <NavLink to="/">Accueil</NavLink>
-            </li>
+            </li> */}
             <li>
               <NavLink to="/login">Se connecter</NavLink>
             </li>

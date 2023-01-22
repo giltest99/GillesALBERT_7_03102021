@@ -2,7 +2,8 @@ import { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as yup from "yup";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useSignIn, useIsAuthenticated } from "react-auth-kit";
+import { Navigate } from "react-router-dom";
 import styled from "styled-components";
 import TextError from "./SpanError";
 import BackError from "./BackEndError";
@@ -29,23 +30,6 @@ const Label = styled.label`
   display: block;
   font-size: 1.25em;
   color: var(--tertiary);
-`;
-
-const InputText = styled(Field).attrs({
-  type: "text",
-  autoComplete: "off",
-})`
-  border: 1px solid rgb(0, 0, 0, 0.2);
-  border-radius: 0.5rem;
-  margin-bottom: 0.25rem;
-  padding: 0.75rem;
-  width: 100%;
-  font-size: 1.5em;
-  font-family: Lato, sans-serif;
-  &:focus {
-    outline: none;
-    border: 1px solid var(--primary);
-  }
 `;
 
 const InputEmail = styled(Field).attrs({
@@ -97,23 +81,17 @@ const Button = styled.button`
   }
 `;
 
-export default function Register() {
-
+export default function Login() {
   const [errorMessage, setErrorMessage] = useState("");
-
-  const navigate = useNavigate();
+  const signIn = useSignIn();
+  const isAuthenticated = useIsAuthenticated();
 
   const initialValues = {
-    username: "",
     email: "",
     password: "",
   };
 
   const registerSchema = yup.object().shape({
-    username: yup
-      .string()
-      .min(4, "Minimum de 4 caractères")
-      .required("Nom d'utilisateur requis"),
     email: yup
       .string()
       .email("Entrez un email valide")
@@ -125,20 +103,35 @@ export default function Register() {
   });
 
   const handleSubmit = (values, { resetForm }) => {
-    console.log(values);
+    // console.log(values);
     axios
-      .post("http://localhost:3000/api/users/signup", values)
-      .then((response) => {
-        console.log(response.data);
-        resetForm();
-        alert(response.data.message);
-        navigate("/login");
+      .post("http://localhost:3000/api/users/login", values)
+      .then((res) => {
+        if (res.status === 200) {
+          if (
+            signIn({
+              token: res.data.token,
+              expiresIn: 120,
+              tokenType: "Bearer",
+              authState: res.data,
+            })
+          ) {
+            console.log("Connexion ok");
+          } else {
+            return <button onClick={handleSubmit()}>Connexion</button>;
+          }
+        }
       })
       .catch((error) => {
         console.log(error.response.data.message);
         setErrorMessage(error.response.data.message);
       });
   };
+  if (isAuthenticated()) {
+    // If authenticated user, then redirect to secure dashboard
+
+    return <Navigate to={"/posts"} replace />;
+  }
 
   const resetForm = () => {
     setErrorMessage("");
@@ -155,12 +148,6 @@ export default function Register() {
         >
           <StyledForm>
             <BackError>{errorMessage}</BackError>
-
-            <FieldWrapper>
-              <Label htmlFor="username">Nom d'utilisateur</Label>
-              <InputText name="username" autoComplete="off" />
-              <ErrorMessage name="username" component={TextError} />
-            </FieldWrapper>
 
             <FieldWrapper>
               <Label htmlFor="email">Email</Label>

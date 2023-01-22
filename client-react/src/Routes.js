@@ -1,7 +1,8 @@
 import React from "react";
 import { RequireAuth } from "react-auth-kit";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import LoginForm from "./components/LoginForm";
+/* import LoginForm from "./components/LoginForm"; */
+import Login from "./components/Login";
 import RegisterForm from "./components/RegisterForm";
 import AllPosts from "./components/AllPosts";
 import Profile from "./components/Profile";
@@ -14,13 +15,13 @@ export default function RoutesComponent() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path={"/"} element={<HomePage />} />
-        <Route path={"/login"} element={<LoginForm />} />
+        <Route path={"/"} element={<Login />} />
+        <Route path={"/login"} element={<Login />} />
         <Route path={"/register"} element={<RegisterForm />} />
         <Route
           path={"/posts"}
           element={
-            <RequireAuth loginPath={"/"}>
+            <RequireAuth loginPath={"/login"}>
               <AllPosts />
             </RequireAuth>
           }
@@ -28,7 +29,7 @@ export default function RoutesComponent() {
         <Route
           path={"/create-post"}
           element={
-            <RequireAuth loginPath={"/"}>
+            <RequireAuth loginPath={"/login"}>
               <CreatePost />
             </RequireAuth>
           }
@@ -36,7 +37,7 @@ export default function RoutesComponent() {
         <Route
           path={"/update-post/:id"}
           element={
-            <RequireAuth loginPath={"/"}>
+            <RequireAuth loginPath={"/login"}>
               <UpdatePost />
             </RequireAuth>
           }
@@ -44,7 +45,7 @@ export default function RoutesComponent() {
         <Route
           path={"/profile"}
           element={
-            <RequireAuth loginPath={"/"}>
+            <RequireAuth loginPath={"/login"}>
               <Profile />
             </RequireAuth>
           }
