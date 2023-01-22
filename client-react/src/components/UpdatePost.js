@@ -1,45 +1,117 @@
-import { useState, useEffect } from "react";
-import { useParams, Link, useNavigate, useLocation } from "react-router-dom";
+import React, { useState, useEffect, useRef } from "react";
 import { useFormik } from "formik";
 import axios from "axios";
-import { useMutation, useQueryClient } from "react-query";
-import { updatePost } from "../api/postsApi";
+import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import Navigation from "./Navigation";
 
 const Main = styled.main`
-  max-width: 1024px;
-  margin: 0 auto;
+  background-color: #fff;
+  padding: 1rem 0.5rem 4rem;
+  @media screen and (max-width: 1000px) {
+    padding: 1rem 0.5rem 4rem;
+  }
+
+  button {
+    padding: 1rem;
+  }
 `;
 
-export default function UpdatePost() {
-  const params = useParams();
-  /* console.log(params); */
+const Form = styled.form`
+  max-width: 40rem;
+  margin: 2rem auto;
+  /* border: 1px solid purple; */
+`;
+
+const H1 = styled.h1`
+  margin: 0 auto 2rem;
+  color: var(--tertiary);
+`;
+
+const Label = styled.label`
+  display: block;
+  font-size: 1.25em;
+  color: var(--tertiary);
+`;
+
+const InputText = styled.input.attrs({
+  type: "text",
+  autoComplete: "off",
+})`
+  border: 1px solid rgb(0, 0, 0, 0.2);
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+  width: 100%;
+  font-size: 1.5em;
+  font-family: Lato, sans-serif;
+  &:focus {
+    outline: none;
+    border: 1px solid var(--primary);
+  }
+`;
+
+const TextArea = styled.textarea`
+  border: 1px solid rgb(0, 0, 0, 0.2);
+  min-height: 30vh;
+  resize: none;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+  width: 100%;
+  font-size: 1.5em;
+  font-family: Lato, sans-serif;
+  &:focus {
+    outline: none;
+    border: 1px solid var(--primary);
+  }
+`;
+
+const Button = styled.button`
+  min-width: 6rem;
+  margin-right: 1rem;
+  color: var(--tertiary);
+  &:hover {
+    cursor: pointer;
+    color: var(--primary);
+  }
+`;
+
+export default function CreatePost() {
+  const [posts, setPosts] = useState([]);
+  const [selectedPost, setSelectedPost] = useState({});
   const navigate = useNavigate();
 
-  const [post, setPost] = useState({});
+  const { id } = useParams();
+  console.log("id",id);
 
-  const obj = async () => {
-    return await axios
-      .get(`http://localhost:3000/api/posts/${params.id}`)
+  const titleRef = useRef();
+
+  const post = (id) => {
+    return axios
+      .get(`http://localhost:3000/api/posts/${id}`)
       .then((res) => {
-        setPost(res.data);
-        console.log(res.data);
-      });
+        /* console.log(res.data); */
+        setSelectedPost(res.data);
+      })
+      .catch((error) => console.log(error));
   };
 
   useEffect(() => {
-    obj();
-  }, []);
+    post(id);
+  }, [id]);
 
+  console.log("Post",selectedPost);
+
+  const url = "http://localhost:3000/api/posts";
   const formik = useFormik({
     initialValues: {
-      user_id: post.user_id,
-      title: post.title,
-      content: post.content,
+      user_id: "",
+      title: "",
+      content: "",
       image: "",
     },
-    onSubmit: (values, { resetForm }) => {
+    onSubmit: (values /* , { resetForm } */) => {
       //console.log(values);
 
       const formData = new FormData();
@@ -47,20 +119,15 @@ export default function UpdatePost() {
 
       for (let value in values) {
         formData.append(value, values[value]);
+        //console.log(value, values[value]);
       }
 
-      //console.log(formData);
-
-      axios
-        .put(`http://localhost:3000/api/posts/${obj.id}`, formData)
-        .then((res) => {
-          setPost(post.concat(res.data));
-          alert("Post enregistré");
-          //console.log(post);
-        });
-
-      resetForm({});
-      navigate("/posts");
+      axios.post(url, formData).then((res) => {
+        setPosts(posts.concat(res.data));
+        //console.log(res.data);
+        //alert(res.data.message);
+        navigate("/posts");
+      });
     },
   });
 
@@ -68,73 +135,51 @@ export default function UpdatePost() {
     <>
       <Navigation />
       <Main>
-        <article
-          className="container"
-          style={{
-            backgroundColor: "white",
-            padding: "1rem",
-            margin: "0 auto",
-          }}
-        >
-          <form onSubmit={formik.handleSubmit} encType="multipart/form-data">
-            <h1 style={{ marginBottom: ".5rem" }}>Modifier un message</h1>
-            <div style={{ display: "none" }}>
-              <label>User ID</label>
-              <br />
-              <input
-                autoFocus
-                type="text"
-                name="user_id"
-                onChange={formik.handleChange}
-                value={post.user_id}
-              />
-            </div>
+        <Form onSubmit={formik.handleSubmit} encType="multipart/form-data">
+          <H1>Modifier un message</H1>
+          <div>
+            <Label htmlFor="title">Titre</Label>
+            <InputText
+              type="text"
+              name="title"
+              id="title"
+              onChange={formik.handleChange}
+              value={formik.values.title}
+              required
+              autoFocus
+              ref={titleRef}
+            />
+          </div>
 
-            <div>
-              <label>Titre</label>
-              <br />
-              <input
-                type="text"
-                name="title"
-                onChange={formik.handleChange}
-                value={post.title}
-              />
-            </div>
+          <div>
+            <Label htmlFor="content">Content</Label>
+            <TextArea
+              id="content"
+              name="content"
+              onChange={formik.handleChange}
+              value={formik.values.content}
+            />
+          </div>
 
-            <div>
-              <label>Content</label>
-              <br />
-              <textarea
-                name="content"
-                onChange={formik.handleChange}
-                value={post.content}
-              />
-            </div>
+          <div>
+            <Label htmlFor="image">Télécharger un fichier</Label>
+            <input
+              type="file"
+              id="image"
+              name="image"
+              accept="image/*"
+              onChange={(e) =>
+                formik.setFieldValue("image", e.currentTarget.files[0])
+              }
+              style={{ color: "blue" }}
+            />
+          </div>
+          <br />
 
-            <div>
-              <label>Upload File</label>
-              <br />
-              <input
-                type="file"
-                name="image"
-                accept="image/*"
-                onChange={(e) =>
-                  formik.setFieldValue("image", e.currentTarget.files[0])
-                }
-                style={{ color: "blue" }}
-              />
-            </div>
-            <img src={post.attachment} alt="" />
-            <br />
-
-            <div>
-              <button type="submit">Submit</button>
-            </div>
-          </form>
-          {/* <p>
-            <Link to="/posts">Retour aux posts</Link>
-          </p> */}
-        </article>
+          <div>
+            <Button type="submit">Submit</Button>
+          </div>
+        </Form>
       </Main>
     </>
   );
