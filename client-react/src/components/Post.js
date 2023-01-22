@@ -10,7 +10,7 @@ const Article = styled.article`
   margin-bottom: 0.75rem;
   padding: 0.5rem;
   font-family: sans-serif;
-  border-radius: 0.5rem;
+  border-radius: 0.25rem;
   border: 1px solid rgba(0, 0, 0, 0.25);
   box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.3);
   color: var(--tertiary);
@@ -89,7 +89,7 @@ const Article = styled.article`
 `;
 
 export default function Post({
-  postUserId, // A remplacer par nom de l'auteur
+  postUserId,
   postId,
   postTitle,
   postContent,
@@ -119,7 +119,6 @@ export default function Post({
 
           <div className="right" onClick={onClick}>
             <p>
-              {/* Display image & alt if exists */}
               {imgUrl ? (
                 <img className="main-post-image" src={imgUrl} alt="Post img" />
               ) : (

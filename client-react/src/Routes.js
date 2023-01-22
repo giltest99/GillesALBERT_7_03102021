@@ -1,12 +1,10 @@
 import React from "react";
 import { RequireAuth } from "react-auth-kit";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-/* import LoginForm from "./components/LoginForm"; */
 import Login from "./components/Login";
 import RegisterForm from "./components/RegisterForm";
 import AllPosts from "./components/AllPosts";
 import Profile from "./components/Profile";
-import HomePage from "./components/HomePage";
 import CreatePost from "./components/CreatePost";
 import UpdatePost from "./components/UpdatePost";
 import ErrorPage from "./components/ErrorPage";
