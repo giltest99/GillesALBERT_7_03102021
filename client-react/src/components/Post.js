@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import like from "../assets/like.png";
 import notLike from "../assets/no-like.png";
@@ -115,6 +116,7 @@ export default function Post({
   modifyPost,
   deletePost,
 }) {
+  //console.log(postId);
   return (
     <>
       <Article>
@@ -160,13 +162,25 @@ export default function Post({
             )}
             {isAuthor ? (
               <div className="is-author-container">
-                <button
+                {/* <button
                   onClick={() => modifyPost(postId)}
                   className="btn-modify"
                   title="Modifier"
                 >
                   &#9997;
-                </button>
+                </button> */}
+                <Link
+                  to={`/update-post/${postId}`}
+                  state={{
+                    id: postId,
+                    userId: postUserId,
+                    title: postTitle,
+                    content: postContent,
+                    imgUrl: imgUrl,
+                  }}
+                >
+                  Modifier
+                </Link>
 
                 <button
                   onClick={() => deletePost(postId)}

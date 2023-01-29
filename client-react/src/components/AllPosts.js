@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import Navigation from "./Navigation";
 import axios from "axios";
 import Post from "./Post";
@@ -19,8 +18,6 @@ export default function AllPosts() {
   const [connectedUser, setConnectedUser] = useState({});
 
   const [newPosts, setNewPosts] = useState([]);
-
-  const navigate = useNavigate();
 
   const getAllUsers = () => {
     axios.get("http://localhost:3000/api/users").then((res) => {
@@ -46,7 +43,7 @@ export default function AllPosts() {
   useEffect(() => {
     const loggued = JSON.parse(localStorage.getItem("_auth_state"));
     setConnectedUser(loggued);
-    console.log("Connected user", loggued);
+    //console.log("Connected user", loggued);
   }, []);
 
   useEffect(() => {
@@ -168,6 +165,7 @@ export default function AllPosts() {
             newPosts.map((post) => (
               <Post
                 key={post.id}
+                postId={post.id}
                 postTitle={post.title}
                 postContent={post.content}
                 createdAt={formatDate(post.createdAt)}
@@ -180,7 +178,7 @@ export default function AllPosts() {
                 likePost={() => likeThisPost(post.id)}
                 noLikePost={() => noLikeThisPost(post.likeId)}
                 /* modifyPost={() => alert(`Modifier ${post.id}`)} */
-                modifyPost={() => navigate(`/update-post/${post.id}`)}
+                /* modifyPost={() => navigate(`/update-post/${post.id}`)} */
                 deletePost={() => deleteThisPost(post.id)}
               />
             ))}

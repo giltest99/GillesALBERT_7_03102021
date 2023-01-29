@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import { useFormik } from "formik";
 import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import Navigation from "./Navigation";
 
@@ -79,38 +79,22 @@ const Button = styled.button`
 
 export default function CreatePost() {
   const [posts, setPosts] = useState([]);
-  const [selectedPost, setSelectedPost] = useState({});
+  /* const [selectedPost, setSelectedPost] = useState({}); */
   const navigate = useNavigate();
+  const location = useLocation();
+  //console.log(location.state);
+  //console.log("Post id", location.state.id);
+  const postId = location.state.id;
 
-  const { id } = useParams();
-  console.log("id", id);
+  /* const url = "http://localhost:3000/api/posts"; */
+  const url = `http://localhost:3000/api/posts/${postId}`;
 
-  const titleRef = useRef();
-  titleRef.value = selectedPost.title;
-
-  const post = (id) => {
-    return axios
-      .get(`http://localhost:3000/api/posts/${id}`)
-      .then((res) => {
-        /* console.log(res.data); */
-        setSelectedPost(res.data);
-      })
-      .catch((error) => console.log(error));
-  };
-
-  useEffect(() => {
-    post(id);
-    
-  }, [id]);
-
-  console.log("Post", selectedPost);
-
-  const url = "http://localhost:3000/api/posts";
   const formik = useFormik({
     initialValues: {
-      user_id: "",
-      title: "",
-      content: "",
+      /* id:location.state.id, */
+      user_id: location.state.userId,
+      title: location.state.title,
+      content: location.state.content,
       image: "",
     },
     onSubmit: (values /* , { resetForm } */) => {
@@ -121,12 +105,12 @@ export default function CreatePost() {
 
       for (let value in values) {
         formData.append(value, values[value]);
-        //console.log(value, values[value]);
+        console.log(value, values[value]);
       }
 
-      axios.post(url, formData).then((res) => {
+      axios.put(url, formData).then((res) => {
         setPosts(posts.concat(res.data));
-        //console.log(res.data);
+        console.log(res.data);
         //alert(res.data.message);
         navigate("/posts");
       });
@@ -149,7 +133,6 @@ export default function CreatePost() {
               value={formik.values.title}
               required
               autoFocus
-              ref={titleRef}
             />
           </div>
 
@@ -179,7 +162,15 @@ export default function CreatePost() {
           <br />
 
           <div>
-            <Button type="submit">Submit</Button>
+            <img src={location.state.imgUrl} alt="" width="400" />
+          </div>
+          <br />
+
+          <div>
+            <Button type="submit">Modifier</Button>
+            <Button type="button" onClick={() => navigate("/posts")}>
+              Annuler
+            </Button>
           </div>
         </Form>
       </Main>
