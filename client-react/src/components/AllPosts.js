@@ -109,7 +109,7 @@ export default function AllPosts() {
 
     if (result === true) {
       axios.delete(`http://localhost:3000/api/posts/${id}`).then(() => {
-        console.log("Post supprimé");
+        //console.log("Post supprimé");
         getAllPosts();
         getAllUsers();
         getAllLikes();
@@ -160,7 +160,6 @@ export default function AllPosts() {
       <Navigation />
       <Main>
         <section>
-          {/* <AddPostButton onClick={() => navigate("/create-post")} /> */}
           {newPosts &&
             newPosts.map((post) => (
               <Post

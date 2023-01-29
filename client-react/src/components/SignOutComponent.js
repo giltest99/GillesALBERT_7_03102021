@@ -25,9 +25,8 @@ export default function SignOutComponent() {
       localStorage.clear();
       navigate("/", { replace: true });
       window.location.reload();
-    }
-    else {
-      return
+    } else {
+      return;
     }
   };
   return <StyledLink onClick={logout}>Se déconnecter</StyledLink>;

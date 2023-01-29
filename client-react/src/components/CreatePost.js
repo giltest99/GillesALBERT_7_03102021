@@ -94,16 +94,16 @@ export default function CreatePost() {
       //console.log(values);
 
       const formData = new FormData();
-      console.log(formData);
+      //console.log(formData);
 
       for (let value in values) {
         formData.append(value, values[value]);
-        console.log(value, values[value]);
+        //console.log(value, values[value]);
       }
 
       axios.post(url, formData).then((res) => {
         setPosts(posts.concat(res.data));
-        console.log(res.data);
+        //console.log(res.data);
         //alert(res.data.message);
         navigate("/posts");
       });
@@ -155,7 +155,7 @@ export default function CreatePost() {
           <br />
 
           <div>
-            <Button type="submit">Submit</Button>
+            <Button type="submit">Créer</Button>
           </div>
         </Form>
       </Main>

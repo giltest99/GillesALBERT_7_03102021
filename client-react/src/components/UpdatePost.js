@@ -90,7 +90,7 @@ export default function CreatePost() {
       user_id: location.state.userId,
       title: location.state.title,
       content: location.state.content,
-      image: location.state.imgUrl
+      image: location.state.imgUrl,
     },
     onSubmit: (values /* , { resetForm } */) => {
       //console.log(values);
@@ -100,12 +100,12 @@ export default function CreatePost() {
 
       for (let value in values) {
         formData.append(value, values[value]);
-        console.log(value, values[value]);
+        //console.log(value, values[value]);
       }
 
       axios.put(url, formData).then((res) => {
         setPosts(posts.concat(res.data));
-        console.log(res.data);
+        //console.log(res.data);
         navigate("/posts");
       });
     },
@@ -149,7 +149,6 @@ export default function CreatePost() {
               accept="image/*"
               onChange={(e) =>
                 formik.setFieldValue("image", e.currentTarget.files[0])
-                
               }
               style={{ color: "blue" }}
             />

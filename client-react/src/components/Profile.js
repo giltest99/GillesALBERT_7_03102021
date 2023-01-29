@@ -51,7 +51,7 @@ export default function UserAccount() {
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("_auth_state"));
-    console.log(user);
+    //console.log(user);
     setConnectedUser({
       userId: user.id,
       userName: user.username,
@@ -70,7 +70,7 @@ export default function UserAccount() {
 
   const deleteUser = (id) => {
     const loggedUser = JSON.parse(localStorage.getItem("_auth_state"));
-    console.log(loggedUser)
+    //console.log(loggedUser)
     id = loggedUser.userId;
     //console.log(loggedUser.userId);
     let result = window.confirm("Voulez-vous supprimer votre compte ?");
