@@ -79,23 +79,18 @@ const Button = styled.button`
 
 export default function CreatePost() {
   const [posts, setPosts] = useState([]);
-  /* const [selectedPost, setSelectedPost] = useState({}); */
   const navigate = useNavigate();
   const location = useLocation();
-  //console.log(location.state);
-  //console.log("Post id", location.state.id);
   const postId = location.state.id;
 
-  /* const url = "http://localhost:3000/api/posts"; */
   const url = `http://localhost:3000/api/posts/${postId}`;
 
   const formik = useFormik({
     initialValues: {
-      /* id:location.state.id, */
       user_id: location.state.userId,
       title: location.state.title,
       content: location.state.content,
-      image: "",
+      image: location.state.imgUrl
     },
     onSubmit: (values /* , { resetForm } */) => {
       //console.log(values);
@@ -111,7 +106,6 @@ export default function CreatePost() {
       axios.put(url, formData).then((res) => {
         setPosts(posts.concat(res.data));
         console.log(res.data);
-        //alert(res.data.message);
         navigate("/posts");
       });
     },
@@ -155,6 +149,7 @@ export default function CreatePost() {
               accept="image/*"
               onChange={(e) =>
                 formik.setFieldValue("image", e.currentTarget.files[0])
+                
               }
               style={{ color: "blue" }}
             />
