@@ -84,16 +84,23 @@ const Article = styled.article`
     align-items: center;
     justify-content: flex-start;
   }
-
-  .btn-modify,
-  .btn-delete {
+  .btn-modify {
+    display: inline-block;
     cursor: pointer;
-    font-size: 1.25rem;
+    font-size: 0.75rem;
     padding: 0.25rem 0.5rem;
+    color: var(--tertiary);
   }
   .btn-modify:hover {
     color: seagreen;
   }
+
+  .btn-delete {
+    cursor: pointer;
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+  }
+
   .btn-delete:hover {
     color: crimson;
   }
@@ -116,7 +123,6 @@ export default function Post({
   modifyPost,
   deletePost,
 }) {
-  //console.log(postId);
   return (
     <>
       <Article>
@@ -131,7 +137,15 @@ export default function Post({
 
           <div onClick={onClick}>
             {imgUrl ? (
-              <img className="main-post-image" src={imgUrl} alt="Post img" />
+              <div>
+                <a href={imgUrl} target="_blank" rel="noopenner noreferrer">
+                  <img
+                    className="main-post-image"
+                    src={imgUrl}
+                    alt="Post img"
+                  />
+                </a>
+              </div>
             ) : (
               ""
             )}
@@ -162,32 +176,28 @@ export default function Post({
             )}
             {isAuthor ? (
               <div className="is-author-container">
-                {/* <button
-                  onClick={() => modifyPost(postId)}
-                  className="btn-modify"
-                  title="Modifier"
-                >
-                  &#9997;
-                </button> */}
-                <Link
-                  to={`/update-post/${postId}`}
-                  state={{
-                    id: postId,
-                    userId: postUserId,
-                    title: postTitle,
-                    content: postContent,
-                    imgUrl: imgUrl,
-                  }}
-                >
-                  Modifier
-                </Link>
+                <button>
+                  <Link
+                    to={`/update-post/${postId}`}
+                    state={{
+                      id: postId,
+                      userId: postUserId,
+                      title: postTitle,
+                      content: postContent,
+                      imgUrl: imgUrl,
+                    }}
+                    className="btn-modify"
+                  >
+                    Modifier
+                  </Link>
+                </button>
 
                 <button
                   onClick={() => deletePost(postId)}
                   className="btn-delete"
                   title="Supprimer"
                 >
-                  &#10005;
+                  Supprimer
                 </button>
               </div>
             ) : null}

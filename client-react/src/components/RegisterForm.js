@@ -125,7 +125,7 @@ export default function Register() {
   });
 
   const handleSubmit = (values, { resetForm }) => {
-    console.log(values);
+    //console.log(values);
     axios
       .post("http://localhost:3000/api/users/signup", values)
       .then((response) => {

@@ -116,14 +116,14 @@ export default function Login() {
               authState: res.data,
             })
           ) {
-            console.log("Connexion ok");
+            //console.log("Connexion ok");
           } else {
             return <button onClick={handleSubmit()}>Connexion</button>;
           }
         }
       })
       .catch((error) => {
-        console.log(error.response.data.message);
+        //console.log(error.response.data.message);
         setErrorMessage(error.response.data.message);
       });
   };
