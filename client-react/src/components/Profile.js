@@ -47,19 +47,21 @@ export default function UserAccount() {
     biography: "",
     avatar: "",
   });
+  //console.log(connectedUser.userId);
   const navigate = useNavigate();
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("_auth_state"));
     //console.log(user);
     setConnectedUser({
-      userId: user.id,
+      userId: user.userId,
       userName: user.username,
       email: user.email,
       isAdmin: user.is_admin,
       biography: user.biography,
       avatar: user.avatar,
     });
+    //console.log(user.userId);
   }, []);
 
   const logout = () => {
@@ -70,20 +72,21 @@ export default function UserAccount() {
 
   const deleteUser = (id) => {
     const loggedUser = JSON.parse(localStorage.getItem("_auth_state"));
-    //console.log(loggedUser)
-    id = loggedUser.userId;
+    //console.log(loggedUser);
     //console.log(loggedUser.userId);
     let result = window.confirm("Voulez-vous supprimer votre compte ?");
 
     if (result === true && !loggedUser.isAdmin) {
-      localStorage.clear();
-      axios.delete(`http://localhost:3000/api/users/${id}`).then(() => {
-        //console.log("Cliqué");
-        //console.log(`User ${id} supprimé`);
-        logout();
-      });
-      navigate("/", { replace: true });
-      window.location.reload();
+      axios
+        .delete(`http://localhost:3000/api/users/${id}`)
+        .then(() => {
+          //console.log("Cliqué");
+          //console.log(`User ${id} supprimé`);
+          logout();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     } else {
       return;
     }
@@ -107,6 +110,7 @@ export default function UserAccount() {
 
           <H1>Bonjour, {connectedUser.userName}</H1>
           <H3>Mon adresse mail : {connectedUser.email}</H3>
+          {/* <H3>Mon id : {connectedUser.userId}</H3> */}
           <Button onClick={() => deleteUser(connectedUser.userId)}>
             Supprimer mon compte
           </Button>
