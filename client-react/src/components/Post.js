@@ -44,12 +44,12 @@ const Article = styled.article`
       object-fit: contain;
     }
     button {
-      margin: 0 0.5rem 0 0.5rem;
+      margin: 0 0.25rem 0 0.25rem;
     }
   }
 
   .like-icon {
-    width: 30px;
+    width: 2rem;
   }
 
   .main-like-edit-container {

@@ -7,7 +7,7 @@ import AllPosts from "./components/AllPosts";
 import Profile from "./components/Profile";
 import CreatePost from "./components/CreatePost";
 import UpdatePost from "./components/UpdatePost";
-import ErrorPage from "./components/ErrorPage";
+/* import ErrorPage from "./components/ErrorPage"; */
 
 export default function RoutesComponent() {
   return (
@@ -48,7 +48,15 @@ export default function RoutesComponent() {
             </RequireAuth>
           }
         />
-        <Route path={"*"} element={<ErrorPage />} />
+        <Route
+          path={"*"}
+          element={
+            <RequireAuth loginPath={"/posts"}>
+              <AllPosts />
+            </RequireAuth>
+          }
+        />
+        <Route path={"*"} element={<Login />} />
       </Routes>
     </BrowserRouter>
   );
