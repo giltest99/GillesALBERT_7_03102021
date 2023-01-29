@@ -171,7 +171,7 @@ export default function Register() {
             </FieldWrapper>
 
             <FieldWrapper>
-              <Button type="submit">Créer</Button>
+              <Button type="submit">Créer le compte</Button>
 
               <Button type="reset" onClick={resetForm}>
                 Effacer

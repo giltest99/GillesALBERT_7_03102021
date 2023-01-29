@@ -158,7 +158,7 @@ export default function Login() {
             </FieldWrapper>
 
             <FieldWrapper>
-              <Button type="submit">Créer</Button>
+              <Button type="submit">Se connecter</Button>
 
               <Button type="reset" onClick={resetForm}>
                 Effacer
