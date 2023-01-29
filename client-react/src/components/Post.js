@@ -20,19 +20,20 @@ const Article = styled.article`
     display: flex;
     flex-direction: column;
     width: 100%;
-    h3 {
-      margin: 0;
-      padding: 0.5rem;
+
+    h1 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
     }
-    h4 {
-      margin: 0;
-      padding: 0.5rem;
+    h2 {
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
     }
     p {
-      margin: 0;
-      padding: 0.5rem;
-      margin: 1rem 0;
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
     }
+
     .post-author {
       font-style: italic;
     }
@@ -55,6 +56,8 @@ const Article = styled.article`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
+    padding: 0 1.5rem 0;
   }
 
   .post-like-container {
@@ -64,11 +67,13 @@ const Article = styled.article`
 
   .post-likes {
     font-size: 20px;
-    margin-left: 1rem;
+    margin: 1rem 0 0 0.5rem;
   }
-  .post-like {
+  .post-like,
+  .post-no-like {
     border-radius: 0.5rem;
     color: blue;
+    margin: 1rem 0 0 0;
   }
   .post-like:hover {
     cursor: pointer;
@@ -127,11 +132,11 @@ export default function Post({
     <>
       <Article>
         <div className="main-column">
-          <h3 className="post-title">{postTitle}</h3>
+          <h1 className="post-title">{postTitle}</h1>
 
-          <h4 className="post-author">
+          <h2 className="post-author">
             Message de {postName}, le {createdAt}
-          </h4>
+          </h2>
 
           <p className="post-content">{postContent}</p>
 

@@ -90,21 +90,15 @@ export default function CreatePost() {
       content: "",
       image: "",
     },
-    onSubmit: (values /* , { resetForm } */) => {
-      //console.log(values);
-
+    onSubmit: (values) => {
       const formData = new FormData();
-      //console.log(formData);
 
       for (let value in values) {
         formData.append(value, values[value]);
-        //console.log(value, values[value]);
       }
 
       axios.post(url, formData).then((res) => {
         setPosts(posts.concat(res.data));
-        //console.log(res.data);
-        //alert(res.data.message);
         navigate("/posts");
       });
     },

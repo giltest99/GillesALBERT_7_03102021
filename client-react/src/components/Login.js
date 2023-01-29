@@ -102,8 +102,7 @@ export default function Login() {
       .required("Mot de passe requis"),
   });
 
-  const handleSubmit = (values, { resetForm }) => {
-    // console.log(values);
+  const handleSubmit = (values) => {
     axios
       .post("http://localhost:3000/api/users/login", values)
       .then((res) => {
@@ -116,20 +115,17 @@ export default function Login() {
               authState: res.data,
             })
           ) {
-            //console.log("Connexion ok");
           } else {
             return <button onClick={handleSubmit()}>Connexion</button>;
           }
         }
       })
       .catch((error) => {
-        //console.log(error.response.data.message);
         setErrorMessage(error.response.data.message);
       });
   };
   if (isAuthenticated()) {
-    // If authenticated user, then redirect to secure dashboard
-
+    // If authenticated user, then redirect to secure section
     return <Navigate to={"/posts"} replace />;
   }
 

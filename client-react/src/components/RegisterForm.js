@@ -98,7 +98,6 @@ const Button = styled.button`
 `;
 
 export default function Register() {
-
   const [errorMessage, setErrorMessage] = useState("");
 
   const navigate = useNavigate();
@@ -125,17 +124,14 @@ export default function Register() {
   });
 
   const handleSubmit = (values, { resetForm }) => {
-    //console.log(values);
     axios
       .post("http://localhost:3000/api/users/signup", values)
       .then((response) => {
-        //console.log(response.data);
         resetForm();
         alert(response.data.message);
         navigate("/login");
       })
       .catch((error) => {
-        //console.log(error.response.data.message);
         setErrorMessage(error.response.data.message);
       });
   };

@@ -22,28 +22,24 @@ export default function AllPosts() {
   const getAllUsers = () => {
     axios.get("http://localhost:3000/api/users").then((res) => {
       setUsers(res.data);
-      //console.log(res.data);
     });
   };
 
   const getAllPosts = () => {
     axios.get("http://localhost:3000/api/posts").then((res) => {
       setPosts(res.data);
-      //console.log(res.data);
     });
   };
 
   const getAllLikes = () => {
     axios.get("http://localhost:3000/api/postlikes").then((res) => {
       setLikes(res.data);
-      //console.log(res.data);
     });
   };
 
   useEffect(() => {
     const loggued = JSON.parse(localStorage.getItem("_auth_state"));
     setConnectedUser(loggued);
-    //console.log("Connected user", loggued);
   }, []);
 
   useEffect(() => {
@@ -64,7 +60,7 @@ export default function AllPosts() {
         e.userName = findUserName.username; */
 
         // eslint-disable-next-line array-callback-return, no-unused-vars
-        const myNewUsers = myUsers.find((el) => {
+        myUsers.find((el) => {
           if (el.id === e.user_id) e.userName = el.username;
         });
 
@@ -97,8 +93,6 @@ export default function AllPosts() {
 
         return e;
       });
-      //console.log("myNewPosts", myNewPosts);
-      //console.log(myNewPosts);
       setNewPosts(myNewPosts);
     }
     addPostUser();
@@ -109,7 +103,6 @@ export default function AllPosts() {
 
     if (result === true) {
       axios.delete(`http://localhost:3000/api/posts/${id}`).then(() => {
-        //console.log("Post supprimé");
         getAllPosts();
         getAllUsers();
         getAllLikes();
@@ -126,9 +119,7 @@ export default function AllPosts() {
       user_id: likeUserId,
       post_id: likePostId,
     };
-    //console.log(obj);
     axios.post(`http://localhost:3000/api/postlikes`, obj).then(() => {
-      //console.log("Post liké");
       getAllPosts();
       getAllUsers();
       getAllLikes();
@@ -136,7 +127,6 @@ export default function AllPosts() {
   }
   function noLikeThisPost(id) {
     axios.delete(`http://localhost:3000/api/postlikes/${id}`).then(() => {
-      //console.log("Post disliké");
       getAllPosts();
       getAllUsers();
       getAllLikes();
@@ -176,8 +166,6 @@ export default function AllPosts() {
                 isAuthor={post.isAuthor}
                 likePost={() => likeThisPost(post.id)}
                 noLikePost={() => noLikeThisPost(post.likeId)}
-                /* modifyPost={() => alert(`Modifier ${post.id}`)} */
-                /* modifyPost={() => navigate(`/update-post/${post.id}`)} */
                 deletePost={() => deleteThisPost(post.id)}
               />
             ))}
