@@ -15,8 +15,6 @@ const Article = styled.article`
   padding: 0.5rem;
   font-family: sans-serif;
   border-radius: 0.25rem;
-  border: 1px solid rgba(0, 0, 0, 0.25);
-  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.3);
   color: var(--tertiary);
 
   .main-column {
