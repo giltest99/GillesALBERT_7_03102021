@@ -40,10 +40,14 @@ const Article = styled.article`
     .post-author {
       font-style: italic;
     }
+    .image-container {
+      display: flex;
+      justify-content: center;
+      margin: 1rem 0;
+    }
     .main-post-image {
-      width: 100%;
-      max-height: 400px;
-      border-radius: 0 0.5rem 0.5rem 0;
+      max-height: 500px;
+      border-radius: 0.5rem;
       object-fit: contain;
     }
     button {
@@ -153,7 +157,7 @@ export default function Post({
 
           <div onClick={onClick}>
             {imgUrl ? (
-              <div>
+              <div className="image-container">
                 <a href={imgUrl} target="_blank" rel="noopenner noreferrer">
                   <img
                     className="main-post-image"
