@@ -23,6 +23,11 @@ const Article = styled.article`
     display: flex;
     flex-direction: column;
     width: 100%;
+    .text-container {
+      display: flex;
+      flex-direction: column;
+      padding: 1rem 1.5rem;
+    }
 
     h1 {
       font-size: 1.5rem;
@@ -46,9 +51,10 @@ const Article = styled.article`
       margin: 1rem 0;
     }
     .main-post-image {
-      max-height: 500px;
+      max-width: 96%;
       border-radius: 0.5rem;
       object-fit: contain;
+      padding: 0.5rem;
     }
     button {
       margin: 0 0.25rem 0 0.25rem;
@@ -147,25 +153,27 @@ export default function Post({
     <>
       <Article>
         <div className="main-column">
-          <h1 className="post-title">{postTitle}</h1>
+          <div className="text-container">
+            <h1 className="post-title">{postTitle}</h1>
 
-          <h2 className="post-author">
-            Message de {postName}, le {createdAt}
-          </h2>
+            <h2 className="post-author">
+              Message de {postName}, le {createdAt}
+            </h2>
 
-          <p className="post-content">{postContent}</p>
+            <p className="post-content">{postContent}</p>
+          </div>
 
           <div onClick={onClick}>
             {imgUrl ? (
-              <div className="image-container">
-                <a href={imgUrl} target="_blank" rel="noopenner noreferrer">
+              <a href={imgUrl} target="_blank" rel="noopenner noreferrer">
+                <div className="image-container">
                   <img
                     className="main-post-image"
                     src={imgUrl}
                     alt="Post img"
                   />
-                </a>
-              </div>
+                </div>
+              </a>
             ) : (
               ""
             )}
