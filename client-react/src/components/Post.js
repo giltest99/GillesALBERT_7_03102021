@@ -1,10 +1,8 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import like from "../assets/like.png";
-import notLike from "../assets/no-like.png";
 import { ButtonIcon } from "./ButtonIcon";
 import { FiEdit } from "react-icons/fi";
-import { AiOutlineDelete } from "react-icons/ai";
+import { AiOutlineDelete, AiFillLike, AiOutlineLike } from "react-icons/ai";
 
 const Article = styled.article`
   display: flex;
@@ -50,7 +48,7 @@ const Article = styled.article`
     }
     .main-post-image {
       max-width: 96%;
-      border-radius: 0.5rem;
+      border-radius: 1rem;
       object-fit: contain;
       padding: 0.5rem;
     }
@@ -80,19 +78,31 @@ const Article = styled.article`
     font-size: 20px;
     margin: 1rem 0 0 0.5rem;
   }
-  .post-like,
+  .post-like {
+    border-radius: 0.5rem;
+    color: var(--primary);
+    margin: 1rem 0 0 0;
+
+    svg {
+      height: 2em;
+      width: 2em;
+    }
+  }
   .post-no-like {
     border-radius: 0.5rem;
-    color: blue;
+    color: var(--secondary);
     margin: 1rem 0 0 0;
+
+    svg {
+      height: 2em;
+      width: 2em;
+    }
   }
   .post-like:hover {
     cursor: pointer;
-    background-color: gainsboro;
   }
   .post-no-like:hover {
     cursor: pointer;
-    background-color: gainsboro;
     border-radius: 0.5rem;
   }
   .is-author-container {
@@ -103,11 +113,10 @@ const Article = styled.article`
   .btn-modify {
     cursor: pointer;
     font-size: 1.25rem;
-    padding: 0.25rem 0.5rem;
+    padding: 0.5rem 0.75rem;
     background-color: seagreen;
     color: white;
-    border: 1px solid grey;
-    /* border-radius: 2rem; */
+    border-radius: 2rem;
     transition: all 0.3s ease;
   }
   .btn-modify:hover {
@@ -117,11 +126,11 @@ const Article = styled.article`
   .btn-delete {
     cursor: pointer;
     font-size: 1.25rem;
-    padding: 0.25rem 0.5rem;
+    margin-left: 0.5rem;
+    padding: 0.5rem 0.75rem;
     background-color: var(--primary);
     color: white;
-    border: 1px solid grey;
-    /* border-radius: 2rem; */
+    border-radius: 2rem;
     transition: all 0.3s ease;
   }
 
@@ -180,53 +189,54 @@ export default function Post({
             {postLiked ? (
               <div className="post-like-container">
                 <p className="post-like" onClick={noLikePost}>
-                  <img
+                  {/* <img
                     src={like}
                     alt={`Post ${postTitle} liké par ${postName}`}
                     className="like-icon"
-                  />
+                  /> */}
+                  <AiFillLike />
                 </p>
                 <p className="post-likes">{postLikes}</p>
               </div>
             ) : (
               <div className="post-like-container">
                 <p className="post-no-like" onClick={likePost}>
-                  <img
+                  {/* <img
                     src={notLike}
                     alt={`Post ${postTitle} non liké`}
                     className="like-icon"
-                  />
+                  /> */}
+                  <AiOutlineLike />
                 </p>
                 <p className="post-likes">{postLikes}</p>
               </div>
             )}
             {isAuthor ? (
               <div className="is-author-container">
-                <button title="Modifier">
-                  <Link
-                    to={`/update-post/${postId}`}
-                    state={{
-                      id: postId,
-                      userId: postUserId,
-                      title: postTitle,
-                      content: postContent,
-                      imgUrl: imgUrl,
-                    }}
-                    className="btn-modify"
-                  >
-                    <FiEdit />
-                  </Link>
-                </button>
+                <Link
+                  to={`/update-post/${postId}`}
+                  state={{
+                    id: postId,
+                    userId: postUserId,
+                    title: postTitle,
+                    content: postContent,
+                    imgUrl: imgUrl,
+                  }}
+                  className="btn-modify"
+                  title="Modifier"
+                >
+                  <FiEdit />
+                </Link>
 
                 <ButtonIcon modify>Modifier</ButtonIcon>
 
-                <button
+                <Link
                   onClick={() => deletePost(postId)}
                   className="btn-delete"
                   title="Supprimer"
                 >
                   <AiOutlineDelete />
-                </button>
+                </Link>
               </div>
             ) : null}
           </div>
