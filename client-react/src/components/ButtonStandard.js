@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 
-export default function ButtonStandard({ txt, onClick }) {
+export default function ButtonStandard({ txt, onClick,type }) {
   return (
     <>
-      <Button onClick={onClick}>{txt}</Button>
+      <Button onClick={onClick} type={type}>{txt}</Button>
     </>
   );
 }
