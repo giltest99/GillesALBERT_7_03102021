@@ -76,8 +76,6 @@ const Article = styled.article`
 
   .post-likes {
     font-size: 1.5rem !important;
-    font-weight: 600;
-    color: var(--tertiary);
     margin: 1rem 0 0 0.5rem;
   }
   .post-like {
