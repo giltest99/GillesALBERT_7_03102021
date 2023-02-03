@@ -75,7 +75,9 @@ const Article = styled.article`
   }
 
   .post-likes {
-    font-size: 20px;
+    font-size: 1.5rem !important;
+    font-weight: 600;
+    color: var(--tertiary);
     margin: 1rem 0 0 0.5rem;
   }
   .post-like {
@@ -189,11 +191,6 @@ export default function Post({
             {postLiked ? (
               <div className="post-like-container">
                 <p className="post-like" onClick={noLikePost}>
-                  {/* <img
-                    src={like}
-                    alt={`Post ${postTitle} liké par ${postName}`}
-                    className="like-icon"
-                  /> */}
                   <AiFillLike />
                 </p>
                 <p className="post-likes">{postLikes}</p>
@@ -201,11 +198,6 @@ export default function Post({
             ) : (
               <div className="post-like-container">
                 <p className="post-no-like" onClick={likePost}>
-                  {/* <img
-                    src={notLike}
-                    alt={`Post ${postTitle} non liké`}
-                    className="like-icon"
-                  /> */}
                   <AiOutlineLike />
                 </p>
                 <p className="post-likes">{postLikes}</p>
