@@ -4,6 +4,7 @@ import axios from "axios";
 import { useNavigate, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import Navigation from "./Navigation";
+import ButtonStandard from "./ButtonStandard";
 
 const Main = styled.main`
   background-color: #fff;
@@ -67,14 +68,9 @@ const TextArea = styled.textarea`
   }
 `;
 
-const Button = styled.button`
-  min-width: 6rem;
-  margin-right: 1rem;
-  color: var(--tertiary);
-  &:hover {
-    cursor: pointer;
-    color: var(--primary);
-  }
+const ButtonsWrapper = styled.div`
+  display: flex;
+  gap: 1rem;
 `;
 
 export default function CreatePost() {
@@ -155,12 +151,18 @@ export default function CreatePost() {
           </div>
           <br />
 
-          <div>
-            <Button type="submit">Modifier</Button>
-            <Button type="button" onClick={() => navigate("/posts")}>
+          <ButtonsWrapper>
+            <ButtonStandard type="submit" txt="Modifier">
+              Modifier
+            </ButtonStandard>
+            <ButtonStandard
+              type="button"
+              onClick={() => navigate("/posts")}
+              txt="Annuler"
+            >
               Annuler
-            </Button>
-          </div>
+            </ButtonStandard>
+          </ButtonsWrapper>
         </Form>
       </Main>
     </>

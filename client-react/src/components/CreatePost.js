@@ -4,6 +4,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Navigation from "./Navigation";
+import ButtonStandard from "./ButtonStandard";
 
 const Main = styled.main`
   background-color: #fff;
@@ -64,16 +65,6 @@ const TextArea = styled.textarea`
   &:focus {
     outline: none;
     border: 1px solid var(--primary);
-  }
-`;
-
-const Button = styled.button`
-  min-width: 6rem;
-  margin-right: 1rem;
-  color: var(--tertiary);
-  &:hover {
-    cursor: pointer;
-    color: var(--primary);
   }
 `;
 
@@ -149,7 +140,7 @@ export default function CreatePost() {
           <br />
 
           <div>
-            <Button type="submit">Créer</Button>
+            <ButtonStandard type="submit" txt="Créer le message" />
           </div>
         </Form>
       </Main>

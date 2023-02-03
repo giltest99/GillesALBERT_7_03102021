@@ -2,6 +2,9 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import like from "../assets/like.png";
 import notLike from "../assets/no-like.png";
+import { ButtonIcon } from "./ButtonIcon";
+import { FiEdit } from "react-icons/fi";
+import { AiOutlineDelete } from "react-icons/ai";
 
 const Article = styled.article`
   display: flex;
@@ -90,24 +93,32 @@ const Article = styled.article`
     justify-content: flex-start;
   }
   .btn-modify {
-    display: inline-block;
     cursor: pointer;
-    font-size: 0.75rem;
+    font-size: 1.25rem;
     padding: 0.25rem 0.5rem;
-    color: var(--tertiary);
+    background-color: seagreen;
+    color: white;
+    border: 1px solid grey;
+    /* border-radius: 2rem; */
+    transition: all 0.3s ease;
   }
   .btn-modify:hover {
-    color: seagreen;
+    background-color: #267347;
   }
 
   .btn-delete {
     cursor: pointer;
-    font-size: 0.75rem;
+    font-size: 1.25rem;
     padding: 0.25rem 0.5rem;
+    background-color: var(--primary);
+    color: white;
+    border: 1px solid grey;
+    /* border-radius: 2rem; */
+    transition: all 0.3s ease;
   }
 
   .btn-delete:hover {
-    color: crimson;
+    background-color: var(--primary-hover);
   }
 `;
 
@@ -181,7 +192,7 @@ export default function Post({
             )}
             {isAuthor ? (
               <div className="is-author-container">
-                <button>
+                <button title="Modifier">
                   <Link
                     to={`/update-post/${postId}`}
                     state={{
@@ -193,16 +204,18 @@ export default function Post({
                     }}
                     className="btn-modify"
                   >
-                    Modifier
+                    <FiEdit />
                   </Link>
                 </button>
+
+                <ButtonIcon modify>Modifier</ButtonIcon>
 
                 <button
                   onClick={() => deletePost(postId)}
                   className="btn-delete"
                   title="Supprimer"
                 >
-                  Supprimer
+                  <AiOutlineDelete />
                 </button>
               </div>
             ) : null}

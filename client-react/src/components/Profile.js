@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import styled from "styled-components";
 import Navigation from "./Navigation";
+import ButtonStandard from "./ButtonStandard";
 
 const Main = styled.main`
   display: flex;
@@ -104,9 +105,10 @@ export default function UserAccount() {
 
           <H1>Bonjour, {connectedUser.userName}</H1>
           <H3>Mon adresse mail : {connectedUser.email}</H3>
-          <Button onClick={() => deleteUser(connectedUser.userId)}>
-            Supprimer mon compte
-          </Button>
+          <ButtonStandard
+            onClick={() => deleteUser(connectedUser.userId)}
+            txt="Supprimer mon compte"
+          />
         </Section>
       </Main>
     </>

@@ -87,13 +87,30 @@ const FieldWrapper = styled.div`
   margin: 1rem 0;
 `;
 
+const ButtonsWrapper = styled.div`
+  display: flex;
+  gap: 1rem;
+`;
+
 const Button = styled.button`
-  min-width: 6rem;
-  margin-right: 1rem;
-  color: var(--tertiary);
+  border: none;
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  vertical-align: middle;
+  overflow: hidden;
+  text-decoration: none;
+  color: white;
+  background-color: var(--primary);
+  text-align: center;
+  cursor: pointer;
+  white-space: nowrap;
+  font-weight: 700;
+  font-size: 1.25em;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+
   &:hover {
-    cursor: pointer;
-    color: var(--primary);
+    background-color: var(--primary-hover);
   }
 `;
 
@@ -170,13 +187,12 @@ export default function Register() {
               <ErrorMessage name="password" component={TextError} />
             </FieldWrapper>
 
-            <FieldWrapper>
+            <ButtonsWrapper>
               <Button type="submit">Créer le compte</Button>
-
               <Button type="reset" onClick={resetForm}>
                 Effacer
               </Button>
-            </FieldWrapper>
+            </ButtonsWrapper>
           </StyledForm>
         </Formik>
       </Main>

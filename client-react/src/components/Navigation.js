@@ -55,7 +55,7 @@ const NavLink = styled(Link)`
   text-align: center;
   padding: 0.5rem;
   border-radius: 0.33rem;
-  transition: background-color 0.2s ease;
+  transition: background-color 0.3s ease;
   @media (max-width: 700px) {
     margin: 1rem 0;
   }
