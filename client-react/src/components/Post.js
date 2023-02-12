@@ -42,7 +42,7 @@ export default function Post({
                   <img
                     className="main-post-image"
                     src={imgUrl}
-                    alt="Post img"
+                    alt={postTitle}
                   />
                 </div>
               </a>
@@ -133,6 +133,15 @@ const Article = styled.article`
     p {
       font-size: 1.1rem;
       margin-bottom: 1rem;
+    }
+    textarea {
+      resize: none;
+      min-height: 10rem;
+      border: none;
+      padding: 0.5rem 0;
+      font-size: 1.25em;
+      font-family: Lato, sans-serif;
+      color: var(--tertiary);
     }
 
     .post-author {
