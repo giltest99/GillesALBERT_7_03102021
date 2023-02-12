@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useFormik } from "formik";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -9,6 +9,17 @@ import ButtonStandard from "./ButtonStandard";
 export default function CreatePost() {
   const [posts, setPosts] = useState([]);
   const [file, setFile] = useState("");
+
+  const [token, setToken] = useState();
+
+  useEffect(() => {
+    const LS = JSON.parse(localStorage.getItem("_auth_state"));
+    setToken((t) => LS.token);
+  }, [token]);
+
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
 
   function handleFileChange(e) {
     setFile(URL.createObjectURL(e.target.files[0]));
@@ -32,7 +43,7 @@ export default function CreatePost() {
         formData.append(value, values[value]);
       }
 
-      axios.post(url, formData).then((res) => {
+      axios.post(url, formData, config).then((res) => {
         setPosts(posts.concat(res.data));
         navigate("/posts");
       });

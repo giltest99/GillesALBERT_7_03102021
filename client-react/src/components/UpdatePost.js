@@ -10,6 +10,18 @@ export default function CreatePost() {
   const [post, setPost] = useState([]);
   const [file, setFile] = useState("");
 
+  const [token, setToken] = useState();
+
+  useEffect(() => {
+    const LS = JSON.parse(localStorage.getItem("_auth_state"));
+    setToken((t) => LS.token);
+    console.log(token);
+  }, [token]);
+
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
+
   const inputRef = useRef(null);
 
   function handleFileChange(e) {
@@ -41,7 +53,7 @@ export default function CreatePost() {
         //console.log(value, values[value]);
       }
 
-      axios.put(url, formData).then((res) => {
+      axios.put(url, formData, config).then((res) => {
         setPost(post.concat(res.data));
         console.log(post);
         navigate("/posts");

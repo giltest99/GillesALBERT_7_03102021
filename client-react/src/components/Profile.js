@@ -28,17 +28,6 @@ const H3 = styled.h3`
   color: var(--tertiary);
 `;
 
-const Button = styled.button`
-  min-width: 6rem;
-  margin-right: 1rem;
-  padding: 0.5rem 1rem;
-  color: var(--tertiary);
-  &:hover {
-    cursor: pointer;
-    color: var(--primary);
-  }
-`;
-
 export default function UserAccount() {
   const [connectedUser, setConnectedUser] = useState({
     userId: "",
@@ -48,6 +37,19 @@ export default function UserAccount() {
     biography: "",
     avatar: "",
   });
+
+  const [token, setToken] = useState();
+
+  useEffect(() => {
+    const LS = JSON.parse(localStorage.getItem("_auth_state"));
+    setToken((t) => LS.token);
+    console.log(token);
+  }, [token]);
+
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -75,7 +77,7 @@ export default function UserAccount() {
 
     if (result === true && !loggedUser.isAdmin) {
       axios
-        .delete(`http://localhost:3000/api/users/${id}`)
+        .delete(`http://localhost:3000/api/users/${id}`, config)
         .then(() => {
           logout();
         })

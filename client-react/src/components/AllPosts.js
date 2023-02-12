@@ -16,36 +16,55 @@ export default function AllPosts() {
   const [users, setUsers] = useState([]);
   const [likes, setLikes] = useState([]);
   const [connectedUser, setConnectedUser] = useState({});
-
   const [newPosts, setNewPosts] = useState([]);
-
-  const getAllUsers = () => {
-    axios.get("http://localhost:3000/api/users").then((res) => {
-      setUsers(res.data);
-    });
-  };
-
-  const getAllPosts = () => {
-    axios.get("http://localhost:3000/api/posts").then((res) => {
-      setPosts(res.data);
-    });
-  };
-
-  const getAllLikes = () => {
-    axios.get("http://localhost:3000/api/postlikes").then((res) => {
-      setLikes(res.data);
-    });
-  };
 
   useEffect(() => {
     const loggued = JSON.parse(localStorage.getItem("_auth_state"));
     setConnectedUser(loggued);
   }, []);
 
+  function returnToken() {
+    const LS = JSON.parse(localStorage.getItem("_auth_state"));
+    return LS.token;
+  }
+  const TOKEN = returnToken();
+
+  function returnLoggedIn() {
+    const loggued = JSON.parse(localStorage.getItem("_auth_state"));
+    return loggued;
+  }
+
+  useEffect(() => {
+    setConnectedUser(returnLoggedIn());
+  }, []);
+
+  const config = {
+    headers: { Authorization: `Bearer ${TOKEN}` },
+  };
+
+  const getAllUsers = () => {
+    axios.get("http://localhost:3000/api/users", config).then((res) => {
+      setUsers(res.data);
+    });
+  };
+
+  const getAllPosts = () => {
+    axios.get("http://localhost:3000/api/posts", config).then((res) => {
+      setPosts(res.data);
+    });
+  };
+
+  const getAllLikes = () => {
+    axios.get("http://localhost:3000/api/postlikes", config).then((res) => {
+      setLikes(res.data);
+    });
+  };
+
   useEffect(() => {
     getAllPosts();
     getAllUsers();
     getAllLikes();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -102,7 +121,7 @@ export default function AllPosts() {
     let result = window.confirm("Voulez-vous supprimer le post ?");
 
     if (result === true) {
-      axios.delete(`http://localhost:3000/api/posts/${id}`).then(() => {
+      axios.delete(`http://localhost:3000/api/posts/${id}`, config).then(() => {
         getAllPosts();
         getAllUsers();
         getAllLikes();
@@ -119,22 +138,24 @@ export default function AllPosts() {
       user_id: likeUserId,
       post_id: likePostId,
     };
-    axios.post(`http://localhost:3000/api/postlikes`, obj).then(() => {
+    axios.post(`http://localhost:3000/api/postlikes`, obj, config).then(() => {
       getAllPosts();
       getAllUsers();
       getAllLikes();
     });
   }
   function noLikeThisPost(id) {
-    axios.delete(`http://localhost:3000/api/postlikes/${id}`).then(() => {
-      getAllPosts();
-      getAllUsers();
-      getAllLikes();
-    });
+    axios
+      .delete(`http://localhost:3000/api/postlikes/${id}`, config)
+      .then(() => {
+        getAllPosts();
+        getAllUsers();
+        getAllLikes();
+      });
   }
 
-  // Refresh data every 60 sec
-  useEffect(() => {
+  // Refresh data every 60s
+  /* useEffect(() => {
     const interval = setInterval(() => {
       getAllPosts();
       getAllUsers();
@@ -143,7 +164,7 @@ export default function AllPosts() {
     return () => {
       clearInterval(interval);
     };
-  }, []);
+  }, [posts, users,likes]); */
 
   return (
     <>
