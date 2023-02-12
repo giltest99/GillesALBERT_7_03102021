@@ -4,6 +4,103 @@ import { ButtonIcon } from "./ButtonIcon";
 import { FiEdit } from "react-icons/fi";
 import { AiOutlineDelete, AiFillLike, AiOutlineLike } from "react-icons/ai";
 
+export default function Post({
+  postUserId,
+  postId,
+  postTitle,
+  postContent,
+  postName,
+  postLikes,
+  postLiked,
+  onClick,
+  imgUrl,
+  isAuthor,
+  createdAt,
+  likePost,
+  noLikePost,
+  modifyPost,
+  deletePost,
+}) {
+  return (
+    <>
+      <Article>
+        <div className="main-column">
+          <div className="text-container">
+            <h1 className="post-title">{postTitle}</h1>
+
+            <h2 className="post-author">
+              Message de {postName}, le {createdAt}
+            </h2>
+
+            <p className="post-content">{postContent}</p>
+          </div>
+
+          <div onClick={onClick}>
+            {imgUrl ? (
+              <a href={imgUrl} target="_blank" rel="noopenner noreferrer">
+                <div className="image-container">
+                  <img
+                    className="main-post-image"
+                    src={imgUrl}
+                    alt="Post img"
+                  />
+                </div>
+              </a>
+            ) : (
+              ""
+            )}
+          </div>
+          <div className="main-like-edit-container">
+            {postLiked ? (
+              <div className="post-like-container">
+                <p className="post-like" onClick={noLikePost}>
+                  <AiFillLike />
+                </p>
+                <p className="post-likes">{postLikes}</p>
+              </div>
+            ) : (
+              <div className="post-like-container">
+                <p className="post-no-like" onClick={likePost}>
+                  <AiOutlineLike />
+                </p>
+                <p className="post-likes">{postLikes}</p>
+              </div>
+            )}
+            {isAuthor ? (
+              <div className="is-author-container">
+                <Link
+                  to={`/update-post/${postId}`}
+                  state={{
+                    id: postId,
+                    userId: postUserId,
+                    title: postTitle,
+                    content: postContent,
+                    imgUrl: imgUrl,
+                  }}
+                  className="btn-modify"
+                  title="Modifier"
+                >
+                  <FiEdit />
+                </Link>
+
+                <ButtonIcon modify>Modifier</ButtonIcon>
+
+                <Link
+                  onClick={() => deletePost(postId)}
+                  className="btn-delete"
+                  title="Supprimer"
+                >
+                  <AiOutlineDelete />
+                </Link>
+              </div>
+            ) : null}
+          </div>
+        </div>
+      </Article>
+    </>
+  );
+}
+
 const Article = styled.article`
   display: flex;
   flex-direction: row;
@@ -138,100 +235,3 @@ const Article = styled.article`
     background-color: var(--primary-hover);
   }
 `;
-
-export default function Post({
-  postUserId,
-  postId,
-  postTitle,
-  postContent,
-  postName,
-  postLikes,
-  postLiked,
-  onClick,
-  imgUrl,
-  isAuthor,
-  createdAt,
-  likePost,
-  noLikePost,
-  modifyPost,
-  deletePost,
-}) {
-  return (
-    <>
-      <Article>
-        <div className="main-column">
-          <div className="text-container">
-            <h1 className="post-title">{postTitle}</h1>
-
-            <h2 className="post-author">
-              Message de {postName}, le {createdAt}
-            </h2>
-
-            <p className="post-content">{postContent}</p>
-          </div>
-
-          <div onClick={onClick}>
-            {imgUrl ? (
-              <a href={imgUrl} target="_blank" rel="noopenner noreferrer">
-                <div className="image-container">
-                  <img
-                    className="main-post-image"
-                    src={imgUrl}
-                    alt="Post img"
-                  />
-                </div>
-              </a>
-            ) : (
-              ""
-            )}
-          </div>
-          <div className="main-like-edit-container">
-            {postLiked ? (
-              <div className="post-like-container">
-                <p className="post-like" onClick={noLikePost}>
-                  <AiFillLike />
-                </p>
-                <p className="post-likes">{postLikes}</p>
-              </div>
-            ) : (
-              <div className="post-like-container">
-                <p className="post-no-like" onClick={likePost}>
-                  <AiOutlineLike />
-                </p>
-                <p className="post-likes">{postLikes}</p>
-              </div>
-            )}
-            {isAuthor ? (
-              <div className="is-author-container">
-                <Link
-                  to={`/update-post/${postId}`}
-                  state={{
-                    id: postId,
-                    userId: postUserId,
-                    title: postTitle,
-                    content: postContent,
-                    imgUrl: imgUrl,
-                  }}
-                  className="btn-modify"
-                  title="Modifier"
-                >
-                  <FiEdit />
-                </Link>
-
-                <ButtonIcon modify>Modifier</ButtonIcon>
-
-                <Link
-                  onClick={() => deletePost(postId)}
-                  className="btn-delete"
-                  title="Supprimer"
-                >
-                  <AiOutlineDelete />
-                </Link>
-              </div>
-            ) : null}
-          </div>
-        </div>
-      </Article>
-    </>
-  );
-}
