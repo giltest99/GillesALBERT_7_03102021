@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { FiEdit } from "react-icons/fi";
 import { AiOutlineDelete } from "react-icons/ai";
 
-export function ButtonIcon({ txt, onClick, icn }) {
+export function ButtonIcon({ onClick, icn }) {
   if (icn === "modify")
     return (
       <Button onClick={onClick} title="Modifier">

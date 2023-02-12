@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useFormik } from "formik";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -8,15 +8,11 @@ import ButtonStandard from "./ButtonStandard";
 
 export default function CreatePost() {
   const [posts, setPosts] = useState([]);
-  const [file, setFile] = useState("waiting-image");
+  const [file, setFile] = useState("");
 
   function handleFileChange(e) {
     setFile(URL.createObjectURL(e.target.files[0]));
   }
-
-  useEffect(() => {
-    setFile();
-  }, [file]);
 
   const navigate = useNavigate();
   const LS = JSON.parse(localStorage.getItem("_auth_state"));
@@ -86,11 +82,10 @@ export default function CreatePost() {
               style={{ color: "blue" }}
             />
           </div>
-          <br />
 
-          <div>
+          <ImageContainer>
             <img src={file} id="image-preview" alt="" width="400" />
-          </div>
+          </ImageContainer>
 
           <div>
             <ButtonStandard type="submit" txt="Créer le message" />
@@ -161,4 +156,8 @@ const TextArea = styled.textarea`
     outline: none;
     border: 1px solid var(--primary);
   }
+`;
+
+const ImageContainer = styled.div`
+  margin: 1rem 0;
 `;

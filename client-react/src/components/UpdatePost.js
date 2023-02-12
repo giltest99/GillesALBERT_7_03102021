@@ -38,7 +38,7 @@ export default function CreatePost() {
 
       for (let value in values) {
         formData.append(value, values[value]);
-        console.log(value, values[value]);
+        //console.log(value, values[value]);
       }
 
       axios.put(url, formData).then((res) => {
