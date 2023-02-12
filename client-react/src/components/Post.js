@@ -32,7 +32,9 @@ export default function Post({
               Message de {postName}, le {createdAt}
             </h2>
 
-            <p className="post-content">{postContent}</p>
+            <textarea className="post-content" readonly="readonly">
+              {postContent}
+            </textarea>
           </div>
 
           <div onClick={onClick}>
@@ -139,9 +141,10 @@ const Article = styled.article`
       min-height: 10rem;
       border: none;
       padding: 0.5rem 0;
-      font-size: 1.25em;
+      font-size: 1.5em;
       font-family: Lato, sans-serif;
       color: var(--tertiary);
+      outline: none;
     }
 
     .post-author {
