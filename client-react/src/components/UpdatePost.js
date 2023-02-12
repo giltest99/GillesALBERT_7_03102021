@@ -15,7 +15,6 @@ export default function CreatePost() {
   useEffect(() => {
     const LS = JSON.parse(localStorage.getItem("_auth_state"));
     setToken((t) => LS.token);
-    console.log(token);
   }, [token]);
 
   const config = {
@@ -50,12 +49,10 @@ export default function CreatePost() {
 
       for (let value in values) {
         formData.append(value, values[value]);
-        //console.log(value, values[value]);
       }
 
       axios.put(url, formData, config).then((res) => {
         setPost(post.concat(res.data));
-        console.log(post);
         navigate("/posts");
       });
     },

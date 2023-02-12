@@ -43,7 +43,6 @@ export default function UserAccount() {
   useEffect(() => {
     const LS = JSON.parse(localStorage.getItem("_auth_state"));
     setToken((t) => LS.token);
-    console.log(token);
   }, [token]);
 
   const config = {
