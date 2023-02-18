@@ -69,7 +69,7 @@ dont vous pouvez vous inspirer.
 * React Js
 * Styled-components
 
-## Installation du projet
+<h2>Installation du projet</h2>
 
 Pré-requis :
 Node Js et Mysql doivent être installés sur la machine.
