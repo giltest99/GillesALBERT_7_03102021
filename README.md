@@ -1,6 +1,6 @@
 ![Groupmania](./client-react/src/assets/mono-groupo.svg)
 
-# Reseau social d'entreprise Groupomania
+# Réseau social d'entreprise Groupomania
 
 <h2>Description du projet</h2>
 
