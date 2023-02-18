@@ -98,3 +98,19 @@ Lancement du frond-end (port 3333)
 ```bash
 npm start
 ```
+
+<h2>Screenshots</h2>
+
+***Page de connexion***
+![](./client-react/public/readme_assets/login.png)
+
+***Page de création de compte***
+![](./client-react/public/readme_assets/register.png)
+
+***Page des posts***
+![](./client-react/public/readme_assets/posts.png)
+
+***Page du profil utilisateur***
+![](./client-react/public/readme_assets/profile.png)
+
+
