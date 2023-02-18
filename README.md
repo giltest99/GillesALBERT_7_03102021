@@ -101,6 +101,10 @@ npm start
 
 <h2>Screenshots</h2>
 
+***Page des posts***
+![posts](./client-react/public/readme_assets/posts.png)
+<br />
+
 ***Page de connexion***
 ![login](./client-react/public/readme_assets/login.png)
 <br />
@@ -109,13 +113,11 @@ npm start
 ![register](./client-react/public/readme_assets/register.png)
 <br />
 
-***Page des posts***
-![posts](./client-react/public/readme_assets/posts.png)
-<br />
 
 ***Page de rédaction d'un post***
 ![write-post](./client-react/public/readme_assets/write_post.png)
 <br />
+
 
 ***Page du profil utilisateur***
 ![profile](./client-react/public/readme_assets/profile.png)
