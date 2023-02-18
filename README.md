@@ -8,7 +8,7 @@ Le projet consiste à construire un réseau social interne pour les employés de
 but de cet outil est de faciliter les interactions entre collègues. Le département RH de
 Groupomania a imaginé plusieurs fonctionnalités pour favoriser les échanges entre collègues.
 
-## Spécifications fonctionnelles
+<h2>Spécifications fonctionnelles</h2>
 
 ### Page de connexion
 
@@ -64,7 +64,7 @@ dont vous pouvez vous inspirer.
 * Sequelize
 * Mysql
 
-### Frond-end
+<h3> Frond-end</h3>
 
 * React Js
 * Styled-components
