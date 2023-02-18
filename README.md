@@ -103,14 +103,18 @@ npm start
 
 ***Page de connexion***
 ![](./client-react/public/readme_assets/login.png)
+<br>
 
 ***Page de création de compte***
 ![](./client-react/public/readme_assets/register.png)
+<br>
 
 ***Page des posts***
 ![](./client-react/public/readme_assets/posts.png)
+<br>
 
 ***Page du profil utilisateur***
 ![](./client-react/public/readme_assets/profile.png)
+<br>
 
 
