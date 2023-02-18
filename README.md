@@ -68,3 +68,33 @@ dont vous pouvez vous inspirer.
 
 * React Js
 * Styled-components
+
+## Installation du projet
+
+Pré-requis :
+Node Js et Mysql doivent être installés sur la machine.
+
+### Back-end
+
+Installation du back-end
+```bash
+npm install
+```
+Importer le fichier truc.sql dans Mysql.
+
+Lancement du back-end (port 3000)
+```bash
+npm start
+```
+
+### Front-end
+
+Installation du front-end
+```bash
+npm install
+```
+
+Lancement du frond-end (port 3333)
+```bash
+npm start
+```
