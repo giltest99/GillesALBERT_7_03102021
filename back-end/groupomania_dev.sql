@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : Dim 19 fév. 2023 à 18:33
+-- Généré le : Dim 19 fév. 2023 à 20:06
 -- Version du serveur :  8.0.32-0ubuntu0.20.04.2
 -- Version de PHP : 7.4.3-4ubuntu2.17
 
@@ -118,8 +118,7 @@ INSERT INTO `Posts` (`id`, `user_id`, `title`, `content`, `attachment`, `created
 (160, 40, 'Week-end tranquille ', 'Hello !\r\nle week-end dernier a été calme et relax.\r\nDe quoi attaquer la semaine en pleine forme !\r\nBonne semaine à tous.', 'http://localhost:3000/images/cat-glasses.jpeg_1676825249165.jpg', '2023-02-13 16:47:29', '2023-02-19 16:47:29'),
 (161, 41, 'Jurassic dev', 'Hello !\r\nles projets sont toujours pleins de promesses (au début...) !\r\nAttention aux surprises, sinon retour au jurassique !\r\nA+\r\n', 'http://localhost:3000/images/dev-budget.jpg_1676825700380.jpg', '2023-02-14 16:55:00', '2023-02-19 16:55:00'),
 (162, 41, 'Hiéroglyphes...', 'Salut les devs,\r\nquand j\'ai besoin d\'une regex, la solution si Google a du mal !\r\nVanessa, merci d\'avance de ton aide !\r\nA+', 'http://localhost:3000/images/dev-regex.webp_1676825954873.undefined', '2023-02-14 16:59:14', '2023-02-19 16:59:14'),
-(163, 41, 'Being a dev !', 'Salut à tous !\r\nC\'est quoi le métier de dev ?\r\nTout le monde a en fait tout faux !\r\nMême peut-être moi...\r\nA+', 'http://localhost:3000/images/what-dev-is.jpeg_1676826146839.jpg', '2023-02-19 17:02:26', '2023-02-19 17:02:26'),
-(164, 39, 'Bientôt les vacances', 'Hello !\r\nLes vacances approchent !\r\nOn se prépare sérieusement.\r\nA+', 'http://localhost:3000/images/fingers-holidays.gif_1676824581476.gif', '2023-02-17 16:36:21', '2023-02-19 16:36:21');
+(163, 41, 'Being a dev !', 'Salut à tous !\r\nC\'est quoi le métier de dev ?\r\nTout le monde a en fait tout faux !\r\nMême peut-être moi...\r\nA+', 'http://localhost:3000/images/what-dev-is.jpeg_1676826146839.jpg', '2023-02-19 17:02:26', '2023-02-19 17:02:26');
 
 -- --------------------------------------------------------
 
