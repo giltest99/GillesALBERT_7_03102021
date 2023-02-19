@@ -39,7 +39,7 @@ UPDATE http://localhost:3000/api/users/1
 DELETE http://localhost:3000/api/users/4
 
 # POSTS
-http://localhost:3000/api/posts
+POST http://localhost:3000/api/posts
 
 ## Select all posts (default order DESC)
 GET http://localhost:3000/api/posts
@@ -72,7 +72,7 @@ DELETE http://localhost:3000/api/posts/20
 
 
 # POSTS LIKED
-http://localhost:3000/api/postlikes
+POST http://localhost:3000/api/postlikes
 
 ## Select a post and return the number of likes
 GET http://localhost:3000/api/postlikes/1
