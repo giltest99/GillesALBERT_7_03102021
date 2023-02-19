@@ -58,7 +58,7 @@ POST http://localhost:3000/api/posts
 }
 ```
 ## Update post
-POST http://localhost:3000/api/posts
+PUT http://localhost:3000/api/posts
 ```json
 {
     "user_id": "5",

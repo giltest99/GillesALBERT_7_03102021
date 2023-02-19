@@ -128,7 +128,7 @@ export default function Register() {
   const registerSchema = yup.object().shape({
     username: yup
       .string()
-      .min(4, "Minimum de 4 caractères")
+      .min(8, "Minimum de 8 caractères")
       .required("Nom d'utilisateur requis"),
     email: yup
       .string()
@@ -136,7 +136,7 @@ export default function Register() {
       .required("Email requis"),
     password: yup
       .string()
-      .min(2, "Minimum de 2 caractères")
+      .min(5, "Minimum de 5 caractères")
       .required("Mot de passe requis"),
   });
 
