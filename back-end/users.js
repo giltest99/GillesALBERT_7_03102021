@@ -5,6 +5,7 @@ const users = [
     email: "herve.legarec@groupomania.com",
     password: "123456",
     is_admin: 0,
+    // Bretagne
   },
   {
     id: 2,
@@ -12,13 +13,7 @@ const users = [
     email: "jacques.dupont@groupomania.com",
     password: "123456",
     is_admin: 0,
-  },
-  {
-    id: 3,
-    username: "Anne RENARD",
-    email: "anne.renard@groupomania.com",
-    password: "123456",
-    is_admin: 0,
+    // lundi, vacances
   },
   {
     id: 4,
@@ -26,20 +21,22 @@ const users = [
     email: "vanessa.rigaud@groupomania.com",
     password: "123456",
     is_admin: 0,
+    // chats
   },
   {
     id: 5,
-    username: "Gilles BLATER",
-    email: "gilles.blater@groupomania.com",
+    username: "Pierre SAUNIER",
+    email: "pierre.saunier@groupomania.com",
     password: "123456",
     is_admin: 0,
+    // dev
   },
   {
-    id: 6,
-    username: "Administrateur",
-    email: "admin@groupomania.com",
-    password: "admin",
-    is_admin: 0,
+    id: 8,
+    username: "Admin Groupomania",
+    email: "admin.group@groupomania.com",
+    password: "admingroupo123",
+    is_admin: 1,
   },
   {
     id: 7,
@@ -47,13 +44,6 @@ const users = [
     email: "admin2@groupomania.com",
     password: "admin123",
     is_admin: 1,
-  },
-  {
-    id: 8,
-    username: "Admin Groupomania",
-    email: "admin.group@groupomania.com",
-    password: "admingroupo123",
-    is_admin: 0,
   },
 
   /* {
