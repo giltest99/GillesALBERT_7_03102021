@@ -80,7 +80,9 @@ Installation du back-end
 ```bash
 npm install
 ```
-Importer le fichier truc.sql dans Mysql.
+Importer le fichier `groupomania_dev.sql` dans Mysql.
+Contient tous les éléments de la base de données prêts à être utilisés.
+
 
 Lancement du back-end (port 3000)
 ```bash
