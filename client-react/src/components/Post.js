@@ -32,9 +32,11 @@ export default function Post({
               Message de {postName}, le {createdAt}
             </h2>
 
-            <textarea className="post-content" readonly="readonly">
-              {postContent}
-            </textarea>
+            <textarea
+              className="post-content"
+              readOnly="readonly"
+              value={postContent}
+            />
           </div>
 
           <div onClick={onClick}>
